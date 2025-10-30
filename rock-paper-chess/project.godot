@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Rock Paper Chess"
 config/features=PackedStringArray("4.5", "Mobile")
-config/icon="res://this works if you can see this.svg"
+config/icon="res://icon.svg"
 
 [rendering]
 
