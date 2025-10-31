@@ -1,7 +1,7 @@
-extends Node
+class_name PieceTypes
 
 '''
-Stores the enums of the attributes of each piece, defined as a singleton
+Stores the enums of the attributes of each piece
 Classes: Dictates the pieces' moveset/stats
 Types: The piece's matchup type for challenges
 Owner: Which player this piece belongs to
