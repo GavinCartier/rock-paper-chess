@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cdv1amk6tvkep"
+path="res://.godot/imported/whip crack.wav-fa82b9d58bdb36895133cf5f09b4ab3c.sample"
+
+[deps]
+
+source_file="res://assets/sound effects/whip crack.wav"
+dest_files=["res://.godot/imported/whip crack.wav-fa82b9d58bdb36895133cf5f09b4ab3c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
