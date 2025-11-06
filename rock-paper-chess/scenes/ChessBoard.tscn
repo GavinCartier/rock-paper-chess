@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq0e7rspvwt20"]
+
+[ext_resource type="Texture2D" uid="uid://5qf76lgkdah7" path="res://assets/chessboard.webp" id="1_mjsvw"]
+
+[node name="ChessBoard" type="Node2D"]
+
+[node name="ChessBoardSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_mjsvw")
