@@ -8,5 +8,5 @@ Owner: Which player this piece belongs to
 '''
 
 enum Classes {PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING}
-enum Types {ROCK, PAPER, SCISSORS}
+enum Types {NONE, ROCK, PAPER, SCISSORS}
 enum Owner {WHITE, BLACK}
