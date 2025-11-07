@@ -14,4 +14,12 @@ var piece_class : int  # PT.Classes
 var piece_type :  int  # PT.Types
 var piece_owner : int  # PT.Owner
 
+# Combat stats
+var damage : float
+var health : float
+
 var location : Vector2i
+
+# Function to receive damage
+func receive_damage(damage : float) -> void:
+	pass
