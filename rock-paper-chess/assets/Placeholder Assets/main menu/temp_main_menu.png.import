@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cldsv48buwyj"
-path="res://.godot/imported/Scissors Pawn Black.png-2773a89b56ddfb8d91b05bf47848e86e.ctex"
+uid="uid://cksjw77eor4q2"
+path="res://.godot/imported/temp_main_menu.png-a9d9e248c16fa6c1c4e7cd1e36399cba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Placeholder Assets/Scissors/Black Scissors/Scissors Pawn Black.png"
-dest_files=["res://.godot/imported/Scissors Pawn Black.png-2773a89b56ddfb8d91b05bf47848e86e.ctex"]
+source_file="res://assets/Placeholder Assets/main menu/temp_main_menu.png"
+dest_files=["res://.godot/imported/temp_main_menu.png-a9d9e248c16fa6c1c4e7cd1e36399cba.ctex"]
 
 [params]
 

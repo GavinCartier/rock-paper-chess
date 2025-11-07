@@ -1,22 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://nuan8ukxj5ny"]
+[gd_scene load_steps=5 format=3 uid="uid://nuan8ukxj5ny"]
 
 [ext_resource type="PackedScene" uid="uid://cq0e7rspvwt20" path="res://scenes/ChessBoard.tscn" id="1_elqb8"]
-[ext_resource type="PackedScene" uid="uid://0k71bkt73jdv" path="res://scenes/drafting.tscn" id="2_rvslj"]
-[ext_resource type="Script" uid="uid://dkxnwft03ausk" path="res://scripts/player.gd" id="3_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://rwyyjixmr5ji" path="res://scenes/menu.tscn" id="1_rvslj"]
+[ext_resource type="PackedScene" path="res://scenes/drafting.tscn" id="2_rvslj"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="3_0bbpv"]
 
 [node name="Main" type="Node2D"]
 
 [node name="ChessBoard" parent="." instance=ExtResource("1_elqb8")]
+visible = false
 scale = Vector2(2.5, 2.5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Drafting" parent="." instance=ExtResource("2_rvslj")]
 
+[node name="Menu" parent="." instance=ExtResource("1_rvslj")]
+
 [node name="BlackPlayer" type="Node" parent="."]
 script = ExtResource("3_0bbpv")
-metadata/_custom_type_script = "uid://dkxnwft03ausk"
 
 [node name="WhitePlayer" type="Node" parent="."]
 script = ExtResource("3_0bbpv")
-metadata/_custom_type_script = "uid://dkxnwft03ausk"

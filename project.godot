@@ -11,16 +11,8 @@ config_version=5
 [application]
 
 config/name="rock paper chess"
-run/main_scene="uid://nuan8ukxj5ny"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
-
-[input]
-
-left_click={
-"deadzone": 0.2,
-"events": []
-}
 
 [rendering]
 
