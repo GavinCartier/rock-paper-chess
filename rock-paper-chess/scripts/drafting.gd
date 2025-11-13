@@ -11,8 +11,15 @@ var selections = []
 @onready var message : Label = $"Instruction Text"
 @onready var cam : Camera2D = get_parent().get_node("Camera2D")
 
+signal finish_drafting
+
 
 func _ready() -> void:
+	$Camera2D.enabled = true
+	# Go to chessboard when finish drafting
+	var board = get_parent().get_node("ChessBoard")
+	connect("finish_drafting", Callable(board, "_finished_drafting"))
+	
 	# Initialize the players
 	white_player.color = Player.Player_Color.WHITE
 	black_player.color = Player.Player_Color.BLACK
@@ -157,3 +164,10 @@ func draft_controller() -> void:
 			sprite_xpos += 80
 		
 		sprite.visible = true
+		
+		# go to chessboard after all drafting finished
+		if i == len(turn_order) - 1:
+			message.text = "Ready for game."
+			emit_signal("finish_drafting")
+			# turn off the camera for drafting
+			$Camera2D.enabled=false
