@@ -3,7 +3,7 @@ extends Node
 
 enum Player_Color {WHITE, BLACK}
 
-var color : Player_Color
+@export var color: Player_Color 
 
 var pawn : Piece
 var rook : Piece

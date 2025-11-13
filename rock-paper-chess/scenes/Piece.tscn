@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://nfsxi2iij8ti"]
+
+[ext_resource type="Script" uid="uid://dkiekyfcol724" path="res://scripts/models/piece.gd" id="1_tk1p6"]
+[ext_resource type="Texture2D" uid="uid://1uj5m43tdhum" path="res://assets/Placeholder Assets/Paper/Black/Paper Bishop Black.png" id="2_lxuho"]
+
+[node name="Piece" type="Node2D"]
+script = ExtResource("1_tk1p6")
+
+[node name="PieceSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_lxuho")
