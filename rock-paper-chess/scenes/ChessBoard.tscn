@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq0e7rspvwt20"]
+[gd_scene load_steps=3 format=3 uid="uid://cq0e7rspvwt20"]
 
-[ext_resource type="Texture2D" uid="uid://5qf76lgkdah7" path="res://assets/chessboard.webp" id="1_mjsvw"]
+[ext_resource type="Texture2D" uid="uid://cwxggpqsbpc6q" path="res://assets/chessboard/small.png" id="1_fr4o4"]
+[ext_resource type="Texture2D" uid="uid://joirttjfsqe1" path="res://assets/chessboard/chessboard.PNG" id="2_8qgad"]
 
 [node name="ChessBoard" type="Node2D"]
 
+[node name="ChessBackgroundSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_fr4o4")
+
 [node name="ChessBoardSprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_mjsvw")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_8qgad")
