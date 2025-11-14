@@ -19,6 +19,7 @@ var damage : float
 var health : float
 
 var location : Vector2i
+var is_clicked : bool = false
 
 # convert to string for searching file path
 const CLASS_NAMES := {
@@ -75,10 +76,11 @@ func set_board_reference(cb : ChessBoard):
 	board = cb
 
 
-func get_legal_moves(current_position : Vector2i, possible_moves : Array) -> Array:
+func get_legal_moves(current_position : Vector2i) -> Array:
+	var possible_moves = PieceTypes.get_possible_moves(piece_class, piece_owner, location, board)
 	var legal_moves : Array
 	for move in possible_moves:
-		var potential_move = move + Vector2(current_position.x, current_position.y)
+		var potential_move = move + current_position
 		
 		var move_out_of_bounds = (potential_move.x > 3 or potential_move.x < -4) or (potential_move.y > 3 or potential_move.y < -4)
 		
@@ -91,48 +93,47 @@ func get_legal_moves(current_position : Vector2i, possible_moves : Array) -> Arr
 	return legal_moves
 
 func _on_mouse_entered():
-	var possible_moves = PieceTypes.get_possible_moves(piece_class, piece_owner, location, board)
-	var legal_moves = get_legal_moves(location, possible_moves)
-	
-	for move in legal_moves:
-		var glow := Sprite2D.new()
-		board.add_child(glow)
+	if not is_clicked:
+		var legal_moves = get_legal_moves(location)
 		
-		var sprite_filepath : String
-		var piece_at_space = board.grid[move.x][move.y]
-		if piece_at_space == null:
-			sprite_filepath = "res://assets/tile glow/white glow.png"
-		else:
-			var advantage = check_type_matchup(piece_at_space)
-			match advantage:
-				-1:
-					sprite_filepath = "res://assets/tile glow/red glow.png"
-				0:
-					sprite_filepath = "res://assets/tile glow/yellow glow.png"
-				1:
-					sprite_filepath = "res://assets/tile glow/green glow.png"
-		
-		glow.texture = load(sprite_filepath)
-		
-		glow.scale = Vector2(0.5, 0.5)
-		
-		glow.position = board_to_world(move)
-		
-		# I know I'm using the location.y to adjust position.x and vice versa
-		# But it works, no clue why lmao
-		# I think it's because the tilemap (x,y) is opposite to world pos
-		# which means tilemap is actually (y,x) to the world axis
-		#glow.position.x -= 256 * location.y + 128
-		#glow.position.y -= 256 * location.x + 128
-		
-		glow_sprites.append(glow)
+		for move in legal_moves:
+			var glow := Sprite2D.new()
+			board.add_child(glow)
+			
+			var sprite_filepath : String
+			var piece_at_space = board.grid[move.x][move.y]
+			if piece_at_space == null:
+				sprite_filepath = "res://assets/tile glow/white glow.png"
+			else:
+				var advantage = check_type_matchup(piece_at_space)
+				match advantage:
+					-1:
+						sprite_filepath = "res://assets/tile glow/green glow.png"
+					0:
+						sprite_filepath = "res://assets/tile glow/yellow glow.png"
+					1:
+						sprite_filepath = "res://assets/tile glow/red glow.png"
+			
+			glow.texture = load(sprite_filepath)
+			
+			glow.scale = Vector2(0.5, 0.5)
+			
+			glow.position = board_to_world(move)
+			
+			# I know I'm using the location.y to adjust position.x and vice versa
+			# But it works, no clue why lmao
+			# I think it's because the tilemap (x,y) is opposite to world pos
+			# which means tilemap is actually (y,x) to the world axis
+			#glow.position.x -= 256 * location.y + 128
+			#glow.position.y -= 256 * location.x + 128
+			
+			glow_sprites.append(glow)
 
 
 func _on_mouse_exited():
-	for glow in glow_sprites:
-		glow.queue_free()
-		
-	glow_sprites.clear()
+	if not is_clicked:
+		remove_glows()
+
 
 func _on_area_input(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -181,3 +182,16 @@ func check_type_matchup(enemy: Piece) -> int:
 					return 0 # if something weird happens just treat it as neutral
 		_:
 			return 0 # if something weird happens just treat it as neutral
+
+
+func delete() -> void:
+	remove_glows()
+	self.queue_free()
+
+
+func remove_glows() -> void:
+	for glow in glow_sprites:
+		glow.queue_free()
+	
+	is_clicked = false
+	glow_sprites.clear()

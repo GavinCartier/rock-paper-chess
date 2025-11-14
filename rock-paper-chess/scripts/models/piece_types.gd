@@ -11,18 +11,17 @@ enum Classes {PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING}
 enum Types {NONE, ROCK, PAPER, SCISSORS}
 enum Owner {WHITE, BLACK}
 
-static func get_possible_moves(piece_class: int, owner: int, location: Vector2, board: ChessBoard) -> Array:
-
+static func get_possible_moves(piece_class: int, owner: int, location: Vector2i, board: ChessBoard) -> Array:
 	match piece_class:
 		Classes.PAWN:
 			return _pawn_moves(owner, location, board)
 
 		Classes.KNIGHT:
 			var potential_moves = [
-				Vector2(-2, -1), Vector2(-2, 1),
-				Vector2(-1, -2), Vector2(-1, 2),
-				Vector2(1, -2),  Vector2(1, 2),
-				Vector2(2, -1),  Vector2(2, 1)
+				Vector2i(-2, -1), Vector2i(-2, 1),
+				Vector2i(-1, -2), Vector2i(-1, 2),
+				Vector2i(1, -2),  Vector2i(1, 2),
+				Vector2i(2, -1),  Vector2i(2, 1)
 			]
 			var possible_moves = []
 			for move in potential_moves:
@@ -38,21 +37,21 @@ static func get_possible_moves(piece_class: int, owner: int, location: Vector2, 
 			return possible_moves
 
 		Classes.BISHOP:
-			return _ray_moves(owner, [Vector2(1, 1), Vector2(1, -1), Vector2(-1, 1), Vector2(-1, -1)], location, board)
+			return _ray_moves(owner, [Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(-1, -1)], location, board)
 
 		Classes.ROOK:
-			return _ray_moves(owner, [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)], location, board)
+			return _ray_moves(owner, [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)], location, board)
 
 		Classes.QUEEN:
 			return _ray_moves(owner, [
-				Vector2(1, 1), Vector2(1, -1), Vector2(-1, 1), Vector2(-1, -1),
-				Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)
+				Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(-1, -1),
+				Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)
 			], location, board)
 
 		Classes.KING:
 			var potential_moves = [
-				Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1),
-				Vector2(1, 1), Vector2(1, -1), Vector2(-1, 1), Vector2(-1, -1)
+				Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1),
+				Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(-1, -1)
 			]
 			var possible_moves = []
 			for move in potential_moves:
@@ -70,14 +69,14 @@ static func get_possible_moves(piece_class: int, owner: int, location: Vector2, 
 			return []
 
 
-static func _pawn_moves(owner: int, location: Vector2, board: ChessBoard) -> Array:
+static func _pawn_moves(owner: int, location: Vector2i, board: ChessBoard) -> Array:
 	var dir := -1 if owner == Owner.WHITE else 1
 	
 	var potential_moves = [
-		Vector2(dir, 0), # one step forward
-		Vector2(dir * 2, 0), # two steps from start
-		Vector2(dir, 1), # capture right
-		Vector2(dir, -1) # capture left
+		Vector2i(dir, 0), # one step forward
+		Vector2i(dir * 2, 0), # two steps from start
+		Vector2i(dir, 1), # capture right
+		Vector2i(dir, -1) # capture left
 	]
 	
 	var possible_moves = []
@@ -86,31 +85,42 @@ static func _pawn_moves(owner: int, location: Vector2, board: ChessBoard) -> Arr
 		if (tile.x <= 3 and tile.x >= -4) and (tile.y <= 3 and tile.y >= -4):
 			var piece_on_tile = board.grid[tile.x][tile.y]
 			
-			if move == Vector2(dir, 0):
+			if move == Vector2i(dir, 0):
 				if piece_on_tile == null:
 					possible_moves.append(move)
 			
-			if move == Vector2(dir * 2, 0):
-				if piece_on_tile == null and board.grid[location.x + (1 * dir)][tile.y] == null:
+			if move == Vector2i(dir * 2, 0):
+				var both_spaces_empty = (piece_on_tile == null and board.grid[location.x + (1 * dir)][tile.y] == null)
+				var has_moved : bool
+				
+				if (owner == Owner.WHITE and location.x == 2):
+					has_moved = false
+				elif (owner == Owner.BLACK and location.x == -3):
+					has_moved = false
+				else:
+					has_moved = true
+				
+				if both_spaces_empty and not has_moved:
 					possible_moves.append(move)
 			
-			if move == Vector2(dir, 1) or move == Vector2(dir, -1):
+			if move == Vector2i(dir, 1) or move == Vector2i(dir, -1):
 				if piece_on_tile != null and piece_on_tile.piece_owner != owner:
 					possible_moves.append(move)
 					
 	return possible_moves
 
-static func _ray_moves(owner: int, directions: Array, location: Vector2, board: ChessBoard) -> Array:
+static func _ray_moves(owner: int, directions: Array, location: Vector2i, board: ChessBoard) -> Array:
 	var moves := []
 	for dir in directions:
 		for step in range(1, 8):
 			var tile = (dir * step) + location
-			var piece_on_tile = board.grid[tile.x][tile.y]
-			
-			if piece_on_tile != null:
-				if piece_on_tile.piece_owner != owner:
+			if (tile.x <= 3 and tile.x >= -4) and (tile.y <= 3 and tile.y >= -4):
+				var piece_on_tile = board.grid[tile.x][tile.y]
+				
+				if piece_on_tile != null:
+					if piece_on_tile.piece_owner != owner:
+						moves.append(dir * step)
+					break
+				else:
 					moves.append(dir * step)
-				break
-			else:
-				moves.append(dir * step)
 	return moves
