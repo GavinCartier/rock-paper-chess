@@ -7,12 +7,12 @@ extends Node
 var turn_order : Array
 var buttons : Array
 var selections = []
+var pressed_set_all := false
 
 @onready var message : Label = $"Instruction Text"
 @onready var cam : Camera2D = get_parent().get_node("Camera2D")
 
 signal finish_drafting
-
 
 func _ready() -> void:
 	$Camera2D.enabled = true
@@ -40,7 +40,11 @@ func _ready() -> void:
 	var b_bishop := make_button("Bishop", Vector2(cam.position.x + 40, cam.position.y))
 	var b_queen := make_button("Queen", Vector2(cam.position.x + 120, cam.position.y))
 	var b_king := make_button("King", Vector2(cam.position.x + 200, cam.position.y))
+	
 	buttons = [b_pawn, b_rook, b_knight, b_bishop, b_queen, b_king]
+	
+	var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 280, cam.position.y))
+	buttons.append(dev_button)
 	
 	# Put the instruction text in the scene
 	message.position.y = cam.position.y - 50
@@ -78,7 +82,12 @@ func _on_item_pressed(index: int, button: MenuButton) -> void:
 	# When an option is selected, it's put into the
 	# selections array, which the draft function is listening to.
 	var type = button.get_popup().get_item_text(index)
-	button.visible = false
+	
+	if button.text == "Set All (dev only - delete before release)":
+		pressed_set_all = true
+	else:
+		button.visible = false
+	
 	selections.append([button, button.text, type])
 
 
@@ -129,6 +138,27 @@ func draft_controller() -> void:
 		# Get the selection from the array
 		var pname = selections[0][1]
 		var ptype = selections[0][2]
+		
+		if pressed_set_all:
+			white_player.set_piece_type("Pawn", ptype)
+			white_player.set_piece_type("Rook", ptype)
+			white_player.set_piece_type("Bishop", ptype)
+			white_player.set_piece_type("Knight", ptype)
+			white_player.set_piece_type("Queen", ptype)
+			white_player.set_piece_type("King", ptype)
+			black_player.set_piece_type("Pawn", ptype)
+			black_player.set_piece_type("Rook", ptype)
+			black_player.set_piece_type("Bishop", ptype)
+			black_player.set_piece_type("Knight", ptype)
+			black_player.set_piece_type("Queen", ptype)
+			black_player.set_piece_type("King", ptype)
+			
+			message.text = "Ready for game."
+			emit_signal("finish_drafting")
+			# turn off the camera for drafting
+			$Camera2D.enabled=false
+			
+			return
 		
 		# Record the choice
 		current_player.set_piece_type(pname, ptype)
