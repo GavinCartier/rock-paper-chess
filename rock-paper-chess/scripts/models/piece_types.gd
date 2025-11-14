@@ -62,4 +62,3 @@ static func _ray_moves(directions: Array) -> Array:
 		for step in range(1, 8):
 			moves.append(dir * step)
 	return moves
-
