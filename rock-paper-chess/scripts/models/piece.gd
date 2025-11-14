@@ -52,6 +52,7 @@ func _ready():
 	tilemap = get_parent().get_node("TileMapLayer")
 	area.connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	area.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
+	area.connect("input_event", Callable(self, "_on_area_input"))
 
 
 func set_texture():
@@ -95,7 +96,7 @@ func _on_mouse_entered():
 	
 	for move in legal_moves:
 		var glow := Sprite2D.new()
-		add_child(glow)
+		board.add_child(glow)
 		
 		var sprite_filepath : String
 		var piece_at_space = board.grid[move.x][move.y]
@@ -119,8 +120,10 @@ func _on_mouse_entered():
 		
 		# I know I'm using the location.y to adjust position.x and vice versa
 		# But it works, no clue why lmao
-		glow.position.x -= 256 * location.y + 128
-		glow.position.y -= 256 * location.x + 128
+		# I think it's because the tilemap (x,y) is opposite to world pos
+		# which means tilemap is actually (y,x) to the world axis
+		#glow.position.x -= 256 * location.y + 128
+		#glow.position.y -= 256 * location.x + 128
 		
 		glow_sprites.append(glow)
 
@@ -131,7 +134,11 @@ func _on_mouse_exited():
 		
 	glow_sprites.clear()
 
-
+func _on_area_input(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if board != null:
+			board.on_piece_clicked(self)
+			
 # Returns the centered position of a cell in the TileMap's local coordinate space.
 func board_to_world(pos: Vector2i) -> Vector2:
 	# reverse the pos for tilemap (col,row)
