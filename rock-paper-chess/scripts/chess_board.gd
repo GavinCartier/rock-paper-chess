@@ -9,12 +9,12 @@ const PieceScene: PackedScene = preload("res://scenes/Piece.tscn")
 
 @onready var white_player : Player = get_parent().get_node("WhitePlayer")
 @onready var black_player : Player = get_parent().get_node("BlackPlayer")
+@onready var current_player : Player
 
 var grid: Array = []
 
 var selected_piece: Piece = null
 var selected_pos: Vector2i
-
 
 const CLASS_NAMES := {
 	PT.Classes.PAWN:"Pawn",
@@ -35,8 +35,10 @@ func begin_chess_game():
 	# Initialize the players
 	white_player.color = Player.Player_Color.WHITE
 	black_player.color = Player.Player_Color.BLACK
+	current_player = white_player
 	_initialize_board()
 	_initialize_piece_position()
+	print("White's turn")
 
 func _initialize_board():
 	# 8x8 grid with null placeholders
@@ -120,17 +122,27 @@ func board_to_grid(pos: Vector2i) -> Vector2i:
 	
 # manage the piece that selected by mouse (player)	
 func on_piece_clicked(piece: Piece) -> void:
+	if piece.piece_owner != current_player.color:
+		return
+	
 	# first time select piece
 	if selected_piece == null:
 		# set the current one as selected
 		selected_piece = piece
 		selected_pos = piece.location
+		selected_piece.is_clicked = true
+		
 		return
 	
 	# update the piece if the player select another one
 	if piece.piece_owner == selected_piece.piece_owner:
+		selected_piece.is_clicked = false
+		selected_piece.remove_glows()
+		
 		selected_piece = piece
 		selected_pos = piece.location
+		selected_piece.is_clicked = true		
+		
 		return
 
 func _input(event: InputEvent) -> void:
@@ -147,43 +159,56 @@ func _input(event: InputEvent) -> void:
 		var square: Vector2i = tilemap.local_to_map(local_pos)
 
 		var target_pos = Vector2i(square.y, square.x)
-		print("target:", target_pos)
+		#print("target:", target_pos)
 		
-		_try_move_to(target_pos)
-		
-func _try_move_to(target_pos: Vector2i) -> void:
+		if _try_move_to(target_pos):
+			get_tree().get_root().set_input_as_handled()
+
+
+func _try_move_to(target_pos: Vector2i) -> bool:
 	if selected_piece == null:
-		return
+		return false
+	
+	#if selected_piece.owner != current_player:
+	#	return false
+	
 	# dev log: start pos is correct
 	var start_pos = selected_piece.location
 	# target should be (1,-3)
-	print("start:", start_pos, " target:", target_pos)
+	#print("start:", start_pos, " target:", target_pos)
 	
-	var possible_moves: Array = PT.get_possible_moves(
-		selected_piece.piece_class,
-		selected_piece.piece_owner,
-		Vector2(start_pos.x, start_pos.y),
-		self)
-	var offset = Vector2(target_pos.x - start_pos.x, target_pos.y - start_pos.y)
-	print("offset:", offset)
-	print("possible_moves:", possible_moves)
+	#var possible_moves: Array = PT.get_possible_moves(
+	#	selected_piece.piece_class,
+	#	selected_piece.piece_owner,
+	#	Vector2(start_pos.x, start_pos.y),
+	#	self)
+	#var offset = Vector2(target_pos.x - start_pos.x, target_pos.y - start_pos.y)
+	#print("offset:", offset)
+	#print("possible_moves:", possible_moves)
 	
-	var valid_move :bool = false
+	#var valid_move :bool = false
 	# check whether it is a valid movement
-	for i in possible_moves:
-		if i == offset:
-			valid_move = true
-			break
+	#for i in possible_moves:
+	#	if i == offset:
+	#		valid_move = true
+	#		break
 	
-	if not valid_move:
-		print("not a valid move")
-		return
+	#if not valid_move:
+	
+	# The above commented out code did have some buggy behavior about detecting valid moves
+	# But I had also made a function that does this in the piece class so I'm calling that here
+	var legal_moves = selected_piece.get_legal_moves(start_pos)
+	if target_pos not in legal_moves:
+		#print("not a valid move")
+		return false
 	
 	_move_piece(start_pos, target_pos)
 	
 	# empty selection
 	selected_piece = null
-	
+	return true
+
+
 func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	var piece: Piece = grid[start.x][start.y]
 	if piece == null:
@@ -196,7 +221,11 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		if target_piece.piece_owner != piece.piece_owner:
 			# waiting for challenge fucntion
 			# right now just delete for dev
-			target_piece.queue_free()
+			
+			# Changing deleting a piece to be handled in the piece class
+			# so that we can properly delete the hover effects too
+			target_piece.delete()
+			#target_piece.queue_free()
 	
 	# update grid status
 	# start point -> no piece on it etc.
@@ -205,6 +234,17 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	
 	# update postion on board
 	piece.location = target
-	
 	# update piece postion in world
 	piece.position = board_to_world(target)
+	
+	piece.is_clicked = false
+	piece.remove_glows()
+	selected_piece = null
+	
+	# swap whose turn it is
+	if current_player == white_player:
+		current_player = black_player
+		print("Black's turn")
+	elif current_player == black_player:
+		current_player = white_player
+		print("White's turn")
