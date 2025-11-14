@@ -76,6 +76,7 @@ func _initialize_piece_position():
 # place pieces via setup functions
 func _set_piece(piece_class: int, piece_owner: int, pos_on_board: Vector2i):
 	var piece = PieceScene.instantiate()
+	piece.set_board_reference(self)
 	piece.piece_class = piece_class
 	piece.piece_owner = piece_owner
 	
@@ -92,6 +93,7 @@ func _set_piece(piece_class: int, piece_owner: int, pos_on_board: Vector2i):
 	grid[pos_on_board.x][pos_on_board.y] = piece
 	add_child(piece)
 	piece.position = board_to_world(pos_on_board)
+	piece.location = pos_on_board
 	# set the texture according to the player's data
 	piece.set_texture()
 	
