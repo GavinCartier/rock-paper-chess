@@ -106,6 +106,9 @@ func _set_piece(piece_class: int, piece_owner: int, pos_on_board: Vector2i):
 	# set the texture according to the player's data
 	piece.set_texture()
 	
+	# Set the piece's stats
+	piece.set_stats()
+	
 # Returns the centered position of a cell in the TileMap's local coordinate space.
 func board_to_world(pos: Vector2i) -> Vector2:
 	# reverse the pos for tilemap (col,row)
@@ -216,27 +219,7 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	
 	var target_piece: Piece = grid[target.x][target.y]
 	
-	# if the target pos has opponent's piece
-	if target_piece != null:
-		if target_piece.piece_owner != piece.piece_owner:
-			# waiting for challenge fucntion
-			# right now just delete for dev
-			
-			# Changing deleting a piece to be handled in the piece class
-			# so that we can properly delete the hover effects too
-			target_piece.delete()
-			#target_piece.queue_free()
-	
-	# update grid status
-	# start point -> no piece on it etc.
-	grid[start.x][start.y] = null
-	grid[target.x][target.y] = piece
-	
-	# update postion on board
-	piece.location = target
-	# update piece postion in world
-	piece.position = board_to_world(target)
-	
+	# Reset which pieces are clicked, glowing etc.
 	piece.is_clicked = false
 	piece.remove_glows()
 	selected_piece = null
@@ -248,3 +231,23 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	elif current_player == black_player:
 		current_player = white_player
 		print("White's turn")
+	
+	# if the target pos has opponent's piece
+	if target_piece != null:
+		if target_piece.piece_owner != piece.piece_owner:
+			# waiting for challenge fucntion
+			# right now just delete for dev
+			if DamageEngine.challenge(piece, target_piece):
+				target_piece.delete()
+			else:
+				return
+	
+	# update grid status
+	# start point -> no piece on it etc.
+	grid[start.x][start.y] = null
+	grid[target.x][target.y] = piece
+
+	# update postion on board
+	piece.location = target
+	# update piece postion in world
+	piece.position = board_to_world(target)

@@ -15,6 +15,10 @@ run/main_scene="uid://nuan8ukxj5ny"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DamageEngine="*res://scripts/damage_engine.gd"
+
 [rendering]
 
 renderer/rendering_method="mobile"

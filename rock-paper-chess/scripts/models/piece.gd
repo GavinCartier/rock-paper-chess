@@ -17,6 +17,7 @@ var piece_owner : int  # PT.Owner
 # Combat stats
 var damage : float
 var health : float
+var max_health : float
 
 var location : Vector2i
 var is_clicked : bool = false
@@ -45,6 +46,7 @@ const TYPE_NAMES := {
 @onready var sprite: Sprite2D = $PieceSprite
 @onready var area = $Area2D
 @onready var tilemap: TileMapLayer
+@onready var health_bar: HealthBar = $HealthBar
 
 var glow_sprites : Array = []
 var board : ChessBoard
@@ -54,6 +56,7 @@ func _ready():
 	area.connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	area.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 	area.connect("input_event", Callable(self, "_on_area_input"))
+	health_bar.hide()
 
 
 func set_texture():
@@ -66,10 +69,17 @@ func set_texture():
 	var sprite_filepath = "res://assets/Placeholder Assets/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
 	sprite.texture = load(sprite_filepath)
 
+# Set the stats for this piece based on its type
+func set_stats():
+	damage = PT.damage_stats.get(piece_class)
+	max_health = PT.health_stats.get(piece_class)
+	health = max_health
+	
 
 # Function to receive damage
-func receive_damage(_damage : float) -> void:
-	pass
+func receive_damage(damage_received : float) -> void:
+	health = max(0.0, health - damage_received)
+	health_bar.update_health(health / max_health)
 
 
 func set_board_reference(cb : ChessBoard):
@@ -93,6 +103,7 @@ func get_legal_moves(current_position : Vector2i) -> Array:
 	return legal_moves
 
 func _on_mouse_entered():
+	health_bar.show()
 	if not is_clicked:
 		var legal_moves = get_legal_moves(location)
 		
@@ -131,6 +142,7 @@ func _on_mouse_entered():
 
 
 func _on_mouse_exited():
+	health_bar.hide()
 	if not is_clicked:
 		remove_glows()
 

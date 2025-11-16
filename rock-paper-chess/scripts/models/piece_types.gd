@@ -11,6 +11,25 @@ enum Classes {PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING}
 enum Types {NONE, ROCK, PAPER, SCISSORS}
 enum Owner {WHITE, BLACK}
 
+# Store health and damage stats
+static var health_stats := {
+	Classes.PAWN: 10,
+	Classes.KNIGHT: 20,
+	Classes.BISHOP: 20,
+	Classes.ROOK: 20,
+	Classes.QUEEN: 40,
+	Classes.KING:  40
+}
+
+static var damage_stats := {
+	Classes.PAWN: 10,
+	Classes.KNIGHT: 10,
+	Classes.BISHOP: 10,
+	Classes.ROOK:   10,
+	Classes.QUEEN:  20,
+	Classes.KING:   20
+}
+
 static func get_possible_moves(piece_class: int, owner: int, location: Vector2i, board: ChessBoard) -> Array:
 	match piece_class:
 		Classes.PAWN:

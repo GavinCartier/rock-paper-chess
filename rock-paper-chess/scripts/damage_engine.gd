@@ -1,5 +1,4 @@
 extends Node
-class_name DamageEngine
 
 '''
 Class for handling challenges between pieces
@@ -36,8 +35,10 @@ static var type_multipliers := {
 
 
 # Main function for handling a challenge
-static func challenge(attacker: Piece, defender: Piece) -> void:
+# Returns true if the defender was killed
+func challenge(attacker: Piece, defender: Piece) -> bool:
 	var multiplier : float = type_multipliers[attacker.piece_type][defender.piece_type]
-	
 	var attack_damage = attacker.damage * multiplier
 	defender.receive_damage(attack_damage)
+	
+	return defender.health <= 0.0
