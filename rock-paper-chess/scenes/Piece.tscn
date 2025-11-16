@@ -34,3 +34,7 @@ layout_mode = 0
 offset_right = 161.0
 offset_bottom = 24.0
 color = Color(0, 1, 0, 1)
+
+[node name="DamageReceived" type="ColorRect" parent="HealthBar"]
+layout_mode = 0
+offset_bottom = 24.0
