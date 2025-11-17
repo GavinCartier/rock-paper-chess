@@ -24,6 +24,11 @@ const CLASS_NAMES := {
 	PT.Classes.QUEEN:"Queen",
 	PT.Classes.KING:"King",
 }
+
+# Signal for showing when the board's selected piece has changed
+# Used for resetting visualizations and such
+signal reset_piece_selection()
+
 func _finished_drafting():
 	var drafting := get_parent().get_node("Drafting")
 	drafting.queue_free()
@@ -122,31 +127,23 @@ func world_to_board(pos: Vector2) -> Vector2i:
 # tansfer for grid [0,7] from [-4,3]
 func board_to_grid(pos: Vector2i) -> Vector2i:
 	return Vector2i(pos.x + 4, pos.y + 4)
-	
+
+# Prompts pieces to load display logic upon being hovered.
+# Only activates if a piece is not already selected via click
+func on_piece_hovered(piece: Piece) -> void:
+	if selected_piece == null and piece.piece_owner == current_player.color:
+		emit_signal("reset_piece_selection")
+		piece.show_piece_options()
+
 # manage the piece that selected by mouse (player)	
 func on_piece_clicked(piece: Piece) -> void:
 	if piece.piece_owner != current_player.color:
 		return
 	
-	# first time select piece
-	if selected_piece == null:
-		# set the current one as selected
-		selected_piece = piece
-		selected_pos = piece.location
-		selected_piece.is_clicked = true
-		
-		return
-	
-	# update the piece if the player select another one
-	if piece.piece_owner == selected_piece.piece_owner:
-		selected_piece.is_clicked = false
-		selected_piece.remove_glows()
-		
-		selected_piece = piece
-		selected_pos = piece.location
-		selected_piece.is_clicked = true		
-		
-		return
+	emit_signal("reset_piece_selection")
+	selected_piece = piece
+	selected_pos = piece.location
+	piece.show_piece_options()
 
 func _input(event: InputEvent) -> void:
 	
@@ -220,9 +217,8 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	var target_piece: Piece = grid[target.x][target.y]
 	
 	# Reset which pieces are clicked, glowing etc.
-	piece.is_clicked = false
-	piece.remove_glows()
 	selected_piece = null
+	emit_signal("reset_piece_selection")
 	
 	# swap whose turn it is
 	if current_player == white_player:
@@ -235,8 +231,6 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	# if the target pos has opponent's piece
 	if target_piece != null:
 		if target_piece.piece_owner != piece.piece_owner:
-			# waiting for challenge fucntion
-			# right now just delete for dev
 			if DamageEngine.challenge(piece, target_piece):
 				target_piece.delete()
 			else:

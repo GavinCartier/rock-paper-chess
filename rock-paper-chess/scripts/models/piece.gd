@@ -20,7 +20,6 @@ var health : float
 var max_health : float
 
 var location : Vector2i
-var is_clicked : bool = false
 
 # convert to string for searching file path
 const CLASS_NAMES := {
@@ -56,6 +55,8 @@ func _ready():
 	area.connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	area.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 	area.connect("input_event", Callable(self, "_on_area_input"))
+	
+	board.reset_piece_selection.connect(_on_reset_piece_selection)
 	health_bar.hide()
 
 
@@ -104,48 +105,13 @@ func get_legal_moves(current_position : Vector2i) -> Array:
 
 func _on_mouse_entered():
 	health_bar.show()
-	if not is_clicked:
-		var legal_moves = get_legal_moves(location)
-		
-		for move in legal_moves:
-			var glow := Sprite2D.new()
-			board.add_child(glow)
-			
-			var sprite_filepath : String
-			var piece_at_space = board.grid[move.x][move.y]
-			if piece_at_space == null:
-				sprite_filepath = "res://assets/tile glow/white glow.png"
-			else:
-				var advantage = check_type_matchup(piece_at_space)
-				match advantage:
-					-1:
-						sprite_filepath = "res://assets/tile glow/green glow.png"
-					0:
-						sprite_filepath = "res://assets/tile glow/yellow glow.png"
-					1:
-						sprite_filepath = "res://assets/tile glow/red glow.png"
-			
-			glow.texture = load(sprite_filepath)
-			
-			glow.scale = Vector2(0.5, 0.5)
-			
-			glow.position = board_to_world(move)
-			
-			# I know I'm using the location.y to adjust position.x and vice versa
-			# But it works, no clue why lmao
-			# I think it's because the tilemap (x,y) is opposite to world pos
-			# which means tilemap is actually (y,x) to the world axis
-			#glow.position.x -= 256 * location.y + 128
-			#glow.position.y -= 256 * location.x + 128
-			
-			glow_sprites.append(glow)
+	board.on_piece_hovered(self)
 
 
 func _on_mouse_exited():
 	health_bar.hide()
-	if not is_clicked:
-		remove_glows()
-
+	if not board.selected_piece:
+		_on_reset_piece_selection()
 
 func _on_area_input(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -157,6 +123,17 @@ func board_to_world(pos: Vector2i) -> Vector2:
 	# reverse the pos for tilemap (col,row)
 	return tilemap.map_to_local(Vector2i(pos.y, pos.x))
 
+# This is a function received from a signal in board. Resets selection options
+func _on_reset_piece_selection() -> void:
+	remove_glows()
+	health_bar.select_show = false
+	health_bar.hide()
+
+# Show all piece options (health bars and targets)
+func show_piece_options() -> void:
+	health_bar.select_show = true
+	health_bar.show()
+	show_glows()
 
 func check_type_matchup(enemy: Piece) -> int:
 	match enemy.piece_type:
@@ -195,15 +172,63 @@ func check_type_matchup(enemy: Piece) -> int:
 		_:
 			return 0 # if something weird happens just treat it as neutral
 
-
 func delete() -> void:
 	remove_glows()
 	self.queue_free()
 
+# Show the glowing tiles indicating moves, as well as the damage indicators for piece targets
+func show_glows() -> void:
+	var legal_moves = get_legal_moves(location)
+		
+	for move in legal_moves:
+		var glow := Sprite2D.new()
+		board.add_child(glow)
+		
+		var sprite_filepath : String
+		var piece_at_space = board.grid[move.x][move.y]
+		if piece_at_space == null:
+			sprite_filepath = "res://assets/tile glow/white glow.png"
+		else:
+			var advantage = check_type_matchup(piece_at_space)
+			match advantage:
+				-1:
+					sprite_filepath = "res://assets/tile glow/green glow.png"
+				0:
+					sprite_filepath = "res://assets/tile glow/yellow glow.png"
+				1:
+					sprite_filepath = "res://assets/tile glow/red glow.png"
+				
+			# Show the health that the piece would have afterward
+			piece_at_space.health_bar.select_show = true
+			piece_at_space.health_bar.show()
+			var hypothetical_damage : float = DamageEngine.damage_dealt(self, piece_at_space)
+			piece_at_space.health_bar.show_damage_received(hypothetical_damage / piece_at_space.max_health)
+		
+		glow.texture = load(sprite_filepath)
+		
+		glow.scale = Vector2(0.5, 0.5)
+		
+		glow.position = board_to_world(move)
+		
+		# I know I'm using the location.y to adjust position.x and vice versa
+		# But it works, no clue why lmao
+		# I think it's because the tilemap (x,y) is opposite to world pos
+		# which means tilemap is actually (y,x) to the world axis
+		#glow.position.x -= 256 * location.y + 128
+		#glow.position.y -= 256 * location.x + 128
+		
+		glow_sprites.append(glow)
 
+# Remove all glowing squares and damage indicators
 func remove_glows() -> void:
+	for move in get_legal_moves(location):
+		var piece_at_space = board.grid[move.x][move.y]
+		if piece_at_space != null:
+			piece_at_space.health_bar.select_show = false
+			piece_at_space.health_bar.hide_damage_received()
+			piece_at_space.health_bar.hide()
+	
 	for glow in glow_sprites:
 		glow.queue_free()
 	
-	is_clicked = false
 	glow_sprites.clear()

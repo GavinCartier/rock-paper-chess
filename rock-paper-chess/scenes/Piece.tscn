@@ -25,7 +25,7 @@ offset_left = -81.0
 offset_top = -136.0
 offset_right = 80.0
 offset_bottom = -112.0
-color = Color(0.7431859, 3.7662312e-06, 7.70092e-07, 1)
+color = Color(0.89, 0, 0, 1)
 script = ExtResource("3_lxuho")
 
 [node name="HealthBarFill" type="ColorRect" parent="HealthBar"]
@@ -36,5 +36,6 @@ offset_bottom = 24.0
 color = Color(0, 1, 0, 1)
 
 [node name="DamageReceived" type="ColorRect" parent="HealthBar"]
+z_index = 1
 layout_mode = 0
 offset_bottom = 24.0

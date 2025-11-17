@@ -37,8 +37,14 @@ static var type_multipliers := {
 # Main function for handling a challenge
 # Returns true if the defender was killed
 func challenge(attacker: Piece, defender: Piece) -> bool:
-	var multiplier : float = type_multipliers[attacker.piece_type][defender.piece_type]
-	var attack_damage = attacker.damage * multiplier
+	var attack_damage = damage_dealt(attacker, defender)
 	defender.receive_damage(attack_damage)
 	
 	return defender.health <= 0.0
+
+# Returns the damage dealt to the defender
+# Can be used for hypothetical damage calculations
+func damage_dealt(attacker: Piece, defender: Piece) -> float:
+	var multiplier : float = type_multipliers[attacker.piece_type][defender.piece_type]
+	var attack_damage = attacker.damage * multiplier
+	return min(defender.health, attack_damage)

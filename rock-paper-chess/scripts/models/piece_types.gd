@@ -13,21 +13,21 @@ enum Owner {WHITE, BLACK}
 
 # Store health and damage stats
 static var health_stats := {
-	Classes.PAWN: 10,
-	Classes.KNIGHT: 20,
-	Classes.BISHOP: 20,
-	Classes.ROOK: 20,
-	Classes.QUEEN: 40,
-	Classes.KING:  40
+	Classes.PAWN: 20,
+	Classes.KNIGHT: 30,
+	Classes.BISHOP: 40,
+	Classes.ROOK: 40,
+	Classes.QUEEN: 50,
+	Classes.KING:  50
 }
 
 static var damage_stats := {
 	Classes.PAWN: 10,
-	Classes.KNIGHT: 10,
+	Classes.KNIGHT: 20,
 	Classes.BISHOP: 10,
-	Classes.ROOK:   10,
-	Classes.QUEEN:  20,
-	Classes.KING:   20
+	Classes.ROOK:   20,
+	Classes.QUEEN:  25,
+	Classes.KING:   25
 }
 
 static func get_possible_moves(piece_class: int, owner: int, location: Vector2i, board: ChessBoard) -> Array:
