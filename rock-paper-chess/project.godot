@@ -15,12 +15,9 @@ run/main_scene="uid://nuan8ukxj5ny"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
-[input]
+[autoload]
 
-left_click={
-"deadzone": 0.2,
-"events": []
-}
+DamageEngine="*res://scripts/damage_engine.gd"
 
 [rendering]
 

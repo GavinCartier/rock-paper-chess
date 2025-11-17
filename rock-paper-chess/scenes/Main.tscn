@@ -8,10 +8,6 @@
 [node name="Main" type="Node2D"]
 
 [node name="ChessBoard" parent="." instance=ExtResource("1_elqb8")]
-visible = false
-scale = Vector2(2.5, 2.5)
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Drafting" parent="." instance=ExtResource("2_rvslj")]
 
@@ -19,6 +15,11 @@ scale = Vector2(2.5, 2.5)
 
 [node name="BlackPlayer" type="Node" parent="."]
 script = ExtResource("3_0bbpv")
+color = 1
+metadata/_custom_type_script = "uid://dkxnwft03ausk"
 
 [node name="WhitePlayer" type="Node" parent="."]
 script = ExtResource("3_0bbpv")
+metadata/_custom_type_script = "uid://dkxnwft03ausk"
+
+[node name="Camera2D" type="Camera2D" parent="."]
