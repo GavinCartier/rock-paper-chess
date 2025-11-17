@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://rwyyjixmr5ji"]
+
+[ext_resource type="Texture2D" uid="uid://cksjw77eor4q2" path="res://assets/Placeholder Assets/main menu/temp_main_menu.png" id="1_yqeox"]
+[ext_resource type="Script" uid="uid://dakny6oidgd6u" path="res://scripts/menu/start.gd" id="2_con2f"]
+[ext_resource type="Script" uid="uid://b1ohipdk8a86v" path="res://scripts/menu/exit.gd" id="2_vjb58"]
+[ext_resource type="Script" uid="uid://dwpbidhmljj47" path="res://scripts/menu/settings.gd" id="3_mhnvy"]
+
+[node name="Menu" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yqeox")
+
+[node name="Start" type="Button" parent="."]
+offset_left = -45.0
+offset_top = -68.0
+offset_right = 45.0
+offset_bottom = -13.0
+flat = true
+script = ExtResource("2_con2f")
+
+[node name="Settings" type="Button" parent="."]
+offset_left = -69.0
+offset_top = 11.0
+offset_right = 69.0
+offset_bottom = 59.0
+flat = true
+script = ExtResource("3_mhnvy")
+
+[node name="Exit" type="Button" parent="."]
+offset_left = -48.0
+offset_top = 73.0
+offset_right = 41.0
+offset_bottom = 133.0
+flat = true
+script = ExtResource("2_vjb58")
