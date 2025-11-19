@@ -1,19 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://nuan8ukxj5ny"]
+[gd_scene load_steps=5 format=3 uid="uid://nuan8ukxj5ny"]
 
 [ext_resource type="PackedScene" uid="uid://cq0e7rspvwt20" path="res://scenes/ChessBoard.tscn" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://rwyyjixmr5ji" path="res://scenes/Menu.tscn" id="1_rvslj"]
-[ext_resource type="PackedScene" uid="uid://0k71bkt73jdv" path="res://scenes/Drafting.tscn" id="2_rvslj"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="3_0bbpv"]
-[ext_resource type="Script" uid="uid://gaarh0qqlc5e" path="res://scenes/transition_animation.gd" id="5_vcsgt"]
-
-[sub_resource type="Animation" id="Animation_c01mt"]
-resource_name = "transition_to_new_scene"
-length = 0.5
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nxtc6"]
-_data = {
-&"transition_to_new_scene": SubResource("Animation_c01mt")
-}
+[ext_resource type="PackedScene" uid="uid://0k71bkt73jdv" path="res://scenes/drafting.tscn" id="2_rvslj"]
+[ext_resource type="Script" uid="uid://dkxnwft03ausk" path="res://scripts/player.gd" id="3_0bbpv"]
 
 [node name="Main" type="Node2D"]
 
@@ -33,15 +23,3 @@ metadata/_custom_type_script = "uid://dkxnwft03ausk"
 
 [node name="WhitePlayer" type="Node" parent="."]
 script = ExtResource("3_0bbpv")
-metadata/_custom_type_script = "uid://dkxnwft03ausk"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="FadeIn" type="CanvasLayer" parent="."]
-
-[node name="TransitionAnimation" type="AnimationPlayer" parent="FadeIn"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_nxtc6")
-}
-script = ExtResource("5_vcsgt")

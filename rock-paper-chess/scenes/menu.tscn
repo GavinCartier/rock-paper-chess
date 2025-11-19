@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://rwyyjixmr5ji"]
+[gd_scene load_steps=6 format=3 uid="uid://rwyyjixmr5ji"]
 
-[ext_resource type="Script" uid="uid://dtfqkvh0qge0r" path="res://scenes/menu.gd" id="1_b6cxs"]
 [ext_resource type="Texture2D" uid="uid://cksjw77eor4q2" path="res://assets/Placeholder Assets/main menu/temp_main_menu.png" id="1_yqeox"]
 [ext_resource type="Script" uid="uid://dakny6oidgd6u" path="res://scripts/menu/start.gd" id="2_con2f"]
 [ext_resource type="Script" uid="uid://b1ohipdk8a86v" path="res://scripts/menu/exit.gd" id="2_vjb58"]
@@ -8,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cfo6mk5rnvig7" path="res://scenes/settings_popup.tscn" id="5_jmdev"]
 
 [node name="Menu" type="Node2D"]
-script = ExtResource("1_b6cxs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_yqeox")

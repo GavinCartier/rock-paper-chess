@@ -4,7 +4,6 @@ extends Button
 var chess_board = preload("res://scenes/ChessBoard.tscn")
 var menu = preload("res://scenes/Menu.tscn")
 
-
 func _ready():
 	var button = $"."
 	button.pressed.connect(_start_button_pressed)
@@ -13,4 +12,3 @@ func _start_button_pressed():
 	visible = false
 	$"../SettingsPopup".visible = false
 	$"..".visible = false
-	get_tree().change_scene_to_file("res://scenes/Drafting.tscn")
