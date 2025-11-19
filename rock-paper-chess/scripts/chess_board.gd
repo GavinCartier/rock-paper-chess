@@ -25,6 +25,19 @@ const CLASS_NAMES := {
 	PT.Classes.KING:"King",
 }
 
+# play the apprpriate sound effects when clicking the piece
+func _play_piece_click_sfx(piece: Piece) -> void:
+	match piece.piece_type:
+		PT.Types.ROCK:
+			Sfx.play("rock")
+		PT.Types.PAPER:
+			Sfx.play("paper")
+		PT.Types.SCISSORS:
+			Sfx.play("scissors")
+		_:
+			pass
+
+
 # Signal for showing when the board's selected piece has changed
 # Used for resetting visualizations and such
 signal reset_piece_selection()
@@ -140,6 +153,7 @@ func on_piece_clicked(piece: Piece) -> void:
 	if piece.piece_owner != current_player.color:
 		return
 	
+	_play_piece_click_sfx(piece)
 	emit_signal("reset_piece_selection")
 	selected_piece = piece
 	selected_pos = piece.location
@@ -220,14 +234,6 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	selected_piece = null
 	emit_signal("reset_piece_selection")
 	
-	# swap whose turn it is
-	if current_player == white_player:
-		current_player = black_player
-		print("Black's turn")
-	elif current_player == black_player:
-		current_player = white_player
-		print("White's turn")
-	
 	# if the target pos has opponent's piece
 	if target_piece != null:
 		if target_piece.piece_owner != piece.piece_owner:
@@ -245,3 +251,13 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	piece.location = target
 	# update piece postion in world
 	piece.position = board_to_world(target)
+	
+	# swap whose turn it is
+	if current_player == white_player:
+		current_player = black_player
+		print("Black's turn")
+		Sfx.play("lasso")
+	elif current_player == black_player:
+		current_player = white_player
+		print("White's turn")
+		Sfx.play("clap")

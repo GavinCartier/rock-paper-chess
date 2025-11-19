@@ -69,6 +69,10 @@ func make_button(text: String, pos: Vector2) -> MenuButton:
 	add_child(mb)
 	popup.connect("id_pressed", Callable(self, "_on_item_pressed").bind(mb))
 	
+	# 🔊 NEW: when the piece button is clicked (to open the menu), play dice
+	mb.connect("pressed", Callable(self, "_on_button_pressed").bind(mb))
+	
+	
 	# Customize text on button
 	mb.add_theme_color_override("font_color", Color.WHITE)
 	mb.add_theme_color_override("font_outline_color", Color.BLACK)
@@ -77,11 +81,24 @@ func make_button(text: String, pos: Vector2) -> MenuButton:
 	
 	return mb
 
+# piece button clicked (before choosing Rock/Paper/Scissors)
+func _on_button_pressed(_button: MenuButton) -> void:
+	Sfx.play("dice")
 
 func _on_item_pressed(index: int, button: MenuButton) -> void:
 	# When an option is selected, it's put into the
 	# selections array, which the draft function is listening to.
 	var type = button.get_popup().get_item_text(index)
+	
+	match type:
+		"Rock":
+			Sfx.play("rock")
+		"Paper":
+			Sfx.play("paper")
+		"Scissors":
+			Sfx.play("scissors")
+		_:
+			pass
 	
 	if button.text == "Set All (dev only - delete before release)":
 		pressed_set_all = true
@@ -95,6 +112,8 @@ func draft_controller() -> void:
 	var current_player : Player
 	var next_player : Player
 	var player_name : String
+	var prev_player : Player = null   # 🔊 NEW: remember who had the previous turn
+
 	
 	# X Position of the first sprite to appear (a bit hacky)
 	var sprite_xpos := -200
@@ -122,6 +141,14 @@ func draft_controller() -> void:
 			message.text = player_name + ", make 2 selections."
 		else:
 			message.text = player_name + ", make 1 selection."
+			
+		# turn SFX
+		#if prev_player != null and current_player != prev_player:
+		#	await get_tree().create_timer(0.5).timeout
+		#	if current_player == white_player:
+		#		Sfx.play("clap")   
+		#	else:
+		#		Sfx.play("lasso")
 		
 		# Only have the remaining options on screen.
 		# So if a player has already picked a piece, make that button disappear
@@ -195,6 +222,15 @@ func draft_controller() -> void:
 		
 		sprite.visible = true
 		
+		# Turn SFX for the upcoming player (if the turn actually changes)
+		if i + 1 < turn_order.size():
+			var upcoming_player : Player = turn_order[i + 1]
+			if upcoming_player != current_player:
+				if upcoming_player == white_player:
+					Sfx.play("clap")   
+				else:
+					Sfx.play("lasso") 
+
 		# go to chessboard after all drafting finished
 		if i == len(turn_order) - 1:
 			message.text = "Ready for game."
