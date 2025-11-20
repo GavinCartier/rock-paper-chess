@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 DamageEngine="*res://scripts/damage_engine.gd"
 
+[display]
+
+window/size/viewport_width=2400
+window/size/viewport_height=1600
+
 [rendering]
 
 renderer/rendering_method="mobile"
