@@ -245,3 +245,21 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	piece.location = target
 	# update piece postion in world
 	piece.position = board_to_world(target)
+	piece.has_moved = true
+	
+	# Check if castling occurred -> if so, update rook position as well
+	if piece.piece_class == PieceTypes.Classes.KING && abs(target.y - start.y) == 2:
+		# Castling occurred, get the rook
+		var rook : Piece
+		
+		if target.y == -2:
+			rook = grid[target.x][-4]
+		else:
+			rook = grid[target.x][3]
+		# Move the rook
+		grid[target.x][rook.location.y] = null
+		grid[target.x][int(target.y / 2.0)] = rook
+		
+		rook.location = Vector2i(target.x, int(target.y / 2.0))
+		rook.position = board_to_world(rook.location)
+		rook.has_moved = true
