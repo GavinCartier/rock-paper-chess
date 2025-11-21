@@ -82,6 +82,14 @@ static func get_possible_moves(piece_class: int, owner: int, location: Vector2i,
 						possible_moves.append(move)
 					elif piece_on_tile.piece_owner != owner:
 						possible_moves.append(move)
+			# Castling
+			var king = board.grid[location.x][location.y]
+			var castling_moves = _castling(king, board)
+			
+			for move in castling_moves:
+				possible_moves.append(move)
+			
+			
 			return possible_moves
 
 		_:
@@ -143,3 +151,41 @@ static func _ray_moves(owner: int, directions: Array, location: Vector2i, board:
 				else:
 					moves.append(dir * step)
 	return moves
+
+# Determine the possible castling moves that can be made for a king
+static func _castling(piece: Piece, board: ChessBoard) -> Array:
+	var moves := []
+	
+	if piece.has_moved: return moves
+	
+	if piece.piece_owner == Owner.WHITE:
+		# Left castle
+		var left_rook : Piece = board.grid[3][-4]
+		if left_rook != null and left_rook.piece_class == Classes.ROOK and not left_rook.has_moved:
+			if board.grid[3][-3] == null and board.grid[3][-2] == null and board.grid[3][-1] == null:
+				# Yes, can castle on left
+				moves.append(Vector2i(0, -2))
+		
+		# Right castle
+		var right_rook : Piece = board.grid[3][3]
+		if right_rook != null and right_rook.piece_class == Classes.ROOK and not right_rook.has_moved:
+			if board.grid[3][1] == null and board.grid[3][2] == null:
+				# Yes, can castle on right
+				moves.append(Vector2i(0, 2))
+	
+	else:
+		var left_rook : Piece = board.grid[-4][-4]
+		if left_rook != null and left_rook.piece_class == Classes.ROOK and not left_rook.has_moved:
+			if board.grid[-4][-3] == null and board.grid[-4][-2] == null and board.grid[-4][-1] == null:
+				# Yes, can castle on left
+				moves.append(Vector2i(0, -2))
+		
+		# Right castle
+		var right_rook : Piece = board.grid[-4][3]
+		if right_rook != null and right_rook.piece_class == Classes.ROOK and not right_rook.has_moved:
+			if board.grid[-4][1] == null and board.grid[-4][2] == null:
+				# Yes, can castle on right
+				moves.append(Vector2i(0, 2))
+	
+	return moves
+	

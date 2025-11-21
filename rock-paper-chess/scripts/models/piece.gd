@@ -22,6 +22,7 @@ var max_health : float
 var location : Vector2i
 
 var is_dead : bool = false
+var has_moved : bool # Whether this piece has moved or not (used for castling)
 
 # convert to string for searching file path
 const CLASS_NAMES := {
@@ -60,6 +61,8 @@ func _ready():
 	
 	board.reset_piece_selection.connect(_on_reset_piece_selection)
 	health_bar.hide()
+	
+	has_moved = false
 
 
 func set_texture():

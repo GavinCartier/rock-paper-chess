@@ -369,3 +369,23 @@ func _on_rules_button_pressed() -> void:
 		parent.remove_child(rules_sprite)
 		parent.add_child(rules_sprite)
 		get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
+	# update piece postion in world
+	piece.position = board_to_world(target)
+	piece.has_moved = true
+	
+	# Check if castling occurred -> if so, update rook position as well
+	if piece.piece_class == PieceTypes.Classes.KING && abs(target.y - start.y) == 2:
+		# Castling occurred, get the rook
+		var rook : Piece
+		
+		if target.y == -2:
+			rook = grid[target.x][-4]
+		else:
+			rook = grid[target.x][3]
+		# Move the rook
+		grid[target.x][rook.location.y] = null
+		grid[target.x][int(target.y / 2.0)] = rook
+		
+		rook.location = Vector2i(target.x, int(target.y / 2.0))
+		rook.position = board_to_world(rook.location)
+		rook.has_moved = true
