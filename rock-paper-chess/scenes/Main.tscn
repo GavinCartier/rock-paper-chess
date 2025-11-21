@@ -23,3 +23,4 @@ script = ExtResource("3_0bbpv")
 metadata/_custom_type_script = "uid://dkxnwft03ausk"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
