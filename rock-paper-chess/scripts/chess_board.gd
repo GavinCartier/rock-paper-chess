@@ -11,10 +11,21 @@ const PieceScene: PackedScene = preload("res://scenes/Piece.tscn")
 @onready var black_player : Player = get_parent().get_node("BlackPlayer")
 @onready var current_player : Player
 
+@onready var check : Sprite2D = get_node("Check")
+@onready var white_sprite : Sprite2D = get_node("White's Turn")
+@onready var black_sprite : Sprite2D = get_node("Black's Turn")
+
+@onready var white_graveyard : Sprite2D = get_node("White Graveyard")
+@onready var black_graveyard : Sprite2D = get_node("Black Graveyard")
+
+@onready var rules_button : Button = get_node("Rules Button")
+@onready var rules_sprite : Sprite2D = get_node("Rules")
+
 var grid: Array = []
 
 var selected_piece: Piece = null
 var selected_pos: Vector2i
+var hypothetical_damage : float = 0
 
 const CLASS_NAMES := {
 	PT.Classes.PAWN:"Pawn",
@@ -40,10 +51,14 @@ func begin_chess_game():
 	# Initialize the players
 	white_player.color = Player.Player_Color.WHITE
 	black_player.color = Player.Player_Color.BLACK
-	current_player = white_player
+	
 	_initialize_board()
 	_initialize_piece_position()
-	print("White's turn")
+	
+	current_player = white_player
+	white_sprite.visible = true
+	
+	rules_sprite.modulate.a = 0.0
 
 func _initialize_board():
 	# 8x8 grid with null placeholders
@@ -134,6 +149,12 @@ func on_piece_hovered(piece: Piece) -> void:
 	if selected_piece == null and piece.piece_owner == current_player.color:
 		emit_signal("reset_piece_selection")
 		piece.show_piece_options()
+		piece.health_bar.show_damage_received(0)
+	
+	if selected_piece != null and piece.piece_owner != selected_piece.piece_owner:
+		emit_signal("reset_piece_selection")
+		piece.show_piece_options()
+		piece.health_bar.show_damage_received(0)
 
 # manage the piece that selected by mouse (player)	
 func on_piece_clicked(piece: Piece) -> void:
@@ -144,6 +165,17 @@ func on_piece_clicked(piece: Piece) -> void:
 	selected_piece = piece
 	selected_pos = piece.location
 	piece.show_piece_options()
+	
+	for x in range(grid.size()):
+		for y in range(grid[x].size()):
+			var piece_at_space = grid[x][y]
+			
+			if (piece_at_space != null and piece_at_space.piece_owner != current_player.color):
+				piece_at_space.health_bar.select_show = true
+				piece_at_space.health_bar.show()
+				
+				hypothetical_damage = DamageEngine.damage_dealt(piece, piece_at_space)
+				piece_at_space.health_bar.show_damage_received(hypothetical_damage / piece_at_space.max_health)
 
 func _input(event: InputEvent) -> void:
 	
@@ -174,29 +206,7 @@ func _try_move_to(target_pos: Vector2i) -> bool:
 	
 	# dev log: start pos is correct
 	var start_pos = selected_piece.location
-	# target should be (1,-3)
-	#print("start:", start_pos, " target:", target_pos)
-	
-	#var possible_moves: Array = PT.get_possible_moves(
-	#	selected_piece.piece_class,
-	#	selected_piece.piece_owner,
-	#	Vector2(start_pos.x, start_pos.y),
-	#	self)
-	#var offset = Vector2(target_pos.x - start_pos.x, target_pos.y - start_pos.y)
-	#print("offset:", offset)
-	#print("possible_moves:", possible_moves)
-	
-	#var valid_move :bool = false
-	# check whether it is a valid movement
-	#for i in possible_moves:
-	#	if i == offset:
-	#		valid_move = true
-	#		break
-	
-	#if not valid_move:
-	
-	# The above commented out code did have some buggy behavior about detecting valid moves
-	# But I had also made a function that does this in the piece class so I'm calling that here
+
 	var legal_moves = selected_piece.get_legal_moves(start_pos)
 	if target_pos not in legal_moves:
 		#print("not a valid move")
@@ -221,19 +231,48 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	emit_signal("reset_piece_selection")
 	
 	# swap whose turn it is
+	
+	if (check_for_check()):
+		get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.1)
+	
 	if current_player == white_player:
+		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 0.0, 0.1)
+		
+		white_sprite.visible = false
+		black_sprite.visible = true
+		black_sprite.modulate.a = 0.0
+		
+		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 1.0, 0.1)
+		
 		current_player = black_player
-		print("Black's turn")
+		
 	elif current_player == black_player:
+		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 0.0, 0.1)
+		
+		black_sprite.visible = false
+		white_sprite.visible = true
+		white_sprite.modulate.a = 0.0
+		
+		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 1.0, 0.1)
+		
 		current_player = white_player
-		print("White's turn")
+	
+	var move_distance : float = (target - piece.location).length()
+	var move_speed : float = 7.5
+	var move_time : float = move_distance / move_speed
+	
+	animated_movement(piece, board_to_world(target), move_time)
 	
 	# if the target pos has opponent's piece
 	if target_piece != null:
 		if target_piece.piece_owner != piece.piece_owner:
 			if DamageEngine.challenge(piece, target_piece):
-				target_piece.delete()
+				target_piece.is_dead = true
+				send_to_side(target_piece)
+				current_player.num_of_lost_pieces += 1
 			else:
+				animated_movement(piece, board_to_world(piece.location), move_time)
+				check_for_check()
 				return
 	
 	# update grid status
@@ -243,5 +282,90 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 
 	# update postion on board
 	piece.location = target
-	# update piece postion in world
-	piece.position = board_to_world(target)
+	
+	check_for_check()
+
+
+# This function checks to see whether the King can be attacked
+func check_for_check() -> bool:
+	for x in range(grid.size()):
+		for y in range(grid[x].size()):
+			var piece_at_space = grid[x][y]
+			
+			if (piece_at_space != null and piece_at_space.piece_owner != current_player.color):
+				if (piece_at_space.can_attack_king(piece_at_space.location)):
+					check.visible = true
+					get_tree().create_tween().tween_property(check, "modulate:a", 1.0, 0.2)
+					return true
+					
+	get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.2)
+	check.visible = false
+	return false
+
+
+func animated_movement(piece: Node2D, new_position: Vector2, time: float):
+	var tween := get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	var original_scale = piece.scale
+	var move_scale = original_scale * 1.2
+	
+	tween.tween_property(piece, "position", new_position, time)
+	
+	tween.parallel().tween_property(piece, "scale", move_scale, time * 0.5)
+	tween.parallel().tween_property(piece, "scale", original_scale, time * 0.5).set_delay(time * 0.5)
+
+
+func send_to_side(piece: Node2D):
+	var tween := get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	var new_scale = piece.scale * 0.5
+	var time = 0.5
+	
+	var new_position : Vector2
+	
+	if (current_player == black_player):
+		var width = white_graveyard.texture.get_width() * white_graveyard.scale.x
+		var height = white_graveyard.texture.get_height() * white_graveyard.scale.y
+		
+		if (black_player.num_of_lost_pieces < 8):
+			new_position = white_graveyard.position + Vector2(width * -0.4, height * -0.25)
+			new_position.x += (1.0/8.0) * width * black_player.num_of_lost_pieces
+		else:
+			new_position = white_graveyard.position + Vector2(width * -0.4, height * 0.25)
+			new_position.x += (1.0/8.0) * width * (black_player.num_of_lost_pieces - 8)
+		
+	else: 
+		var width = black_graveyard.texture.get_width() * black_graveyard.scale.x
+		var height = black_graveyard.texture.get_height() * black_graveyard.scale.y
+		
+		if (white_player.num_of_lost_pieces < 8):
+			new_position = black_graveyard.position + Vector2(width * -0.4, height * -0.25)
+			new_position.x += (1.0/8.0) * width * white_player.num_of_lost_pieces
+		else:
+			new_position = black_graveyard.position + Vector2(width * -0.4, height * 0.25)
+			new_position.x += (1.0/8.0) * width * (white_player.num_of_lost_pieces - 8)
+		
+		
+	
+	tween.tween_property(piece, "position", new_position, time)
+	
+	tween.parallel().tween_property(piece, "scale", new_scale, time)
+	
+	return tween
+	
+
+
+func _on_rules_button_pressed() -> void:
+	var tween = get_tree().create_tween()
+	var parent = rules_sprite.get_parent()
+	if rules_sprite.visible:
+		tween.tween_property(rules_sprite, "modulate:a", 0.0, 0.25)
+		await tween.finished
+		rules_sprite.visible = false
+	else:
+		rules_sprite.visible = true
+		parent.remove_child(rules_sprite)
+		parent.add_child(rules_sprite)
+		get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)

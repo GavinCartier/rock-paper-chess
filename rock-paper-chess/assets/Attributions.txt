@@ -1,0 +1,49 @@
+Any assets not mentioned in this file were made by members of the team.
+
+Audio
+Song
+Tabletop Jazz Cafe (Free Music) by LudoLoon Studio
+https://assetstore.unity.com/packages/audio/music/tabletop-jazz-cafe-free-music-224462
+
+woosh.wav
+Woosh_Low_Short_01.wav by moogy73 -- https://freesound.org/s/425704/ -- License: Creative Commons 0
+
+dice.wav
+Dice Roll Close Impact.wav by miaopolus -- https://freesound.org/s/656282/ -- License: Attribution NonCommercial 4.0
+
+rock.wav
+Stone Impact Rubble Debris 4 by Sheyvan -- https://freesound.org/s/569500/ -- License: Creative Commons 0
+
+paper.wav
+Crumpling Newspaper by Aiwha -- https://freesound.org/s/496153/ -- License: Attribution 4.0
+
+scissors.wav
+knife sharpen 05.wav by Anthousai -- https://freesound.org/s/336590/ -- License: Creative Commons 0
+
+whip crack.wav
+whip and crack sound by JayRom01 -- https://freesound.org/s/615761/ -- License: Creative Commons 0
+
+drum single beat.wav
+BD22x16-MHP-O~v04.wav by quartertone -- https://freesound.org/s/137313/ -- License: Attribution 4.0
+
+bell.mp3
+Twin Bells.mp3 by Streetpoptunez -- https://freesound.org/s/653752/ -- License: Creative Commons 0
+
+lasso.wav
+whip.wav by _def -- https://freesound.org/s/346524/ -- License: Attribution 4.0
+
+
+Rules Graphic Icons for Rock, Paper, Scissors, Arrow:
+<a href="https://www.freepik.com/free-vector/set-brown-stones-isolated-white_13374383.htm#fromView=keyword&page=1&position=21&uuid=a3ea0897-d9a5-4b71-9f19-754f81ea8f00&query=Rock+illustration">Image by brgfx on Freepik</a>
+
+<a href="https://www.freepik.com/free-vector/scroll-old-paper-isolated_24062739.htm#fromView=image_search_similar&page=1&position=8&uuid=5b7e5df0-1b55-49fc-8f0c-3b767f33a665&query=paper+illustration">Image by brgfx on Freepik</a>
+
+<a href="https://www.freepik.com/free-vector/pair-barber-scissors_19703079.htm#fromView=search&page=1&position=35&uuid=44aaf2a2-ce57-417b-8a38-b000b7f65c51&query=scissors+illustration">Image by brgfx on Freepik</a>
+
+<a href="https://www.flaticon.com/free-icons/arrow" title="arrow icons">Arrow icons created by Freepik - Flaticon</a>
+
+
+Fonts
+bodoni-72-smallcaps-book
+bodoni-72-oldstyle-book
+Cochin Regular
