@@ -152,9 +152,10 @@ func on_piece_hovered(piece: Piece) -> void:
 		piece.health_bar.show_damage_received(0)
 	
 	if selected_piece != null and piece.piece_owner != selected_piece.piece_owner:
-		emit_signal("reset_piece_selection")
-		piece.show_piece_options()
-		piece.health_bar.show_damage_received(0)
+		return
+		#emit_signal("reset_piece_selection")
+		#piece.show_piece_options()
+		#piece.health_bar.show_damage_received(0)
 
 # manage the piece that selected by mouse (player)	
 func on_piece_clicked(piece: Piece) -> void:
@@ -301,8 +302,8 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		grid[target.x][rook.location.y] = null
 		grid[target.x][int(target.y / 2.0)] = rook
 		
-		rook.location = Vector2i(target.x, int(target.y / 2.0))
-		rook.position = board_to_world(rook.location)
+		var rook_location = Vector2i(target.x, int(target.y / 2.0))
+		animated_movement(rook, board_to_world(rook_location), move_time)
 		rook.has_moved = true
 	
 	check_for_check()
