@@ -11,8 +11,19 @@ config_version=5
 [application]
 
 config/name="rock paper chess"
+run/main_scene="uid://nuan8ukxj5ny"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DamageEngine="*res://scripts/damage_engine.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 
 [rendering]
 
