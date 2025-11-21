@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=4 uid="uid://cq0e7rspvwt20"]
+[gd_scene load_steps=13 format=4 uid="uid://cq0e7rspvwt20"]
 
 [ext_resource type="Texture2D" uid="uid://cwxggpqsbpc6q" path="res://assets/chessboard/small.png" id="1_fr4o4"]
 [ext_resource type="Script" uid="uid://8e0wqfvx8ojc" path="res://scripts/chess_board.gd" id="1_k803c"]
 [ext_resource type="Texture2D" uid="uid://joirttjfsqe1" path="res://assets/chessboard/chessboard.PNG" id="2_8qgad"]
 [ext_resource type="Texture2D" uid="uid://ch2x3bfqwf5o2" path="res://assets/chessboard/tiles.png" id="4_k803c"]
+[ext_resource type="Texture2D" uid="uid://t3gtqrtstrln" path="res://assets/UI Elements/Check.png" id="5_kmr1w"]
+[ext_resource type="Texture2D" uid="uid://bdkv6ptt81nn1" path="res://assets/UI Elements/Black Turn.png" id="6_73djx"]
+[ext_resource type="Texture2D" uid="uid://bfmkha3pmwu4t" path="res://assets/UI Elements/White Turn.png" id="7_73djx"]
+[ext_resource type="Texture2D" uid="uid://632kc8wbt83i" path="res://assets/chessboard/board.png" id="8_bjwxv"]
+[ext_resource type="Texture2D" uid="uid://cycsampjwtdlw" path="res://assets/UI Elements/Rules button.png" id="9_0nwsu"]
+[ext_resource type="Texture2D" uid="uid://dm2jcfiwqlw1n" path="res://assets/UI Elements/Rules.png" id="11_yiklk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_80two"]
 texture = ExtResource("4_k803c")
@@ -96,3 +102,46 @@ tile_set = SubResource("TileSet_kmr1w")
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
 zoom = Vector2(0.7, 0.7)
+
+[node name="Check" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1504.0001, -799)
+scale = Vector2(1.3959793, 1.5445623)
+texture = ExtResource("5_kmr1w")
+
+[node name="Black\'s Turn" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1511, 256)
+scale = Vector2(1.3321917, 1.3321921)
+texture = ExtResource("6_73djx")
+
+[node name="White\'s Turn" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1517.5, 259.1875)
+scale = Vector2(1.3125, 1.3125)
+texture = ExtResource("7_73djx")
+
+[node name="White Graveyard" type="Sprite2D" parent="."]
+position = Vector2(1506, 780.00024)
+scale = Vector2(0.24804688, 0.18945311)
+texture = ExtResource("8_bjwxv")
+
+[node name="Black Graveyard" type="Sprite2D" parent="."]
+position = Vector2(1502.1251, -793)
+scale = Vector2(0.23815909, 0.18896487)
+texture = ExtResource("8_bjwxv")
+
+[node name="Rules" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-131, -41)
+scale = Vector2(1.4849008, 1.4849007)
+texture = ExtResource("11_yiklk")
+
+[node name="Rules Button" type="Button" parent="."]
+offset_left = 1412.0
+offset_top = -113.0
+offset_right = 1596.0
+offset_bottom = -1.0
+icon = ExtResource("9_0nwsu")
+
+[connection signal="pressed" from="Rules Button" to="." method="_on_rules_button_pressed"]
