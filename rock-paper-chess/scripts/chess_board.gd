@@ -21,11 +21,15 @@ const PieceScene: PackedScene = preload("res://scenes/Piece.tscn")
 @onready var rules_button : Button = get_node("Rules Button")
 @onready var rules_sprite : Sprite2D = get_node("Rules")
 
+@onready var white_winner : Sprite2D = get_tree().root.get_node("Main/WhiteWinner")
+@onready var black_winner : Sprite2D = get_tree().root.get_node("Main/BlackWinner")
+
 var grid: Array = []
 
 var selected_piece: Piece = null
 var selected_pos: Vector2i
 var hypothetical_damage : float = 0
+var is_game_over : bool
 
 const CLASS_NAMES := {
 	PT.Classes.PAWN:"Pawn",
@@ -59,6 +63,8 @@ func begin_chess_game():
 	white_sprite.visible = true
 	
 	rules_sprite.modulate.a = 0.0
+	
+	is_game_over = false
 
 func _initialize_board():
 	# 8x8 grid with null placeholders
@@ -146,6 +152,10 @@ func board_to_grid(pos: Vector2i) -> Vector2i:
 # Prompts pieces to load display logic upon being hovered.
 # Only activates if a piece is not already selected via click
 func on_piece_hovered(piece: Piece) -> void:
+	if is_game_over:
+		print("hi")
+		return
+	
 	if selected_piece == null and piece.piece_owner == current_player.color:
 		emit_signal("reset_piece_selection")
 		piece.show_piece_options()
@@ -153,12 +163,12 @@ func on_piece_hovered(piece: Piece) -> void:
 	
 	if selected_piece != null and piece.piece_owner != selected_piece.piece_owner:
 		return
-		#emit_signal("reset_piece_selection")
-		#piece.show_piece_options()
-		#piece.health_bar.show_damage_received(0)
 
 # manage the piece that selected by mouse (player)	
 func on_piece_clicked(piece: Piece) -> void:
+	if is_game_over:
+		return
+	
 	if piece.piece_owner != current_player.color:
 		return
 	
@@ -177,6 +187,7 @@ func on_piece_clicked(piece: Piece) -> void:
 				
 				hypothetical_damage = DamageEngine.damage_dealt(piece, piece_at_space)
 				piece_at_space.health_bar.show_damage_received(hypothetical_damage / piece_at_space.max_health)
+
 
 func _input(event: InputEvent) -> void:
 	
@@ -272,7 +283,7 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 				send_to_side(target_piece)
 				current_player.num_of_lost_pieces += 1
 				if target_piece.piece_class == PieceTypes.Classes.KING:
-					_victory_screen(current_player)
+					_victory_screen()
 			else:
 				animated_movement(piece, board_to_world(piece.location), move_time)
 				check_for_check()
@@ -355,10 +366,10 @@ func send_to_side(piece: Node2D):
 		var height = white_graveyard.texture.get_height() * white_graveyard.scale.y
 		
 		if (black_player.num_of_lost_pieces < 8):
-			new_position = white_graveyard.position + Vector2(width * -0.4, height * -0.25)
+			new_position = white_graveyard.position + Vector2(width * -(3.5/8.0), height * -0.25)
 			new_position.x += (1.0/8.0) * width * black_player.num_of_lost_pieces
 		else:
-			new_position = white_graveyard.position + Vector2(width * -0.4, height * 0.25)
+			new_position = white_graveyard.position + Vector2(width * -(3.5/8.0), height * 0.25)
 			new_position.x += (1.0/8.0) * width * (black_player.num_of_lost_pieces - 8)
 		
 	else: 
@@ -366,10 +377,10 @@ func send_to_side(piece: Node2D):
 		var height = black_graveyard.texture.get_height() * black_graveyard.scale.y
 		
 		if (white_player.num_of_lost_pieces < 8):
-			new_position = black_graveyard.position + Vector2(width * -0.4, height * -0.25)
+			new_position = black_graveyard.position + Vector2(width * -(3.5/8.0), height * -0.25)
 			new_position.x += (1.0/8.0) * width * white_player.num_of_lost_pieces
 		else:
-			new_position = black_graveyard.position + Vector2(width * -0.4, height * 0.25)
+			new_position = black_graveyard.position + Vector2(width * -(3.5/8.0), height * 0.25)
 			new_position.x += (1.0/8.0) * width * (white_player.num_of_lost_pieces - 8)
 		
 		
@@ -379,7 +390,6 @@ func send_to_side(piece: Node2D):
 	tween.parallel().tween_property(piece, "scale", new_scale, time)
 	
 	return tween
-	
 
 
 func _on_rules_button_pressed() -> void:
@@ -394,9 +404,11 @@ func _on_rules_button_pressed() -> void:
 		parent.remove_child(rules_sprite)
 		parent.add_child(rules_sprite)
 		get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
-		
-func _victory_screen(current_player : Player):
+
+
+func _victory_screen():
+	is_game_over = true
 	if current_player == black_player:
-		$"../White Winner".visible = true
+		white_winner.visible = true
 	else:
-		$"../Black Winner".visible = true
+		black_winner.visible = true

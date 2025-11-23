@@ -129,7 +129,7 @@ func can_attack_king(current_position : Vector2i) -> bool:
 
 
 func _on_mouse_entered():
-	if is_dead:
+	if is_dead or board.is_game_over:
 		return
 		
 	health_bar.show()
