@@ -1,23 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://nuan8ukxj5ny"]
+[gd_scene load_steps=5 format=3 uid="uid://nuan8ukxj5ny"]
 
 [ext_resource type="PackedScene" uid="uid://cq0e7rspvwt20" path="res://scenes/ChessBoard.tscn" id="1_elqb8"]
-[ext_resource type="PackedScene" uid="uid://rwyyjixmr5ji" path="res://scenes/menu.tscn" id="1_rvslj"]
+[ext_resource type="PackedScene" uid="uid://rwyyjixmr5ji" path="res://scenes/Menu.tscn" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://0k71bkt73jdv" path="res://scenes/drafting.tscn" id="2_rvslj"]
 [ext_resource type="Script" uid="uid://dkxnwft03ausk" path="res://scripts/player.gd" id="3_0bbpv"]
-[ext_resource type="AudioStream" uid="uid://dssbr4txh4358" path="res://assets/sound effects/rock.wav" id="5_mwfav"]
-[ext_resource type="AudioStream" uid="uid://gsknsc2t8hfh" path="res://assets/sound effects/paper.wav" id="6_3p2gp"]
-[ext_resource type="AudioStream" uid="uid://bpvny30ysq1dr" path="res://assets/sound effects/scissors.wav" id="7_cvmbd"]
-[ext_resource type="AudioStream" uid="uid://cwrahbtpter0v" path="res://assets/sound effects/clap.wav" id="8_ft6cd"]
-[ext_resource type="AudioStream" uid="uid://b5023yiq0n3j8" path="res://assets/sound effects/lasso.wav" id="9_bb450"]
-[ext_resource type="AudioStream" uid="uid://ddw31lvc8ave4" path="res://assets/sound effects/woosh.wav" id="10_nfivy"]
-[ext_resource type="AudioStream" uid="uid://c478m63tnyws3" path="res://assets/sound effects/bell.mp3" id="11_1nqs0"]
-[ext_resource type="AudioStream" uid="uid://ym55ofett8cb" path="res://assets/sound effects/drum single beat.wav" id="12_1iba3"]
-[ext_resource type="AudioStream" uid="uid://cdv1amk6tvkep" path="res://assets/sound effects/whip crack.wav" id="13_yxlcp"]
-[ext_resource type="AudioStream" uid="uid://j4u4ip60wpkr" path="res://assets/sound effects/dice.wav" id="14_ebg2g"]
 
 [node name="Main" type="Node2D"]
 
 [node name="ChessBoard" parent="." instance=ExtResource("1_elqb8")]
+scale = Vector2(2.5, 2.5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Drafting" parent="." instance=ExtResource("2_rvslj")]
 
@@ -30,48 +23,3 @@ metadata/_custom_type_script = "uid://dkxnwft03ausk"
 
 [node name="WhitePlayer" type="Node" parent="."]
 script = ExtResource("3_0bbpv")
-metadata/_custom_type_script = "uid://dkxnwft03ausk"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Audio" type="Node" parent="."]
-
-[node name="rock" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("5_mwfav")
-bus = &"sfx"
-
-[node name="paper" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("6_3p2gp")
-bus = &"sfx"
-
-[node name="scissors" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("7_cvmbd")
-bus = &"sfx"
-
-[node name="clap" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("8_ft6cd")
-bus = &"sfx"
-
-[node name="lasso" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("9_bb450")
-bus = &"sfx"
-
-[node name="woosh" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("10_nfivy")
-bus = &"sfx"
-
-[node name="bell" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("11_1nqs0")
-bus = &"sfx"
-
-[node name="drum" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("12_1iba3")
-bus = &"sfx"
-
-[node name="whip" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("13_yxlcp")
-bus = &"sfx"
-
-[node name="dice" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("14_ebg2g")
-bus = &"sfx"
