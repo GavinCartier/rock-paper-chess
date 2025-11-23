@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://0k71bkt73jdv"]
 
-[ext_resource type="Script" path="res://scripts/drafting.gd" id="1_xd4v5"]
+[ext_resource type="Script" uid="uid://cmyr62k4q30af" path="res://scripts/drafting.gd" id="1_xd4v5"]
 [ext_resource type="Texture2D" uid="uid://bv3yu5pp71fpd" path="res://assets/drafting_background.png" id="2_xd4v5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1a71g"]
@@ -12,7 +12,7 @@ outline_size = 10
 script = ExtResource("1_xd4v5")
 
 [node name="DraftBakcgroundSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.48898306, 0.4)
+scale = Vector2(1.7770965, 1.7770962)
 texture = ExtResource("2_xd4v5")
 
 [node name="Instruction Text" type="Label" parent="."]
@@ -31,5 +31,3 @@ text = "Hello"
 label_settings = SubResource("LabelSettings_1a71g")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Camera2D" type="Camera2D" parent="."]

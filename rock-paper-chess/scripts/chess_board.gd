@@ -271,6 +271,8 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 				target_piece.is_dead = true
 				send_to_side(target_piece)
 				current_player.num_of_lost_pieces += 1
+				if current_player.num_of_lost_pieces == 16:
+					_victory_screen(current_player)
 			else:
 				animated_movement(piece, board_to_world(piece.location), move_time)
 				check_for_check()
@@ -392,3 +394,9 @@ func _on_rules_button_pressed() -> void:
 		parent.remove_child(rules_sprite)
 		parent.add_child(rules_sprite)
 		get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
+		
+func _victory_screen(current_player : Player):
+	if current_player == black_player:
+		$"../White Winner".visible = true
+	else:
+		$"../Black Winner".visible = true

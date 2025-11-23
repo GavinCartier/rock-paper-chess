@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://nuan8ukxj5ny"]
+[gd_scene load_steps=8 format=3 uid="uid://nuan8ukxj5ny"]
 
 [ext_resource type="PackedScene" uid="uid://cq0e7rspvwt20" path="res://scenes/ChessBoard.tscn" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://rwyyjixmr5ji" path="res://scenes/menu.tscn" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://0k71bkt73jdv" path="res://scenes/drafting.tscn" id="2_rvslj"]
 [ext_resource type="Script" uid="uid://dkxnwft03ausk" path="res://scripts/player.gd" id="3_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://cou1glsup1s52" path="res://scenes/white_winner.tscn" id="5_c01mt"]
+[ext_resource type="PackedScene" uid="uid://cn4lcl7q7tpff" path="res://scenes/black_winner.tscn" id="6_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://cfo6mk5rnvig7" path="res://scenes/settings_popup.tscn" id="7_nxtc6"]
 
 [node name="Main" type="Node2D"]
 
@@ -22,5 +25,16 @@ metadata/_custom_type_script = "uid://dkxnwft03ausk"
 script = ExtResource("3_0bbpv")
 metadata/_custom_type_script = "uid://dkxnwft03ausk"
 
+[node name="White Winner" parent="." instance=ExtResource("5_c01mt")]
+visible = false
+scale = Vector2(2.6217592, 2.6217592)
+
+[node name="Black Winner" parent="." instance=ExtResource("6_nxtc6")]
+visible = false
+position = Vector2(12, 0)
+scale = Vector2(2.622, 2.622)
+
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+
+[node name="SettingsPopup" parent="." instance=ExtResource("7_nxtc6")]
+visible = false

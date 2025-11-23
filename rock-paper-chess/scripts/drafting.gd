@@ -15,7 +15,7 @@ var pressed_set_all := false
 signal finish_drafting
 
 func _ready() -> void:
-	$Camera2D.enabled = true
+	cam.enabled = true
 	# Go to chessboard when finish drafting
 	var board = get_parent().get_node("ChessBoard")
 	connect("finish_drafting", Callable(board, "_finished_drafting"))
@@ -156,7 +156,7 @@ func draft_controller() -> void:
 			message.text = "Ready for game."
 			emit_signal("finish_drafting")
 			# turn off the camera for drafting
-			$Camera2D.enabled=false
+			cam.enabled=false
 			
 			return
 		
@@ -200,4 +200,4 @@ func draft_controller() -> void:
 			message.text = "Ready for game."
 			emit_signal("finish_drafting")
 			# turn off the camera for drafting
-			$Camera2D.enabled=false
+			cam.enabled=false

@@ -8,9 +8,10 @@
 [node name="Menu" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.6, 1.6)
 texture = ExtResource("1_yqeox")
 
-[node name="Start" type="Button" parent="."]
+[node name="Start" type="Button" parent="Sprite2D"]
 offset_left = -45.0
 offset_top = -68.0
 offset_right = 45.0
@@ -18,7 +19,7 @@ offset_bottom = -13.0
 flat = true
 script = ExtResource("2_con2f")
 
-[node name="Settings" type="Button" parent="."]
+[node name="Settings" type="Button" parent="Sprite2D"]
 offset_left = -69.0
 offset_top = 11.0
 offset_right = 69.0
@@ -26,7 +27,7 @@ offset_bottom = 59.0
 flat = true
 script = ExtResource("3_mhnvy")
 
-[node name="Exit" type="Button" parent="."]
+[node name="Exit" type="Button" parent="Sprite2D"]
 offset_left = -48.0
 offset_top = 73.0
 offset_right = 41.0
