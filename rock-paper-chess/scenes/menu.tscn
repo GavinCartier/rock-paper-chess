@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://rwyyjixmr5ji"]
+[gd_scene load_steps=5 format=3 uid="uid://rwyyjixmr5ji"]
 
 [ext_resource type="Texture2D" uid="uid://cksjw77eor4q2" path="res://assets/Placeholder Assets/main menu/temp_main_menu.png" id="1_yqeox"]
 [ext_resource type="Script" uid="uid://dakny6oidgd6u" path="res://scripts/menu/start.gd" id="2_con2f"]
 [ext_resource type="Script" uid="uid://b1ohipdk8a86v" path="res://scripts/menu/exit.gd" id="2_vjb58"]
 [ext_resource type="Script" uid="uid://dwpbidhmljj47" path="res://scripts/menu/settings.gd" id="3_mhnvy"]
-[ext_resource type="PackedScene" uid="uid://cfo6mk5rnvig7" path="res://scenes/settings_popup.tscn" id="5_jmdev"]
 
 [node name="Menu" type="Node2D"]
 
@@ -34,5 +33,3 @@ offset_right = 41.0
 offset_bottom = 133.0
 flat = true
 script = ExtResource("2_vjb58")
-
-[node name="SettingsPopup" parent="." instance=ExtResource("5_jmdev")]
