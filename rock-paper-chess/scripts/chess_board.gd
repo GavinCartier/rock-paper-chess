@@ -271,7 +271,7 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 				target_piece.is_dead = true
 				send_to_side(target_piece)
 				current_player.num_of_lost_pieces += 1
-				if current_player.num_of_lost_pieces == 16:
+				if target_piece.piece_class == PieceTypes.Classes.KING:
 					_victory_screen(current_player)
 			else:
 				animated_movement(piece, board_to_world(piece.location), move_time)
