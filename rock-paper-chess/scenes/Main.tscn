@@ -25,11 +25,11 @@ metadata/_custom_type_script = "uid://dkxnwft03ausk"
 script = ExtResource("3_0bbpv")
 metadata/_custom_type_script = "uid://dkxnwft03ausk"
 
-[node name="White Winner" parent="." instance=ExtResource("5_c01mt")]
+[node name="WhiteWinner" parent="." instance=ExtResource("5_c01mt")]
 visible = false
 scale = Vector2(2.6217592, 2.6217592)
 
-[node name="Black Winner" parent="." instance=ExtResource("6_nxtc6")]
+[node name="BlackWinner" parent="." instance=ExtResource("6_nxtc6")]
 visible = false
 position = Vector2(12, 0)
 scale = Vector2(2.622, 2.622)
