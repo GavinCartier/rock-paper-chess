@@ -36,13 +36,8 @@ func _play_piece_click_sfx(piece: Piece) -> void:
 			Sfx.play("scissors")
 		_:
 			pass
-<<<<<<< Updated upstream
 
 
-=======
-			
-			
->>>>>>> Stashed changes
 # Signal for showing when the board's selected piece has changed
 # Used for resetting visualizations and such
 signal reset_piece_selection()
