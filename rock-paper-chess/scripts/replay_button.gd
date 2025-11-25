@@ -5,4 +5,5 @@ func _ready():
 	button.pressed.connect(_replay_button_pressed)
 
 func _replay_button_pressed():
+	Sfx.play("woosh")
 	get_tree().reload_current_scene()
