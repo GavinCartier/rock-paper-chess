@@ -10,4 +10,5 @@ func _ready():
 	button.pressed.connect(_button_pressed)
 
 func _button_pressed():
+	Sfx.play("woosh")
 	menu.set_visible(false)
