@@ -40,6 +40,18 @@ const CLASS_NAMES := {
 	PT.Classes.KING:"King",
 }
 
+# play the apprpriate sound effects when clicking the piece
+func _play_piece_click_sfx(piece: Piece) -> void:
+	match piece.piece_type:
+		PT.Types.ROCK:
+			Sfx.play("rock")
+		PT.Types.PAPER:
+			Sfx.play("paper")
+		PT.Types.SCISSORS:
+			Sfx.play("scissors")
+		_:
+			pass
+
 # Signal for showing when the board's selected piece has changed
 # Used for resetting visualizations and such
 signal reset_piece_selection()
@@ -172,6 +184,7 @@ func on_piece_clicked(piece: Piece) -> void:
 	if piece.piece_owner != current_player.color:
 		return
 	
+	_play_piece_click_sfx(piece)
 	emit_signal("reset_piece_selection")
 	selected_piece = piece
 	selected_pos = piece.location

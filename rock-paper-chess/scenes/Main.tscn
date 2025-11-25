@@ -54,6 +54,7 @@ visible = false
 
 [node name="bell" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("8_bb450")
+volume_db = 12.0
 bus = &"sfx"
 
 [node name="clap" type="AudioStreamPlayer" parent="Audio"]
@@ -62,22 +63,27 @@ bus = &"sfx"
 
 [node name="dice" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("10_1nqs0")
+volume_db = 12.0
 bus = &"sfx"
 
 [node name="drum" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("11_1iba3")
+volume_db = 4.0
 bus = &"sfx"
 
 [node name="lasso" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("12_yxlcp")
+volume_db = -4.0
 bus = &"sfx"
 
 [node name="paper" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("13_ebg2g")
+volume_db = 17.0
 bus = &"sfx"
 
 [node name="rock" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("14_2ofn6")
+volume_db = -2.0
 bus = &"sfx"
 
 [node name="scissors" type="AudioStreamPlayer" parent="Audio"]
@@ -86,10 +92,12 @@ bus = &"sfx"
 
 [node name="whip" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("16_36rkl")
+volume_db = -4.0
 bus = &"sfx"
 
 [node name="woosh" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("17_fs0b5")
+volume_db = -2.0
 bus = &"sfx"
 
 [node name="jazz bg" type="AudioStreamPlayer" parent="Audio"]

@@ -69,6 +69,9 @@ func make_button(text: String, pos: Vector2) -> MenuButton:
 	add_child(mb)
 	popup.connect("id_pressed", Callable(self, "_on_item_pressed").bind(mb))
 	
+	# for the piece click sfx
+	mb.connect("pressed", Callable(self, "_on_piece_button_pressed"))
+
 	# Customize text on button
 	mb.add_theme_color_override("font_color", Color.WHITE)
 	mb.add_theme_color_override("font_outline_color", Color.BLACK)
@@ -76,12 +79,25 @@ func make_button(text: String, pos: Vector2) -> MenuButton:
 	mb.set_anchors_preset(Control.PRESET_CENTER)
 	
 	return mb
+	
+func _on_piece_button_pressed() -> void:
+	Sfx.play("dice") 
 
 
 func _on_item_pressed(index: int, button: MenuButton) -> void:
 	# When an option is selected, it's put into the
 	# selections array, which the draft function is listening to.
 	var type = button.get_popup().get_item_text(index)
+	
+	match type:
+		"Rock":
+			Sfx.play("rock")
+		"Paper":
+			Sfx.play("paper")
+		"Scissors":
+			Sfx.play("scissors")
+		_:
+			pass
 	
 	if button.text == "Set All (dev only - delete before release)":
 		pressed_set_all = true
