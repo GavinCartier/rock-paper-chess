@@ -39,6 +39,7 @@ func _play_matchup_sfx(attacker: Piece, defender: Piece, multiplier: float) -> v
 		Sfx.play("drum")
 		return
 	
+<<<<<<< Updated upstream
 	var favored_owner
 	if multiplier == STRONG_ATTACK:
 		favored_owner = attacker.piece_owner
@@ -54,13 +55,38 @@ func _play_matchup_sfx(attacker: Piece, defender: Piece, multiplier: float) -> v
 		Sfx.play("whip")
 	else:
 		Sfx.play("drum")
+=======
+	if multiplier == STRONG_ATTACK:
+		if attacker.piece_owner == PieceTypes.Owner.WHITE:
+			Sfx.play("bell")
+		else:
+			Sfx.play("whip")
+		return
+		
+	# weak attack → defender favored
+	if multiplier == WEAK_ATTACK:
+		if defender.piece_owner == PieceTypes.Owner.WHITE:
+			Sfx.play("bell")
+		else:
+			Sfx.play("whip")
+		return
+
+	# safety fallback (shouldn't happen)
+	Sfx.play("drum")
+>>>>>>> Stashed changes
 
 
 # Main function for handling a challenge
 # Returns true if the defender was killed
 func challenge(attacker: Piece, defender: Piece) -> bool:
+<<<<<<< Updated upstream
 	#_play_sfx("woosh") at start of challenge
 	var attack_damage = damage_dealt(attacker, defender)
+=======
+	#var multiplier = type_multipliers[attacker.piece_type][defender.piece_type]
+
+	var attack_damage = damage_dealt(attacker, defender, true)
+>>>>>>> Stashed changes
 	defender.receive_damage(attack_damage)
 	
 	#_play_sfx("woosh") at end of challenge
@@ -68,10 +94,14 @@ func challenge(attacker: Piece, defender: Piece) -> bool:
 
 # Returns the damage dealt to the defender
 # Can be used for hypothetical damage calculations
-func damage_dealt(attacker: Piece, defender: Piece) -> float:
+func damage_dealt(attacker: Piece, defender: Piece, play_sfx := false) -> float:
 	var multiplier : float = type_multipliers[attacker.piece_type][defender.piece_type]
 	
 	_play_matchup_sfx(attacker, defender, multiplier)
 
 	var attack_damage = attacker.damage * multiplier
+	
+	if play_sfx:
+		_play_matchup_sfx(attacker, defender, multiplier)
+		
 	return min(defender.health, attack_damage)

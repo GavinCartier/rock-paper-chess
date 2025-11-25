@@ -60,19 +60,24 @@ func make_button(text: String, pos: Vector2) -> MenuButton:
 	
 	# Add the RPS options to drop-down menu
 	var popup := mb.get_popup()
-	popup.add_item("Rock")
-	popup.add_item("Paper")
-	popup.add_item("Scissors")
+	popup.add_item("rock")
+	popup.add_item("paper")
+	popup.add_item("scissors")
 	
 	# Position button in scene, add to scene, connect to function
 	mb.position = pos
 	add_child(mb)
 	popup.connect("id_pressed", Callable(self, "_on_item_pressed").bind(mb))
 	
+<<<<<<< Updated upstream
 	# 🔊 NEW: when the piece button is clicked (to open the menu), play dice
 	mb.connect("pressed", Callable(self, "_on_button_pressed").bind(mb))
 	
 	
+=======
+	mb.connect("pressed", Callable(self, "_on_piece_button_pressed"))
+
+>>>>>>> Stashed changes
 	# Customize text on button
 	mb.add_theme_color_override("font_color", Color.WHITE)
 	mb.add_theme_color_override("font_outline_color", Color.BLACK)
@@ -85,17 +90,29 @@ func make_button(text: String, pos: Vector2) -> MenuButton:
 func _on_button_pressed(_button: MenuButton) -> void:
 	Sfx.play("dice")
 
+func _on_piece_button_pressed() -> void:
+	Sfx.play("dice")  
+
+
 func _on_item_pressed(index: int, button: MenuButton) -> void:
 	# When an option is selected, it's put into the
 	# selections array, which the draft function is listening to.
 	var type = button.get_popup().get_item_text(index)
 	
 	match type:
+<<<<<<< Updated upstream
 		"Rock":
 			Sfx.play("rock")
 		"Paper":
 			Sfx.play("paper")
 		"Scissors":
+=======
+		"rock":
+			Sfx.play("rock")
+		"paper":
+			Sfx.play("paper")
+		"scissors":
+>>>>>>> Stashed changes
 			Sfx.play("scissors")
 		_:
 			pass
