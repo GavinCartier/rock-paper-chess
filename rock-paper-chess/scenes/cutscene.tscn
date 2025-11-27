@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://dr2ky34tyoq5u"]
+
+[ext_resource type="Script" uid="uid://bbkiuxy4vm7ce" path="res://scripts/cutscene.gd" id="1_d18fx"]
+[ext_resource type="Texture2D" uid="uid://deagehunexyxi" path="res://assets/story/story_background.png" id="1_edmg7"]
+[ext_resource type="Texture2D" uid="uid://o7wyyfbamf57" path="res://assets/characters/aristocrat_neutral_shadow.png" id="2_a320b"]
+[ext_resource type="Texture2D" uid="uid://cplx2bpqkm3mw" path="res://assets/characters/aristocrat_speaking_shadow.png" id="3_fs8wb"]
+[ext_resource type="Texture2D" uid="uid://kqirnvw11d00" path="res://assets/characters/cowboy_neutral_shadow.png" id="4_bb0yx"]
+[ext_resource type="Texture2D" uid="uid://dutwmpmoghpq1" path="res://assets/characters/cowboy_speaking_shadow.png" id="5_3ptll"]
+[ext_resource type="Texture2D" uid="uid://dmrxev01nlmop" path="res://assets/story/text_box.jpg" id="6_bb0yx"]
+[ext_resource type="FontFile" uid="uid://cf8vq1pgfv0j" path="res://assets/font/bodoni-72-oldstyle-book.ttf" id="7_3ptll"]
+[ext_resource type="Texture2D" uid="uid://632kc8wbt83i" path="res://assets/chessboard/board.png" id="8_75brc"]
+
+[node name="Cutscene" type="Node2D"]
+script = ExtResource("1_d18fx")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-4.7683716e-07, 1.4551915e-11)
+scale = Vector2(0.8135593, 0.6585366)
+texture = ExtResource("1_edmg7")
+
+[node name="Aristocrat" type="Node2D" parent="."]
+visible = false
+position = Vector2(-500, 0)
+scale = Vector2(0.7, 0.7)
+
+[node name="Neutral" type="Sprite2D" parent="Aristocrat"]
+texture = ExtResource("2_a320b")
+
+[node name="Speaking" type="Sprite2D" parent="Aristocrat"]
+visible = false
+texture = ExtResource("3_fs8wb")
+
+[node name="Cowboy" type="Node2D" parent="."]
+visible = false
+position = Vector2(500, 0)
+scale = Vector2(0.7, 0.7)
+
+[node name="Neutral" type="Sprite2D" parent="Cowboy"]
+texture = ExtResource("4_bb0yx")
+
+[node name="Speaking" type="Sprite2D" parent="Cowboy"]
+visible = false
+texture = ExtResource("5_3ptll")
+
+[node name="Text" type="Node2D" parent="."]
+position = Vector2(0, 300)
+scale = Vector2(0.8, 0.8)
+
+[node name="Box" type="Sprite2D" parent="Text"]
+self_modulate = Color(1, 1, 1, 0.78431374)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("6_bb0yx")
+
+[node name="Sprite2D" type="Sprite2D" parent="Text/Box"]
+self_modulate = Color(1, 1, 1, 0.5882353)
+position = Vector2(-707.50006, -118.75004)
+scale = Vector2(0.17578126, 0.042724628)
+texture = ExtResource("8_75brc")
+
+[node name="Name" type="RichTextLabel" parent="Text"]
+offset_left = -858.75
+offset_top = -162.5
+offset_right = -558.75
+offset_bottom = -78.75
+theme_override_colors/default_color = Color(0.82606, 0.82606006, 0.82606, 1)
+theme_override_fonts/normal_font = ExtResource("7_3ptll")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "Aris T. O'Cratt"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speech" type="RichTextLabel" parent="Text"]
+offset_left = -877.5
+offset_top = -159.99998
+offset_right = 894.9999
+offset_bottom = 167.49995
+theme_override_colors/default_color = Color(0.82606, 0.82606006, 0.82606, 1)
+theme_override_fonts/normal_font = ExtResource("7_3ptll")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "sample speech
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

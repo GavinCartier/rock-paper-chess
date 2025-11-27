@@ -1,12 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://nuan8ukxj5ny"]
+[gd_scene load_steps=20 format=3 uid="uid://nuan8ukxj5ny"]
 
 [ext_resource type="PackedScene" uid="uid://cq0e7rspvwt20" path="res://scenes/ChessBoard.tscn" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://rwyyjixmr5ji" path="res://scenes/menu.tscn" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://0k71bkt73jdv" path="res://scenes/drafting.tscn" id="2_rvslj"]
 [ext_resource type="Script" uid="uid://dkxnwft03ausk" path="res://scripts/player.gd" id="3_0bbpv"]
-[ext_resource type="PackedScene" path="res://scenes/white_winner.tscn" id="5_c01mt"]
-[ext_resource type="PackedScene" path="res://scenes/black_winner.tscn" id="6_nxtc6"]
-[ext_resource type="PackedScene" path="res://scenes/settings_popup.tscn" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://dr2ky34tyoq5u" path="res://scenes/cutscene.tscn" id="4_nfivy"]
+[ext_resource type="PackedScene" uid="uid://cou1glsup1s52" path="res://scenes/white_winner.tscn" id="5_c01mt"]
+[ext_resource type="PackedScene" uid="uid://cn4lcl7q7tpff" path="res://scenes/black_winner.tscn" id="6_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://cfo6mk5rnvig7" path="res://scenes/settings_popup.tscn" id="7_nxtc6"]
 [ext_resource type="AudioStream" uid="uid://c478m63tnyws3" path="res://assets/sound effects/bell.mp3" id="8_bb450"]
 [ext_resource type="AudioStream" uid="uid://cwrahbtpter0v" path="res://assets/sound effects/clap.wav" id="9_nfivy"]
 [ext_resource type="AudioStream" uid="uid://j4u4ip60wpkr" path="res://assets/sound effects/dice.wav" id="10_1nqs0"]
@@ -26,6 +27,9 @@
 [node name="Drafting" parent="." instance=ExtResource("2_rvslj")]
 
 [node name="Menu" parent="." instance=ExtResource("1_rvslj")]
+
+[node name="Cutscene" parent="." instance=ExtResource("4_nfivy")]
+visible = false
 
 [node name="BlackPlayer" type="Node" parent="."]
 script = ExtResource("3_0bbpv")
