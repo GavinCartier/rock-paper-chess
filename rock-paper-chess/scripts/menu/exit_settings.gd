@@ -5,4 +5,5 @@ func _ready():
 	button.pressed.connect(_settings_button_pressed)
 
 func _settings_button_pressed():
+	Sfx.play("woosh")
 	$"..".visible = false

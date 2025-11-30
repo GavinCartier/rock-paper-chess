@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3or6srru2k6r"
+path="res://.godot/imported/Tabletop Jazz Cafe.wav-fda3bf130c03e8cc575f1ddafb3c641a.sample"
+
+[deps]
+
+source_file="res://assets/sound effects/Tabletop Jazz Cafe.wav"
+dest_files=["res://.godot/imported/Tabletop Jazz Cafe.wav-fda3bf130c03e8cc575f1ddafb3c641a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

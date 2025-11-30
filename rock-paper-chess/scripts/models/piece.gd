@@ -72,7 +72,7 @@ func set_texture():
 	var player_name = OWNER_NAMES.get(piece_owner)
 	
 	# Get the texture assets
-	var sprite_filepath = "res://assets/Placeholder Assets/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
+	var sprite_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
 	sprite.texture = load(sprite_filepath)
 
 # Set the stats for this piece based on its type
@@ -129,7 +129,7 @@ func can_attack_king(current_position : Vector2i) -> bool:
 
 
 func _on_mouse_entered():
-	if is_dead:
+	if is_dead or board.is_game_over:
 		return
 		
 	health_bar.show()
