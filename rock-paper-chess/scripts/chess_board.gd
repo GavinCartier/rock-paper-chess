@@ -6,6 +6,7 @@ extends Node
 const BOARD_SIZE := 8
 const PT := preload("res://scripts/models/piece_types.gd")
 const PieceScene: PackedScene = preload("res://scenes/Piece.tscn")
+const PawnGraduation : PackedScene = preload("res://scenes/pawn_graduation.tscn")
 
 @onready var white_player : Player = get_parent().get_node("WhitePlayer")
 @onready var black_player : Player = get_parent().get_node("BlackPlayer")
@@ -255,33 +256,6 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	selected_piece = null
 	emit_signal("reset_piece_selection")
 	
-	# swap whose turn it is
-	
-	if (check_for_check()):
-		get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.1)
-	
-	if current_player == white_player:
-		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 0.0, 0.1)
-		
-		white_sprite.visible = false
-		black_sprite.visible = true
-		black_sprite.modulate.a = 0.0
-		
-		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 1.0, 0.1)
-		
-		current_player = black_player
-		
-	elif current_player == black_player:
-		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 0.0, 0.1)
-		
-		black_sprite.visible = false
-		white_sprite.visible = true
-		white_sprite.modulate.a = 0.0
-		
-		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 1.0, 0.1)
-		
-		current_player = white_player
-	
 	var move_distance : float = (target - piece.location).length()
 	var move_speed : float = 7.5
 	var move_time : float = move_distance / move_speed
@@ -331,6 +305,40 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		var rook_location = Vector2i(target.x, int(target.y / 2.0))
 		animated_movement(rook, board_to_world(rook_location), move_time)
 		rook.has_moved = true
+	
+	# Check if the moved piece is a pawn that can graduate
+	if piece.piece_class == PieceTypes.Classes.PAWN and (piece.piece_owner == PieceTypes.Owner.WHITE and target.x == -4) or (piece.piece_owner == PieceTypes.Owner.BLACK and target.x == 3):
+		var pawn_graduation = PawnGraduation.instantiate()
+		pawn_graduation.piece = piece
+		add_child(pawn_graduation)
+		await pawn_graduation.get_selection() # Wait for player to select upgrade
+		
+		# swap whose turn it is
+	
+	if (check_for_check()):
+		get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.1)
+	
+	if current_player == white_player:
+		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 0.0, 0.1)
+		
+		white_sprite.visible = false
+		black_sprite.visible = true
+		black_sprite.modulate.a = 0.0
+		
+		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 1.0, 0.1)
+		
+		current_player = black_player
+		
+	elif current_player == black_player:
+		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 0.0, 0.1)
+		
+		black_sprite.visible = false
+		white_sprite.visible = true
+		white_sprite.modulate.a = 0.0
+		
+		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 1.0, 0.1)
+		
+		current_player = white_player
 	
 	check_for_check()
 
