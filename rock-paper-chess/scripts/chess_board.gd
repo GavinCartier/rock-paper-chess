@@ -273,6 +273,7 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 					_victory_screen()
 			else:
 				animated_movement(piece, board_to_world(piece.location), move_time)
+				swap_turn()
 				check_for_check()
 				return
 	
@@ -318,6 +319,12 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	if (check_for_check()):
 		get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.1)
 	
+	swap_turn()
+	
+	check_for_check()
+
+# Swaps the turn
+func swap_turn() -> void:
 	if current_player == white_player:
 		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 0.0, 0.1)
 		
@@ -339,9 +346,6 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 1.0, 0.1)
 		
 		current_player = white_player
-	
-	check_for_check()
-
 
 # This function checks to see whether the King can be attacked
 func check_for_check() -> bool:
