@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://rwyyjixmr5ji"]
+[gd_scene load_steps=8 format=3 uid="uid://rwyyjixmr5ji"]
 
 [ext_resource type="Texture2D" uid="uid://d2u6wrtkxbvf5" path="res://assets/ref.png" id="1_g3eks"]
 [ext_resource type="VideoStream" uid="uid://bfq8oqdwyd414" path="res://assets/MenuVideo.ogv" id="1_v86rl"]
@@ -6,8 +6,14 @@
 [ext_resource type="Script" uid="uid://dakny6oidgd6u" path="res://scripts/menu/start.gd" id="2_con2f"]
 [ext_resource type="Script" uid="uid://b1ohipdk8a86v" path="res://scripts/menu/exit.gd" id="2_vjb58"]
 [ext_resource type="Script" uid="uid://dwpbidhmljj47" path="res://scripts/menu/settings.gd" id="3_mhnvy"]
+[ext_resource type="Texture2D" uid="uid://bv3yu5pp71fpd" path="res://assets/drafting_background.png" id="5_v86rl"]
 
 [node name="Menu" type="Node2D"]
+
+[node name="DraftingBackground" type="Sprite2D" parent="."]
+position = Vector2(-940, 328.99902)
+scale = Vector2(4.645339, 3.6804879)
+texture = ExtResource("5_v86rl")
 
 [node name="MenuBackgroundVideo" type="VideoStreamPlayer" parent="."]
 anchors_preset = 8
