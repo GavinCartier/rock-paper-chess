@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c83m4743j3lx3"]
+
+[ext_resource type="Texture2D" uid="uid://2px4g1dt0n3b" path="res://assets/Drafting/drafting_tutorial.png" id="1_03s0k"]
+[ext_resource type="Texture2D" uid="uid://bv3yu5pp71fpd" path="res://assets/drafting_background.png" id="1_kmw40"]
+[ext_resource type="Script" uid="uid://6jl6226gagtx" path="res://scripts/button.gd" id="2_7kbcb"]
+[ext_resource type="FontFile" uid="uid://l7ky0leevh4t" path="res://assets/font/bodoni-72-smallcaps-book.ttf" id="3_xs3wa"]
+
+[node name="DraftingTutorial" type="Node2D"]
+
+[node name="DraftingBackground" type="Sprite2D" parent="."]
+position = Vector2(20, 50.000004)
+scale = Vector2(1.6114407, 1.4240851)
+texture = ExtResource("1_kmw40")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_03s0k")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -170.0
+offset_top = 431.0
+offset_right = 161.0
+offset_bottom = 534.0
+theme_override_fonts/font = ExtResource("3_xs3wa")
+theme_override_font_sizes/font_size = 62
+text = "Continue"
+script = ExtResource("2_7kbcb")

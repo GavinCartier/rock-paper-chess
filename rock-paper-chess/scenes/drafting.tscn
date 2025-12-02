@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://0k71bkt73jdv"]
+[gd_scene load_steps=7 format=3 uid="uid://0k71bkt73jdv"]
 
 [ext_resource type="Script" uid="uid://cmyr62k4q30af" path="res://scripts/drafting.gd" id="1_xd4v5"]
 [ext_resource type="Texture2D" uid="uid://bv3yu5pp71fpd" path="res://assets/drafting_background.png" id="2_xd4v5"]
+[ext_resource type="FontFile" uid="uid://cs0flu6qfy6ck" path="res://assets/font/Cochin Regular.otf" id="3_c1xgl"]
+[ext_resource type="Texture2D" uid="uid://kp2xfi4cfp8x" path="res://assets/font/Drafting.png" id="4_jk5do"]
+[ext_resource type="Texture2D" uid="uid://dmrxev01nlmop" path="res://assets/story/text_box.jpg" id="5_7sye8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1a71g"]
 font_size = 24
@@ -16,18 +19,30 @@ scale = Vector2(1.7770965, 1.7770962)
 texture = ExtResource("2_xd4v5")
 
 [node name="Instruction Text" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -17.0
-offset_right = 30.0
-offset_bottom = 17.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Hello"
+offset_left = -280.0
+offset_top = -215.0
+offset_right = -92.00003
+offset_bottom = -125.0
+scale = Vector2(3, 3)
+theme_type_variation = &"HeaderSmall"
+theme_override_fonts/font = ExtResource("3_c1xgl")
+text = "Hello
+
+"
 label_settings = SubResource("LabelSettings_1a71g")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Drafting" type="Sprite2D" parent="."]
+position = Vector2(168, -673)
+scale = Vector2(0.6148437, 0.55138886)
+texture = ExtResource("4_jk5do")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-596, -746, 39, -751, 434.82275, -749.6914, 644, -749)
+default_color = Color(0, 0, 0, 1)
+
+[node name="TextBox" type="Sprite2D" parent="."]
+position = Vector2(-34.95313, 47.000004)
+scale = Vector2(1.544476, 0.30023095)
+texture = ExtResource("5_7sye8")

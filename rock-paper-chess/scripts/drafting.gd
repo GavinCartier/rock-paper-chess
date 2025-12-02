@@ -1,6 +1,7 @@
 class_name Drafting
 extends Node
 
+
 @onready var white_player : Player = get_parent().get_node("WhitePlayer")
 @onready var black_player : Player = get_parent().get_node("BlackPlayer")
 
@@ -34,21 +35,22 @@ func _ready() -> void:
 					white_player ]
 	
 	# Make all the drop-down menus for each piece
-	var b_pawn := make_button("Pawn", Vector2(cam.position.x - 200, cam.position.y))
-	var b_rook := make_button("Rook", Vector2(cam.position.x - 120, cam.position.y))
-	var b_knight := make_button("Knight", Vector2(cam.position.x - 40, cam.position.y))
-	var b_bishop := make_button("Bishop", Vector2(cam.position.x + 40, cam.position.y))
-	var b_queen := make_button("Queen", Vector2(cam.position.x + 120, cam.position.y))
-	var b_king := make_button("King", Vector2(cam.position.x + 200, cam.position.y))
+	var b_pawn := make_button("Pawn", Vector2(cam.position.x - 1400, cam.position.y))
+	var b_rook := make_button("Rook", Vector2(cam.position.x - 900, cam.position.y))
+	var b_knight := make_button("Knight", Vector2(cam.position.x - 400, cam.position.y))
+	var b_bishop := make_button("Bishop", Vector2(cam.position.x + 100, cam.position.y))
+	var b_queen := make_button("Queen", Vector2(cam.position.x + 600, cam.position.y))
+	var b_king := make_button("King", Vector2(cam.position.x + 1100, cam.position.y))
 	
 	buttons = [b_pawn, b_rook, b_knight, b_bishop, b_queen, b_king]
 	
-	var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 280, cam.position.y))
+	var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 1500, cam.position.y))
 	buttons.append(dev_button)
 	
-	# Put the instruction text in the scene
-	message.position.y = cam.position.y - 50
-	
+#format font
+	var font_res := load("res://assets/font/bodoni-72-oldstyle-book.ttf")  # .ttf or .otf in your project
+	message.add_theme_font_override("font", font_res)
+	message.add_theme_font_size_override("font_size", 2000)  # or whatever size you want
 	# Run the drafting function
 	draft_controller()
 
@@ -64,6 +66,9 @@ func make_button(text: String, pos: Vector2) -> MenuButton:
 	popup.add_item("Paper")
 	popup.add_item("Scissors")
 	
+	popup.add_theme_font_size_override("font_size", 28)
+	popup.add_theme_constant_override("item_height", 40)
+	
 	# Position button in scene, add to scene, connect to function
 	mb.position = pos
 	add_child(mb)
@@ -73,9 +78,8 @@ func make_button(text: String, pos: Vector2) -> MenuButton:
 	mb.connect("pressed", Callable(self, "_on_piece_button_pressed"))
 
 	# Customize text on button
-	mb.add_theme_color_override("font_color", Color.WHITE)
-	mb.add_theme_color_override("font_outline_color", Color.BLACK)
-	mb.add_theme_constant_override("outline_size", 2)
+	mb.add_theme_color_override("font_color", Color.BLACK)
+	mb.add_theme_font_size_override("font_size", 70)
 	mb.set_anchors_preset(Control.PRESET_CENTER)
 	
 	return mb
@@ -138,6 +142,7 @@ func draft_controller() -> void:
 			message.text = player_name + ", make 2 selections."
 		else:
 			message.text = player_name + ", make 1 selection."
+			
 		
 		# Only have the remaining options on screen.
 		# So if a player has already picked a piece, make that button disappear
@@ -191,7 +196,8 @@ func draft_controller() -> void:
 		sprite.texture = load(sprite_filepath)
 	
 		# Make it a good looking size
-		sprite.scale = Vector2(0.5, 0.5)
+		sprite.scale = Vector2(1.5, 1.5)
+		
 		
 		# Position it in the scene so they don't overlap,
 		# and are grouped by owner
@@ -199,15 +205,15 @@ func draft_controller() -> void:
 		# White player in the bottom of the screen, black on top
 		var sprite_ypos : int
 		if (player_name == "White"):
-			sprite_ypos = 150
+			sprite_ypos = 450
 		else:
-			sprite_ypos = -150
+			sprite_ypos = -450
 		
 		sprite.position = Vector2(sprite_xpos, sprite_ypos)
 		
 		# Shift the xposition of the next sprite so they don't overlap
 		if (current_player == next_player):
-			sprite_xpos += 80
+			sprite_xpos += 300
 		
 		sprite.visible = true
 		
