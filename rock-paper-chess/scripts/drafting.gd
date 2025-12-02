@@ -47,9 +47,7 @@ func _ready() -> void:
 	var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 1500, cam.position.y))
 	buttons.append(dev_button)
 	
-# Create a DynamicFont (the correct concrete class)
-# Create a new Font
-# Create a FontFile for your TTF font
+#format font
 	var font_res := load("res://assets/font/bodoni-72-oldstyle-book.ttf")  # .ttf or .otf in your project
 	message.add_theme_font_override("font", font_res)
 	message.add_theme_font_size_override("font_size", 2000)  # or whatever size you want
