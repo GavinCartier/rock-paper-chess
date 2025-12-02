@@ -5,6 +5,7 @@ extends Button
 @onready var menu = get_node("../..")
 @onready var drafting = get_node("../../../Drafting")
 @onready var cutscene = get_node("../../../Cutscene")
+@onready var cam : Camera2D = get_node("../../../Camera2D")
 
 func _ready():
 	var button = $"."
@@ -18,3 +19,4 @@ func _button_pressed():
 	
 	await cutscene.play()
 	drafting.set_visible(true)
+	cam.zoom = Vector2(0.5, 0.5)
