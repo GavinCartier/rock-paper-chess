@@ -194,7 +194,7 @@ func draft_controller() -> void:
 		add_child(sprite)
 		
 		# First get the correct asset
-		var sprite_filepath = "res://assets/Placeholder Assets/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
+		var sprite_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
 		sprite.texture = load(sprite_filepath)
 	
 		# Make it a good looking size
