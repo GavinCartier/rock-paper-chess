@@ -22,6 +22,7 @@ const PawnGraduation : PackedScene = preload("res://scenes/pawn_graduation.tscn"
 @onready var rules_button : Button = get_node("Rules Button")
 @onready var rules_sprite : Sprite2D = get_node("Rules")
 
+@onready var stats : Label = get_node("stats")
 @onready var white_winner : Sprite2D = get_tree().root.get_node("Main/WhiteWinner")
 @onready var black_winner : Sprite2D = get_tree().root.get_node("Main/BlackWinner")
 
@@ -190,6 +191,9 @@ func on_piece_clicked(piece: Piece) -> void:
 	selected_piece = piece
 	selected_pos = piece.location
 	piece.show_piece_options()
+	stats.text = str(PieceTypes.Classes.keys()[piece.piece_class]).capitalize() + \
+	" stats:\nHealth: " + str(piece.health) + "\nDamage: " + str(piece.damage) \
+	+ "\nType: " + str(PT.Types.keys()[piece.piece_type]).capitalize()
 	
 	for x in range(grid.size()):
 		for y in range(grid[x].size()):
