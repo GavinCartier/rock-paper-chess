@@ -13,6 +13,9 @@ var pressed_set_all := false
 @onready var message : Label = $"Instruction Text"
 @onready var cam : Camera2D = get_parent().get_node("Camera2D")
 
+
+var font= load("res://assets/font/bodoni-72-oldstyle-book.ttf")
+
 signal finish_drafting
 
 func _ready() -> void:
@@ -57,17 +60,20 @@ func _ready() -> void:
 
 func make_button(text: String, pos: Vector2) -> MenuButton:
 	# Create button
+	
 	var mb := MenuButton.new()
+	mb.add_theme_font_override("font", font)
 	mb.text = text
 	
 	# Add the RPS options to drop-down menu
 	var popup := mb.get_popup()
+	popup.add_theme_font_override("font", font)
 	popup.add_item("Rock")
 	popup.add_item("Paper")
 	popup.add_item("Scissors")
 	
-	popup.add_theme_font_size_override("font_size", 28)
-	popup.add_theme_constant_override("item_height", 40)
+	popup.add_theme_font_size_override("font_size", 60)
+	popup.add_theme_constant_override("item_height", 72)
 	
 	# Position button in scene, add to scene, connect to function
 	mb.position = pos
@@ -92,7 +98,6 @@ func _on_item_pressed(index: int, button: MenuButton) -> void:
 	# When an option is selected, it's put into the
 	# selections array, which the draft function is listening to.
 	var type = button.get_popup().get_item_text(index)
-	
 	match type:
 		"Rock":
 			Sfx.play("rock")
