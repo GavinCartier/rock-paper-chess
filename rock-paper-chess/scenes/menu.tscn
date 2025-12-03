@@ -11,6 +11,7 @@
 [node name="Menu" type="Node2D"]
 
 [node name="DraftingBackground" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-940, 328.99902)
 scale = Vector2(4.645339, 3.6804879)
 texture = ExtResource("5_v86rl")
