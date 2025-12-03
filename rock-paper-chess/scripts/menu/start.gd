@@ -15,8 +15,8 @@ func _button_pressed():
 	Sfx.play("woosh")
 	menu.set_visible(false)
 	drafting.set_visible(false)
-	cutscene.set_visible(true)
 	
+	cutscene.set_visible(true)
 	await cutscene.play()
+	
 	drafting.set_visible(true)
-	cam.zoom = Vector2(0.5, 0.5)

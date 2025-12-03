@@ -13,7 +13,6 @@ var pressed_set_all := false
 @onready var message : Label = $"Instruction Text"
 @onready var cam : Camera2D = get_parent().get_node("Camera2D")
 
-
 var font= load("res://assets/font/bodoni-72-oldstyle-book.ttf")
 
 signal finish_drafting
@@ -47,8 +46,8 @@ func _ready() -> void:
 	
 	buttons = [b_pawn, b_rook, b_knight, b_bishop, b_queen, b_king]
 	
-	var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 1500, cam.position.y))
-	buttons.append(dev_button)
+	#var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 1500, cam.position.y))
+	#buttons.append(dev_button)
 	
 #format font
 	var font_res := load("res://assets/font/bodoni-72-oldstyle-book.ttf")  # .ttf or .otf in your project
@@ -121,9 +120,6 @@ func draft_controller() -> void:
 	var next_player : Player
 	var player_name : String
 	
-	# X Position of the first sprite to appear (a bit hacky)
-	var sprite_xpos := -200
-	
 	for i in range(len(turn_order)):
 		# Check whose turn it is
 		current_player = turn_order[i]
@@ -193,32 +189,13 @@ func draft_controller() -> void:
 		# Spawn the sprite in the world
 		# These aren't the sprites the actual chess game would use,
 		# it's just so they can see what choices have been made
-		var sprite := Sprite2D.new()
-		add_child(sprite)
+		var sprite = get_node(player_name + " Pieces/" + pname)
+		sprite.modulate.a = 0.0
 		
 		# First get the correct asset
 		var sprite_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
 		sprite.texture = load(sprite_filepath)
-	
-		# Make it a good looking size
-		sprite.scale = Vector2(1.5, 1.5)
-		
-		
-		# Position it in the scene so they don't overlap,
-		# and are grouped by owner
-		
-		# White player in the bottom of the screen, black on top
-		var sprite_ypos : int
-		if (player_name == "White"):
-			sprite_ypos = 450
-		else:
-			sprite_ypos = -450
-		
-		sprite.position = Vector2(sprite_xpos, sprite_ypos)
-		
-		# Shift the xposition of the next sprite so they don't overlap
-		if (current_player == next_player):
-			sprite_xpos += 300
+		get_tree().create_tween().tween_property(sprite, "modulate:a", 1.0, 0.1)
 		
 		sprite.visible = true
 		

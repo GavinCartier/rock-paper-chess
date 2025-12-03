@@ -437,7 +437,7 @@ func _on_rules_button_pressed() -> void:
 
 func _victory_screen():
 	is_game_over = true
-	if current_player == black_player:
+	if current_player == white_player:
 		white_winner.visible = true
 	else:
 		black_winner.visible = true
