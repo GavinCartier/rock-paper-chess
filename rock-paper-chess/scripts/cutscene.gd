@@ -197,4 +197,3 @@ func show_screenshot(ss: Sprite2D):
 
 func hide_screenshot(ss: Sprite2D):
 	get_tree().create_tween().tween_property(ss, "modulate:a", 0.0, 0.3)
-	ss.visible = false
