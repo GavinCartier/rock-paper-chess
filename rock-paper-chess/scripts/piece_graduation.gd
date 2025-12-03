@@ -22,6 +22,9 @@ func _ready():
 	queen_area.connect("input_event", Callable(self, "_on_queen_area_input"))
 
 func get_selection():
+	if piece.board.is_game_over:
+		return
+
 	# Get the names of the piece types & owners
 	var ptype = piece.TYPE_NAMES.get(piece.piece_type)
 	var player_name = piece.OWNER_NAMES.get(piece.piece_owner)
