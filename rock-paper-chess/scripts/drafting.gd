@@ -46,8 +46,8 @@ func _ready() -> void:
 	
 	buttons = [b_pawn, b_rook, b_knight, b_bishop, b_queen, b_king]
 	
-	var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 1500, cam.position.y))
-	buttons.append(dev_button)
+	#var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 1500, cam.position.y))
+	#buttons.append(dev_button)
 	
 #format font
 	var font_res := load("res://assets/font/bodoni-72-oldstyle-book.ttf")  # .ttf or .otf in your project
