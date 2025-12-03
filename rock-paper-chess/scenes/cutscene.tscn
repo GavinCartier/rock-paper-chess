@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr2ky34tyoq5u"]
+[gd_scene load_steps=21 format=3 uid="uid://dr2ky34tyoq5u"]
 
 [ext_resource type="Script" uid="uid://bbkiuxy4vm7ce" path="res://scripts/cutscene.gd" id="1_d18fx"]
 [ext_resource type="Texture2D" uid="uid://deagehunexyxi" path="res://assets/story/story_background.png" id="1_edmg7"]
@@ -8,7 +8,25 @@
 [ext_resource type="Texture2D" uid="uid://dutwmpmoghpq1" path="res://assets/characters/cowboy_speaking_shadow.png" id="5_3ptll"]
 [ext_resource type="Texture2D" uid="uid://dmrxev01nlmop" path="res://assets/story/text_box.jpg" id="6_bb0yx"]
 [ext_resource type="FontFile" uid="uid://cf8vq1pgfv0j" path="res://assets/font/bodoni-72-oldstyle-book.ttf" id="7_3ptll"]
+[ext_resource type="Texture2D" uid="uid://cbmdu5c6gswp2" path="res://assets/story/gameplay screenshots/drafting 1.png" id="7_v50sc"]
 [ext_resource type="Texture2D" uid="uid://632kc8wbt83i" path="res://assets/chessboard/board.png" id="8_75brc"]
+[ext_resource type="Texture2D" uid="uid://dihs4nw271t6n" path="res://assets/story/gameplay screenshots/drafting 2.png" id="8_ury3t"]
+[ext_resource type="Texture2D" uid="uid://byuxku2fxw41t" path="res://assets/story/gameplay screenshots/drafting 3.png" id="9_m2h23"]
+[ext_resource type="Texture2D" uid="uid://bgchc8143ovyh" path="res://assets/story/gameplay screenshots/drafting 4.png" id="10_8qop0"]
+[ext_resource type="Texture2D" uid="uid://iq05x2aty04d" path="res://assets/story/gameplay screenshots/board 1.png" id="11_8qop0"]
+[ext_resource type="Texture2D" uid="uid://b8dm5iyt32o1e" path="res://assets/story/gameplay screenshots/board 2.png" id="12_mu2gi"]
+[ext_resource type="Texture2D" uid="uid://bo8mma0vkjtuh" path="res://assets/story/gameplay screenshots/board 5.png" id="13_mu2gi"]
+[ext_resource type="Texture2D" uid="uid://cvdirca54m3is" path="res://assets/story/gameplay screenshots/board 6.png" id="14_c7dhu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c7dhu"]
+load_path = "res://.godot/imported/board 3.png-b468ed3520ebb1714e6f8a9af0a38bc4.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qthij"]
+load_path = "res://.godot/imported/board 4.png-25de601058ec4b549a5ece2f7df228c7.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_75brc"]
+font = ExtResource("7_3ptll")
+font_size = 346
 
 [node name="Cutscene" type="Node2D"]
 script = ExtResource("1_d18fx")
@@ -19,8 +37,7 @@ scale = Vector2(0.8135593, 0.6585366)
 texture = ExtResource("1_edmg7")
 
 [node name="Aristocrat" type="Node2D" parent="."]
-visible = false
-position = Vector2(-500, 0)
+position = Vector2(-600, 0)
 scale = Vector2(0.7, 0.7)
 
 [node name="Neutral" type="Sprite2D" parent="Aristocrat"]
@@ -31,8 +48,7 @@ visible = false
 texture = ExtResource("3_fs8wb")
 
 [node name="Cowboy" type="Node2D" parent="."]
-visible = false
-position = Vector2(500, 0)
+position = Vector2(600, 0)
 scale = Vector2(0.7, 0.7)
 
 [node name="Neutral" type="Sprite2D" parent="Cowboy"]
@@ -41,6 +57,56 @@ texture = ExtResource("4_bb0yx")
 [node name="Speaking" type="Sprite2D" parent="Cowboy"]
 visible = false
 texture = ExtResource("5_3ptll")
+
+[node name="Screenshots" type="Node2D" parent="."]
+position = Vector2(0, -200)
+scale = Vector2(0.3, 0.3)
+
+[node name="Drafting 1" type="Sprite2D" parent="Screenshots"]
+visible = false
+texture = ExtResource("7_v50sc")
+
+[node name="Drafting 2" type="Sprite2D" parent="Screenshots"]
+visible = false
+texture = ExtResource("8_ury3t")
+
+[node name="Drafting 3" type="Sprite2D" parent="Screenshots"]
+visible = false
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("9_m2h23")
+
+[node name="Drafting 4" type="Sprite2D" parent="Screenshots"]
+visible = false
+scale = Vector2(0.99999976, 0.99999976)
+texture = ExtResource("10_8qop0")
+
+[node name="Board 1" type="Sprite2D" parent="Screenshots"]
+visible = false
+texture = ExtResource("11_8qop0")
+
+[node name="Board 2" type="Sprite2D" parent="Screenshots"]
+visible = false
+texture = ExtResource("12_mu2gi")
+
+[node name="Board 3" type="Sprite2D" parent="Screenshots"]
+visible = false
+scale = Vector2(0.99999994, 0.99999994)
+texture = SubResource("CompressedTexture2D_c7dhu")
+
+[node name="Board 4" type="Sprite2D" parent="Screenshots"]
+visible = false
+scale = Vector2(0.99999976, 0.99999976)
+texture = SubResource("CompressedTexture2D_qthij")
+
+[node name="Board 5" type="Sprite2D" parent="Screenshots"]
+visible = false
+scale = Vector2(0.99999964, 0.99999964)
+texture = ExtResource("13_mu2gi")
+
+[node name="Board 6" type="Sprite2D" parent="Screenshots"]
+visible = false
+scale = Vector2(0.9999992, 0.9999992)
+texture = ExtResource("14_c7dhu")
 
 [node name="Text" type="Node2D" parent="."]
 position = Vector2(0, 300)
@@ -85,3 +151,30 @@ text = "sample speech
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Skip" type="Node2D" parent="."]
+position = Vector2(800, -400)
+
+[node name="Sprite2D" type="Sprite2D" parent="Skip"]
+scale = Vector2(0.1036335, 0.17032333)
+texture = ExtResource("6_bb0yx")
+
+[node name="Label" type="Label" parent="Skip/Sprite2D"]
+offset_left = -980.3583
+offset_top = -214.51376
+offset_right = 966.9271
+offset_bottom = 622.4862
+text = "Skip Cutscene
+"
+label_settings = SubResource("LabelSettings_75brc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Skip"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -101.0
+offset_top = -37.0
+offset_right = 101.0
+offset_bottom = 37.0
+
+[connection signal="pressed" from="Skip/Button" to="." method="_on_button_pressed"]

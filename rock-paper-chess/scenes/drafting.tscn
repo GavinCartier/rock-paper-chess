@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://0k71bkt73jdv"]
+[gd_scene load_steps=8 format=3 uid="uid://0k71bkt73jdv"]
 
 [ext_resource type="Script" uid="uid://cmyr62k4q30af" path="res://scripts/drafting.gd" id="1_xd4v5"]
 [ext_resource type="Texture2D" uid="uid://bv3yu5pp71fpd" path="res://assets/drafting_background.png" id="2_xd4v5"]
 [ext_resource type="FontFile" uid="uid://cs0flu6qfy6ck" path="res://assets/font/Cochin Regular.otf" id="3_c1xgl"]
 [ext_resource type="Texture2D" uid="uid://kp2xfi4cfp8x" path="res://assets/font/Drafting.png" id="4_jk5do"]
 [ext_resource type="Texture2D" uid="uid://dmrxev01nlmop" path="res://assets/story/text_box.jpg" id="5_7sye8"]
+[ext_resource type="Texture2D" uid="uid://dk8c0xtje8q6f" path="res://rock-paper-chess-main/icon.svg" id="6_ptqww"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1a71g"]
 font_size = 24
@@ -15,7 +16,7 @@ outline_size = 10
 script = ExtResource("1_xd4v5")
 
 [node name="DraftBakcgroundSprite" type="Sprite2D" parent="."]
-scale = Vector2(1.7770965, 1.7770962)
+scale = Vector2(2.25, 2.25)
 texture = ExtResource("2_xd4v5")
 
 [node name="Instruction Text" type="Label" parent="."]
@@ -34,15 +35,84 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Drafting" type="Sprite2D" parent="."]
-position = Vector2(168, -673)
+position = Vector2(128, -843)
 scale = Vector2(0.6148437, 0.55138886)
 texture = ExtResource("4_jk5do")
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(-596, -746, 39, -751, 434.82275, -749.6914, 644, -749)
+position = Vector2(-21.865, -131.84)
+points = PackedVector2Array(-596, -746, -34.760254, -750.41925, 39, -751, 144.72461, -750.6505, 434.82275, -749.6914, 644, -749)
 default_color = Color(0, 0, 0, 1)
 
 [node name="TextBox" type="Sprite2D" parent="."]
-position = Vector2(-34.95313, 47.000004)
+position = Vector2(0, 47)
 scale = Vector2(1.544476, 0.30023095)
 texture = ExtResource("5_7sye8")
+
+[node name="White Pieces" type="Node2D" parent="."]
+position = Vector2(0, 500)
+scale = Vector2(2.25, 2.25)
+
+[node name="King" type="Sprite2D" parent="White Pieces"]
+visible = false
+position = Vector2(500, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Queen" type="Sprite2D" parent="White Pieces"]
+visible = false
+position = Vector2(300, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Bishop" type="Sprite2D" parent="White Pieces"]
+visible = false
+position = Vector2(100, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Knight" type="Sprite2D" parent="White Pieces"]
+visible = false
+position = Vector2(-100, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Rook" type="Sprite2D" parent="White Pieces"]
+visible = false
+position = Vector2(-300, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Pawn" type="Sprite2D" parent="White Pieces"]
+visible = false
+position = Vector2(-500, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Black Pieces" type="Node2D" parent="."]
+position = Vector2(0, -500)
+scale = Vector2(2.25, 2.25)
+
+[node name="King" type="Sprite2D" parent="Black Pieces"]
+visible = false
+position = Vector2(500, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Queen" type="Sprite2D" parent="Black Pieces"]
+visible = false
+position = Vector2(300, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Bishop" type="Sprite2D" parent="Black Pieces"]
+visible = false
+position = Vector2(100, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Knight" type="Sprite2D" parent="Black Pieces"]
+visible = false
+position = Vector2(-100, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Rook" type="Sprite2D" parent="Black Pieces"]
+visible = false
+position = Vector2(-300, 0)
+texture = ExtResource("6_ptqww")
+
+[node name="Pawn" type="Sprite2D" parent="Black Pieces"]
+visible = false
+position = Vector2(-500, 0)
+texture = ExtResource("6_ptqww")
