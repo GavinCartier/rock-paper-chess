@@ -18,7 +18,7 @@ static var health_stats := {
 	Classes.BISHOP: 40,
 	Classes.ROOK: 40,
 	Classes.QUEEN: 50,
-	Classes.KING:  50
+	Classes.KING:  15
 }
 
 static var damage_stats := {
