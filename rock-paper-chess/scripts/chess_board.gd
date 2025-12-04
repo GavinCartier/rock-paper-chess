@@ -321,7 +321,7 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		rook.has_moved = true
 	
 	# Check if the moved piece is a pawn that can graduate
-	if piece.piece_class == PieceTypes.Classes.PAWN and (piece.piece_owner == PieceTypes.Owner.WHITE and target.x == -4) or (piece.piece_owner == PieceTypes.Owner.BLACK and target.x == 3):
+	if piece.piece_class == PieceTypes.Classes.PAWN and ((piece.piece_owner == PieceTypes.Owner.WHITE and target.x == -4) or (piece.piece_owner == PieceTypes.Owner.BLACK and target.x == 3)):
 		var pawn_graduation = PawnGraduation.instantiate()
 		pawn_graduation.piece = piece
 		add_child(pawn_graduation)
