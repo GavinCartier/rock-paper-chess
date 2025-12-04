@@ -14,6 +14,9 @@ var cowboy_name : String = "C. W. Boye"
 @onready var tb_name = get_node("Text/Name")
 @onready var tb_text = get_node("Text/Speech")
 @onready var screenshot = get_node("Screenshots")
+@onready var fade_transisiton = get_node("../FadeTransition")
+@onready var fade_animation = get_node("../FadeTransition/AnimationPlayer")
+@onready var fade_timer = get_node("../FadeTransition/FadeTimer")
 
 var aristocrat_position
 var cowboy_position
@@ -113,7 +116,10 @@ func play():
 	hide_screenshot(screenshot.get_node("Board 5"))
 	await say(cowboy, "Okay, I think I get it.")
 	await say(cowboy, "Let's get drafting then!")
-	
+	fade_transisiton.show()
+	fade_timer.start()
+	fade_animation.play("fade_in")
+	await fade_timer.timeout
 	self.visible = false
 
 
@@ -185,8 +191,16 @@ func undim_character(nonspeaker : Node2D):
 
 
 func _on_button_pressed() -> void:
+	fade_transisiton.show()
+	fade_timer.start()
+	fade_animation.play("fade_in")
+	await fade_timer.timeout
 	drafting.set_visible(true)
 	self.visible = false
+	fade_timer.start()
+	fade_animation.play("fade_out")
+	await fade_timer.timeout
+	fade_transisiton.hide()
 
 
 func show_screenshot(ss: Sprite2D):

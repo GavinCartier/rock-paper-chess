@@ -12,6 +12,9 @@ var pressed_set_all := false
 
 @onready var message : Label = $"Instruction Text"
 @onready var cam : Camera2D = get_parent().get_node("Camera2D")
+@onready var fade_transisiton = get_node("../FadeTransition")
+@onready var fade_animation = get_node("../FadeTransition/AnimationPlayer")
+@onready var fade_timer = get_node("../FadeTransition/FadeTimer")
 
 var font= load("res://assets/font/bodoni-72-oldstyle-book.ttf")
 
@@ -202,6 +205,10 @@ func draft_controller() -> void:
 		# go to chessboard after all drafting finished
 		if i == len(turn_order) - 1:
 			message.text = "Ready for game."
+			fade_transisiton.show()
+			fade_timer.start()
+			fade_animation.play("fade_in")
+			await fade_timer.timeout
+			fade_transisiton.hide()
 			emit_signal("finish_drafting")
-			# turn off the camera for drafting
-			cam.enabled=false
+			cam.enabled = false

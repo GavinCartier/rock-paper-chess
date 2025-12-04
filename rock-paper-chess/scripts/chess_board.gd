@@ -26,6 +26,10 @@ const PawnGraduation : PackedScene = preload("res://scenes/pawn_graduation.tscn"
 @onready var white_winner : Sprite2D = get_tree().root.get_node("Main/WhiteWinner")
 @onready var black_winner : Sprite2D = get_tree().root.get_node("Main/BlackWinner")
 
+@onready var fade_transisiton = get_node("../FadeTransition")
+@onready var fade_animation = get_node("../FadeTransition/AnimationPlayer")
+@onready var fade_timer = get_node("../FadeTransition/FadeTimer")
+
 var grid: Array = []
 
 var selected_piece: Piece = null
@@ -75,6 +79,11 @@ func begin_chess_game():
 	
 	current_player = white_player
 	white_sprite.visible = true
+	fade_transisiton.show()
+	fade_timer.start()
+	fade_animation.play("fade_out")
+	await fade_timer.timeout
+	fade_transisiton.hide()
 	
 	rules_sprite.modulate.a = 0.0
 	
@@ -435,9 +444,21 @@ func _on_rules_button_pressed() -> void:
 		get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
 
 
+# By the time this function is called, the current player has switched
+# over to the loser's side, which is why they are swapped here.
 func _victory_screen():
+	fade_transisiton.show()
+	fade_timer.start()
+	fade_animation.play("fade_in")
+	await fade_timer.timeout
 	is_game_over = true
-	if current_player == white_player:
+	if current_player == black_player:
 		white_winner.visible = true
+		fade_animation.play("fade_out")
+		await fade_timer.timeout
+		fade_transisiton.hide()
 	else:
 		black_winner.visible = true
+		fade_animation.play("fade_out")
+		await fade_timer.timeout
+		fade_transisiton.hide()
