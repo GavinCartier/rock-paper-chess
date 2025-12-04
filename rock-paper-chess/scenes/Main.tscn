@@ -23,17 +23,17 @@
 [node name="Main" type="Node2D"]
 
 [node name="ChessBoard" parent="." instance=ExtResource("1_elqb8")]
-scale = Vector2(1.3, 1.3)
+scale = Vector2(0.44, 0.44)
 
 [node name="Drafting" parent="." instance=ExtResource("2_rvslj")]
-scale = Vector2(0.5, 0.5)
+visible = false
+position = Vector2(0, 71.99999)
+scale = Vector2(0.4, 0.4)
 
 [node name="Menu" parent="." instance=ExtResource("1_rvslj")]
-scale = Vector2(1.35, 1.35)
 
 [node name="Cutscene" parent="." instance=ExtResource("4_nfivy")]
 visible = false
-scale = Vector2(1.35, 1.35)
 
 [node name="BlackPlayer" type="Node" parent="."]
 script = ExtResource("3_0bbpv")
@@ -46,12 +46,9 @@ metadata/_custom_type_script = "uid://dkxnwft03ausk"
 
 [node name="WhiteWinner" parent="." instance=ExtResource("5_c01mt")]
 visible = false
-scale = Vector2(2.6217592, 2.6217592)
 
 [node name="BlackWinner" parent="." instance=ExtResource("6_nxtc6")]
 visible = false
-position = Vector2(12, 0)
-scale = Vector2(2.622, 2.622)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
