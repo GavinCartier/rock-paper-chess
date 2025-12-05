@@ -25,6 +25,8 @@ signal clicked
 
 var current_speaker : Node2D = null
 
+var is_over : bool = false
+
 func _ready() -> void:
 	tb_box.modulate.a = 0.0
 	tb_name.modulate.a = 0.0
@@ -39,6 +41,12 @@ func _ready() -> void:
 	cowboy_position = cowboy.position
 	cowboy.position.x = -1500
 	cowboy.scale.x *= -1
+
+
+func run():
+	play()
+	while not is_over:
+		await get_tree().create_timer(0.1).timeout
 
 
 func play():
@@ -121,6 +129,8 @@ func play():
 	fade_animation.play("fade_in")
 	await fade_timer.timeout
 	self.visible = false
+	
+	is_over = true
 
 
 func say(speaker: Node2D, line: String):
@@ -190,17 +200,9 @@ func undim_character(nonspeaker : Node2D):
 	get_tree().create_tween().tween_property(nonspeaker, "modulate", dim, 0.1)
 
 
-func _on_button_pressed() -> void:
-	fade_transisiton.show()
-	fade_timer.start()
-	fade_animation.play("fade_in")
-	await fade_timer.timeout
-	drafting.set_visible(true)
-	self.visible = false
-	fade_timer.start()
-	fade_animation.play("fade_out")
-	await fade_timer.timeout
-	fade_transisiton.hide()
+# Skip cutscene button
+func _on_button_pressed() -> void:	
+	is_over = true
 
 
 func show_screenshot(ss: Sprite2D):

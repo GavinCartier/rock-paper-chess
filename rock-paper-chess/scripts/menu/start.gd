@@ -27,7 +27,10 @@ func _button_pressed():
 	fade_animation.play("fade_out")
 	await fade_timer.timeout
 	fade_transisiton.hide()
-	await cutscene.play()
+	
+	await cutscene.run()
+	cutscene.queue_free()
+	
 	drafting.set_visible(true)
 	fade_transisiton.show()
 	fade_timer.start()
