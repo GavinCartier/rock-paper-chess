@@ -1,4 +1,4 @@
-# The title of your game #
+# Rock, Paper, Chess #
 
 ## Summary ##
 
