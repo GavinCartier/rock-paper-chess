@@ -47,3 +47,11 @@ Fonts
 bodoni-72-smallcaps-book
 bodoni-72-oldstyle-book
 Cochin Regular
+
+assets/grayscale.gdshader
+Grayscale shader created using this tutorial:
+	https://youtu.be/-Ks-Wu8R2KQ
+
+scripts/chess_cam.gd
+Camera shake created using this tutorial:
+	https://youtu.be/pG4KGyxQp40

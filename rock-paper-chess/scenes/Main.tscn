@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cn4lcl7q7tpff" path="res://scenes/black_winner.tscn" id="6_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://cfo6mk5rnvig7" path="res://scenes/settings_popup.tscn" id="7_nxtc6"]
 [ext_resource type="AudioStream" uid="uid://c478m63tnyws3" path="res://assets/sound effects/bell.mp3" id="8_bb450"]
-[ext_resource type="PackedScene" path="res://scenes/Fade_transition.tscn" id="9_1nqs0"]
+[ext_resource type="PackedScene" uid="uid://cng8oa08aublf" path="res://scenes/Fade_transition.tscn" id="9_1nqs0"]
 [ext_resource type="AudioStream" uid="uid://cwrahbtpter0v" path="res://assets/sound effects/clap.wav" id="9_nfivy"]
 [ext_resource type="AudioStream" uid="uid://j4u4ip60wpkr" path="res://assets/sound effects/dice.wav" id="10_1nqs0"]
 [ext_resource type="AudioStream" uid="uid://ym55ofett8cb" path="res://assets/sound effects/drum single beat.wav" id="11_1iba3"]

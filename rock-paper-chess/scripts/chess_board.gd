@@ -273,11 +273,16 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	var move_speed : float = 7.5
 	var move_time : float = move_distance / move_speed
 	
-	animated_movement(piece, board_to_world(target), move_time)
+	
 	
 	# if the target pos has opponent's piece
 	if target_piece != null:
 		if target_piece.piece_owner != piece.piece_owner:
+			var attack_time = move_time / 1.5
+			animated_movement(piece, board_to_world(target), attack_time)
+			await get_tree().create_timer(attack_time).timeout
+			$Camera2D.shake(3, 0.5)
+			
 			if DamageEngine.challenge(piece, target_piece):
 				target_piece.is_dead = true
 				send_to_side(target_piece)
@@ -289,6 +294,8 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 				swap_turn()
 				check_for_check()
 				return
+	else:
+		animated_movement(piece, board_to_world(target), move_time)
 	
 	# update grid status
 	# start point -> no piece on it etc.
