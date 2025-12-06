@@ -16,6 +16,9 @@ var pressed_set_all := false
 @onready var fade_animation = get_node("../FadeTransition/AnimationPlayer")
 @onready var fade_timer = get_node("../FadeTransition/FadeTimer")
 
+@onready var white_turn : Sprite2D = get_node("White's Turn")
+@onready var black_turn : Sprite2D = get_node("Black's Turn")
+
 var font= load("res://assets/font/bodoni-72-oldstyle-book.ttf")
 
 signal finish_drafting
@@ -143,6 +146,7 @@ func draft_controller() -> void:
 		
 		# Give instructions based on if they get another turn after this
 		if (current_player == next_player):
+			change_turn_sprite(current_player)
 			message.text = player_name + ", make 2 selections."
 		else:
 			message.text = player_name + ", make 1 selection."
@@ -189,18 +193,12 @@ func draft_controller() -> void:
 		current_player.set_piece_type(pname, ptype)
 		selections.pop_front()
 		
-		# Spawn the sprite in the world
-		# These aren't the sprites the actual chess game would use,
-		# it's just so they can see what choices have been made
 		var sprite = get_node(player_name + " Pieces/" + pname)
-		sprite.modulate.a = 0.0
 		
 		# First get the correct asset
 		var sprite_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
 		sprite.texture = load(sprite_filepath)
-		get_tree().create_tween().tween_property(sprite, "modulate:a", 1.0, 0.1)
-		
-		sprite.visible = true
+		sprite.material = null
 		
 		# go to chessboard after all drafting finished
 		if i == len(turn_order) - 1:
@@ -212,3 +210,23 @@ func draft_controller() -> void:
 			fade_transisiton.hide()
 			emit_signal("finish_drafting")
 			cam.enabled = false
+
+
+func change_turn_sprite(current_player):
+	if current_player == black_player:
+		get_tree().create_tween().tween_property(white_turn, "modulate:a", 0.0, 0.2)
+		
+		white_turn.visible = false
+		black_turn.visible = true
+		black_turn.modulate.a = 0.0
+		
+		get_tree().create_tween().tween_property(black_turn, "modulate:a", 1.0, 0.2)
+		
+	elif current_player == white_player:
+		get_tree().create_tween().tween_property(black_turn, "modulate:a", 0.0, 0.2)
+		
+		black_turn.visible = false
+		white_turn.visible = true
+		white_turn.modulate.a = 0.0
+		
+		get_tree().create_tween().tween_property(white_turn, "modulate:a", 1.0, 0.2)

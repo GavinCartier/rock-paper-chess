@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://cq0e7rspvwt20"]
+[gd_scene load_steps=19 format=4 uid="uid://cq0e7rspvwt20"]
 
 [ext_resource type="Texture2D" uid="uid://cwxggpqsbpc6q" path="res://assets/chessboard/small.png" id="1_fr4o4"]
 [ext_resource type="Script" uid="uid://8e0wqfvx8ojc" path="res://scripts/chess_board.gd" id="1_k803c"]
 [ext_resource type="Texture2D" uid="uid://joirttjfsqe1" path="res://assets/chessboard/chessboard.PNG" id="2_8qgad"]
 [ext_resource type="Texture2D" uid="uid://ch2x3bfqwf5o2" path="res://assets/chessboard/tiles.png" id="4_k803c"]
+[ext_resource type="Script" uid="uid://cgrsti1sjgxpm" path="res://scripts/chess_cam.gd" id="5_jn1x7"]
 [ext_resource type="Texture2D" uid="uid://t3gtqrtstrln" path="res://assets/UI Elements/Check.png" id="5_kmr1w"]
 [ext_resource type="Texture2D" uid="uid://bdkv6ptt81nn1" path="res://assets/UI Elements/Black Turn.png" id="6_73djx"]
 [ext_resource type="Texture2D" uid="uid://bfmkha3pmwu4t" path="res://assets/UI Elements/White Turn.png" id="7_73djx"]
@@ -12,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://dmrxev01nlmop" path="res://assets/story/text_box.jpg" id="11_0nwsu"]
 [ext_resource type="Texture2D" uid="uid://dm2jcfiwqlw1n" path="res://assets/UI Elements/Rules.png" id="11_yiklk"]
 [ext_resource type="FontFile" uid="uid://cf8vq1pgfv0j" path="res://assets/font/bodoni-72-oldstyle-book.ttf" id="12_4eble"]
+[ext_resource type="Texture2D" uid="uid://buepmq1hvt5bk" path="res://assets/tile glow/white glow.png" id="13_slaic"]
+[ext_resource type="Texture2D" uid="uid://cnbm0ts6u314m" path="res://assets/legend.PNG" id="13_yiklk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_80two"]
 texture = ExtResource("4_k803c")
@@ -109,6 +112,7 @@ tile_set = SubResource("TileSet_kmr1w")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
+script = ExtResource("5_jn1x7")
 
 [node name="Check" type="Sprite2D" parent="."]
 visible = false
@@ -118,14 +122,11 @@ texture = ExtResource("5_kmr1w")
 
 [node name="Black\'s Turn" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-1670.9999, 286)
-scale = Vector2(1.5830479, 1.5830483)
+position = Vector2(-1671, 650)
 texture = ExtResource("6_73djx")
 
 [node name="White\'s Turn" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-1673.25, 297.6704)
-scale = Vector2(1.5590273, 1.5590273)
+position = Vector2(-1673.25, 650)
 texture = ExtResource("7_73djx")
 
 [node name="White Graveyard" type="Sprite2D" parent="."]
@@ -171,5 +172,17 @@ vertical_alignment = 1
 position = Vector2(1627, 450)
 scale = Vector2(1.3920455, 1.542068)
 texture = ExtResource("9_0nwsu")
+
+[node name="Legend" type="Node2D" parent="."]
+position = Vector2(-1688, -260.0001)
+scale = Vector2(0.33806676, 0.33806676)
+
+[node name="background" type="Sprite2D" parent="Legend"]
+scale = Vector2(3.621, 4.407)
+texture = ExtResource("13_slaic")
+
+[node name="legend" type="Sprite2D" parent="Legend"]
+scale = Vector2(2.9893684, 2.9893684)
+texture = ExtResource("13_yiklk")
 
 [connection signal="pressed" from="Rules Button" to="." method="_on_rules_button_pressed"]
