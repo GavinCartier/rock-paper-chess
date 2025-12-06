@@ -447,6 +447,7 @@ func _on_rules_button_pressed() -> void:
 # By the time this function is called, the current player has switched
 # over to the loser's side, which is why they are swapped here.
 func _victory_screen():
+	Sfx.pause_bgm()
 	fade_transisiton.show()
 	fade_timer.start()
 	fade_animation.play("fade_in")
@@ -457,8 +458,10 @@ func _victory_screen():
 		fade_animation.play("fade_out")
 		await fade_timer.timeout
 		fade_transisiton.hide()
+		Sfx.play("victory")
 	else:
 		black_winner.visible = true
 		fade_animation.play("fade_out")
 		await fade_timer.timeout
 		fade_transisiton.hide()
+		Sfx.play("victory")

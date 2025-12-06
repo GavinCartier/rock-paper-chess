@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cs8pb7ood05s0"
+path="res://.godot/imported/loud-fanfare-trumpet-effect-01-412045.mp3-8bb38adaabd1340d527fba2c0f2f0c25.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/loud-fanfare-trumpet-effect-01-412045.mp3"
+dest_files=["res://.godot/imported/loud-fanfare-trumpet-effect-01-412045.mp3-8bb38adaabd1340d527fba2c0f2f0c25.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
