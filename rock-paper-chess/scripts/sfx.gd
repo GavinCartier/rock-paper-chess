@@ -5,7 +5,8 @@ var offsets: Dictionary[String, float] = {
 	"clap": 0.55,
 	"lasso": 0.10,
 	"paper": 0.54,
-	"woosh": 0.08
+	"woosh": 0.08,
+	"dialogue": 0.27
 }
 
 const BGM_BUS_NAME: String = "bgm"
@@ -32,11 +33,11 @@ func play(sfx_name: String) -> void:
 				
 
 func pause_bgm() -> void:
-	var bus_idx := AudioServer.get_bus_index(BG_BUS_NAME)
+	var bus_idx := AudioServer.get_bus_index(BGM_BUS_NAME)
 	if bus_idx >= 0:
 		AudioServer.set_bus_mute(bus_idx, true)
 
 func resume_bgm() -> void:
-	var bus_idx := AudioServer.get_bus_index(BG_BUS_NAME)
+	var bus_idx := AudioServer.get_bus_index(BGM_BUS_NAME)
 	if bus_idx >= 0:
 		AudioServer.set_bus_mute(bus_idx, false)

@@ -169,6 +169,7 @@ func say(speaker: Node2D, line: String):
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
+		Sfx.play("dialogue")
 		clicked.emit()
 
 
@@ -202,6 +203,7 @@ func undim_character(nonspeaker : Node2D):
 
 # Skip cutscene button
 func _on_button_pressed() -> void:	
+	Sfx.play("woosh")
 	is_over = true
 
 
