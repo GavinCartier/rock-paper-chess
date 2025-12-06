@@ -36,6 +36,7 @@ var selected_piece: Piece = null
 var selected_pos: Vector2i
 var hypothetical_damage : float = 0
 var is_game_over : bool
+var total_turns : int = 0
 
 const CLASS_NAMES := {
 	PT.Classes.PAWN:"Pawn",
@@ -61,6 +62,8 @@ func _play_piece_click_sfx(piece: Piece) -> void:
 # Signal for showing when the board's selected piece has changed
 # Used for resetting visualizations and such
 signal reset_piece_selection()
+
+signal victory()
 
 func _finished_drafting():
 	var drafting := get_parent().get_node("Drafting")
@@ -90,6 +93,8 @@ func begin_chess_game():
 	is_game_over = false
 
 func _initialize_board():
+	connect("victory", Callable(white_winner, "_finished_game"))
+	connect("victory", Callable(black_winner, "_finished_game"))
 	# 8x8 grid with null placeholders
 	grid.resize(BOARD_SIZE)
 	for i in range(BOARD_SIZE):
@@ -283,6 +288,15 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 			await get_tree().create_timer(attack_time).timeout
 			$Camera2D.shake(3, 0.5)
 			
+	animated_movement(piece, board_to_world(target), move_time)
+	total_turns += 1
+	# if the target pos has opponent's piece
+	if target_piece != null:
+		if target_piece.piece_owner != piece.piece_owner:
+			if (current_player.color == Player.Player_Color.WHITE):
+				white_player.total_damage_dealt += DamageEngine.damage_dealt(piece, target_piece)
+			else:
+				black_player.total_damage_dealt += DamageEngine.damage_dealt(piece, target_piece)
 			if DamageEngine.challenge(piece, target_piece):
 				target_piece.is_dead = true
 				send_to_side(target_piece)
@@ -451,21 +465,24 @@ func _on_rules_button_pressed() -> void:
 		get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
 
 
-# By the time this function is called, the current player has switched
-# over to the loser's side, which is why they are swapped here.
 func _victory_screen():
+	Sfx.pause_bgm()
 	fade_transisiton.show()
 	fade_timer.start()
 	fade_animation.play("fade_in")
 	await fade_timer.timeout
 	is_game_over = true
+	emit_signal("victory", white_player.total_damage_dealt, black_player.total_damage_dealt, \
+	white_player.num_of_lost_pieces, black_player.num_of_lost_pieces, total_turns)
 	if current_player == black_player:
 		white_winner.visible = true
 		fade_animation.play("fade_out")
 		await fade_timer.timeout
 		fade_transisiton.hide()
+		Sfx.play("victory")
 	else:
 		black_winner.visible = true
 		fade_animation.play("fade_out")
 		await fade_timer.timeout
 		fade_transisiton.hide()
+		Sfx.play("victory")
