@@ -20,6 +20,7 @@ var pressed_set_all := false
 @onready var black_turn : Sprite2D = get_node("Black's Turn")
 
 var font= load("res://assets/font/bodoni-72-oldstyle-book.ttf")
+var wiggle_tween: Tween
 
 signal finish_drafting
 
@@ -52,6 +53,7 @@ func _ready() -> void:
 	
 	buttons = [b_pawn, b_rook, b_knight, b_bishop, b_queen, b_king]
 	
+	wiggle_animation(white_turn)
 	#var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 1500, cam.position.y))
 	#buttons.append(dev_button)
 	
@@ -209,13 +211,23 @@ func draft_controller() -> void:
 			await fade_timer.timeout
 			fade_transisiton.hide()
 			emit_signal("finish_drafting")
+			if wiggle_tween and wiggle_tween.is_valid():
+				wiggle_tween.kill()
 			cam.enabled = false
+
+func wiggle_animation(indicator):
+	if wiggle_tween and wiggle_tween.is_valid():
+		wiggle_tween.kill()
+	wiggle_tween = get_tree().create_tween()
+	wiggle_tween.set_loops()  
+	wiggle_tween.tween_property(indicator, "position:x", indicator.position.x + 7, 0.5)
+	wiggle_tween.tween_property(indicator, "position:x", indicator.position.x - 7, 0.5)
 
 
 func change_turn_sprite(current_player):
 	if current_player == black_player:
 		get_tree().create_tween().tween_property(white_turn, "modulate:a", 0.0, 0.2)
-		
+		wiggle_animation(black_turn)
 		white_turn.visible = false
 		black_turn.visible = true
 		black_turn.modulate.a = 0.0
@@ -224,6 +236,7 @@ func change_turn_sprite(current_player):
 		
 	elif current_player == white_player:
 		get_tree().create_tween().tween_property(black_turn, "modulate:a", 0.0, 0.2)
+		wiggle_animation(white_turn)
 		
 		black_turn.visible = false
 		white_turn.visible = true
