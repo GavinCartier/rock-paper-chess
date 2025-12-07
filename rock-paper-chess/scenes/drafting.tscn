@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://0k71bkt73jdv"]
+[gd_scene load_steps=24 format=3 uid="uid://0k71bkt73jdv"]
 
 [ext_resource type="Script" uid="uid://cmyr62k4q30af" path="res://scripts/drafting.gd" id="1_xd4v5"]
 [ext_resource type="Texture2D" uid="uid://bv3yu5pp71fpd" path="res://assets/drafting_background.png" id="2_xd4v5"]
@@ -13,13 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://75cnsvobkn1n" path="res://assets/new placeholder/Paper/White/Paper Bishop White.PNG" id="9_w6nbb"]
 [ext_resource type="Texture2D" uid="uid://btj8734an8te1" path="res://assets/new placeholder/Paper/White/Paper Knight White.PNG" id="10_0fxw5"]
 [ext_resource type="Texture2D" uid="uid://dct60demi5air" path="res://assets/new placeholder/Paper/White/Paper Rook White.PNG" id="11_k41hu"]
-[ext_resource type="Texture2D" uid="uid://owjjalmra4t1" path="res://assets/new placeholder/Paper/White/Paper Pawn White.PNG" id="12_fdiah"]
 [ext_resource type="Texture2D" uid="uid://bg1yscfbpjfyh" path="res://assets/new placeholder/Rock/Black/Rock King Black.PNG" id="13_eygyb"]
 [ext_resource type="Texture2D" uid="uid://bl71ej1h47k2u" path="res://assets/new placeholder/Rock/Black/Rock Queen Black.PNG" id="14_ngim5"]
 [ext_resource type="Texture2D" uid="uid://5g2elb7fysa5" path="res://assets/new placeholder/Rock/Black/Rock Bishop Black.PNG" id="15_6s6b1"]
 [ext_resource type="Texture2D" uid="uid://tokrtqaupnvs" path="res://assets/new placeholder/Rock/Black/Rock Knight Black.PNG" id="16_7g4uo"]
 [ext_resource type="Texture2D" uid="uid://dufxymplxc85h" path="res://assets/new placeholder/Rock/Black/Rock Rook Black.PNG" id="17_g88mm"]
-[ext_resource type="Texture2D" uid="uid://u1keou8f0rhk" path="res://assets/new placeholder/Rock/Black/Rock Pawn Black.PNG" id="18_uitf1"]
 [ext_resource type="Texture2D" uid="uid://cnbm0ts6u314m" path="res://assets/legend.PNG" id="21_uci4u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1a71g"]
@@ -74,7 +72,7 @@ scale = Vector2(1.544476, 0.30023095)
 texture = ExtResource("5_7sye8")
 
 [node name="White Pieces" type="Node2D" parent="."]
-position = Vector2(0, 500)
+position = Vector2(-200, 500)
 scale = Vector2(2.25, 2.25)
 
 [node name="King" type="Sprite2D" parent="White Pieces"]
@@ -102,13 +100,8 @@ material = SubResource("ShaderMaterial_0anh3")
 position = Vector2(-300, 0)
 texture = ExtResource("11_k41hu")
 
-[node name="Pawn" type="Sprite2D" parent="White Pieces"]
-material = SubResource("ShaderMaterial_0anh3")
-position = Vector2(-500, 0)
-texture = ExtResource("12_fdiah")
-
 [node name="Black Pieces" type="Node2D" parent="."]
-position = Vector2(0, -500)
+position = Vector2(-200, -500)
 scale = Vector2(2.25, 2.25)
 
 [node name="King" type="Sprite2D" parent="Black Pieces"]
@@ -135,11 +128,6 @@ texture = ExtResource("16_7g4uo")
 material = SubResource("ShaderMaterial_0anh3")
 position = Vector2(-300, 0)
 texture = ExtResource("17_g88mm")
-
-[node name="Pawn" type="Sprite2D" parent="Black Pieces"]
-material = SubResource("ShaderMaterial_0anh3")
-position = Vector2(-500, 0)
-texture = ExtResource("18_uitf1")
 
 [node name="Black\'s Turn" type="Sprite2D" parent="."]
 visible = false

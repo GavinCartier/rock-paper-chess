@@ -6,7 +6,7 @@ extends Node
 const BOARD_SIZE := 8
 const PT := preload("res://scripts/models/piece_types.gd")
 const PieceScene: PackedScene = preload("res://scenes/Piece.tscn")
-const PawnGraduation : PackedScene = preload("res://scenes/pawn_graduation.tscn")
+#onst PawnGraduation : PackedScene = preload("res://scenes/pawn_graduation.tscn")
 
 @onready var white_player : Player = get_parent().get_node("WhitePlayer")
 @onready var black_player : Player = get_parent().get_node("BlackPlayer")
@@ -106,8 +106,8 @@ func _initialize_board():
 func _initialize_piece_position():
 	# Black pieces
 	# Initialize Pawns
-	for col in range(-4, 4):
-		_set_piece(PieceTypes.Classes.PAWN, PieceTypes.Owner.BLACK, Vector2i(-3, col))
+	#for col in range(-4, 4):
+		#_set_piece(PieceTypes.Classes.PAWN, PieceTypes.Owner.BLACK, Vector2i(-3, col))
 
 	# Other pieces
 	_set_piece(PieceTypes.Classes.ROOK, PieceTypes.Owner.BLACK, Vector2i(-4, -4))
@@ -121,8 +121,8 @@ func _initialize_piece_position():
 
 	# White pieces
 	# Initialize Pawns
-	for col in range(-4, 4):
-		_set_piece(PieceTypes.Classes.PAWN, PieceTypes.Owner.WHITE, Vector2i(2, col))
+	#for col in range(-4, 4):
+		#_set_piece(PieceTypes.Classes.PAWN, PieceTypes.Owner.WHITE, Vector2i(2, col))
 
 	# Other pieces
 	_set_piece(PieceTypes.Classes.ROOK, PieceTypes.Owner.WHITE, Vector2i(3, -4))
@@ -346,11 +346,11 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		rook.has_moved = true
 	
 	# Check if the moved piece is a pawn that can graduate
-	if piece.piece_class == PieceTypes.Classes.PAWN and ((piece.piece_owner == PieceTypes.Owner.WHITE and target.x == -4) or (piece.piece_owner == PieceTypes.Owner.BLACK and target.x == 3)):
-		var pawn_graduation = PawnGraduation.instantiate()
-		pawn_graduation.piece = piece
-		add_child(pawn_graduation)
-		await pawn_graduation.get_selection() # Wait for player to select upgrade
+	#if piece.piece_class == PieceTypes.Classes.PAWN and ((piece.piece_owner == PieceTypes.Owner.WHITE and target.x == -4) or (piece.piece_owner == PieceTypes.Owner.BLACK and target.x == 3)):
+		#var pawn_graduation = PawnGraduation.instantiate()
+		#pawn_graduation.piece = piece
+		#add_child(pawn_graduation)
+		#await pawn_graduation.get_selection() # Wait for player to select upgrade
 		
 		# swap whose turn it is
 	

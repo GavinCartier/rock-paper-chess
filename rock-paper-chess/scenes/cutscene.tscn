@@ -197,7 +197,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Skip" type="Node2D" parent="."]
-position = Vector2(800, -400)
+position = Vector2(800, -200)
 
 [node name="Sprite2D" type="Sprite2D" parent="Skip"]
 scale = Vector2(0.1036335, 0.17032333)
