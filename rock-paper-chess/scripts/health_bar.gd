@@ -2,8 +2,8 @@ extends Node
 class_name HealthBar
 
 # Defines the colors that the damage taken indicator flashes between
-const damage_received_start_color : Color = Color(0.72, 0.18, 0.189, 1.0)
-const damage_received_end_color : Color = Color(1.0, 1.0, 1.0, 1.0)
+const damage_received_start_color : Color = Color(0.0, 1.0, 0.0, 1.0)
+const damage_received_end_color : Color = Color(1.0, 0.0, 0.0, 1.0)
 const damage_received_animation_time : float = 0.5 # Amount of time for flashing animation
 
 # This variable serves as a "lock" on whether to show the health bar or not.
@@ -18,7 +18,7 @@ var damage_received_animation_timer : float = 0.0 # Timer for the flashing anima
 func _process(delta: float) -> void:
 	if damage_received.visible:
 		# Find point between damage indicator's start and end colors to display
-		var ratio_at_end := ((damage_received_animation_time - damage_received_animation_timer) ** 2) / damage_received_animation_time
+		var ratio_at_end : float = (abs(damage_received_animation_time - damage_received_animation_timer) ** 1.5) / damage_received_animation_time
 		var damage_received_color : Color = damage_received_start_color * (1.0 - ratio_at_end) + damage_received_end_color * ratio_at_end
 		damage_received.color = damage_received_color
 		damage_received_animation_timer += delta

@@ -208,17 +208,6 @@ func on_piece_clicked(piece: Piece) -> void:
 	stats.text = str(PieceTypes.Classes.keys()[piece.piece_class]).capitalize() + \
 	" stats:\nHealth: " + str(piece.health) + "\nDamage: " + str(piece.damage) \
 	+ "\nType: " + str(PT.Types.keys()[piece.piece_type]).capitalize()
-	
-	for x in range(grid.size()):
-		for y in range(grid[x].size()):
-			var piece_at_space = grid[x][y]
-			
-			if (piece_at_space != null and piece_at_space.piece_owner != current_player.color):
-				piece_at_space.health_bar.select_show = true
-				piece_at_space.health_bar.show()
-				
-				hypothetical_damage = DamageEngine.damage_dealt(piece, piece_at_space)
-				piece_at_space.health_bar.show_damage_received(hypothetical_damage / piece_at_space.max_health)
 
 
 func _input(event: InputEvent) -> void:
@@ -442,7 +431,10 @@ func send_to_side(piece: Node2D):
 			new_position = black_graveyard.position + Vector2(width * -(3.5/8.0), height * 0.25)
 			new_position.x += (1.0/8.0) * width * (white_player.num_of_lost_pieces - 8)
 		
-		
+	# Hide the player's health bar
+	piece.health_bar.select_show = false
+	piece.health_bar.hide_damage_received()
+	piece.health_bar.hide()
 	
 	tween.tween_property(piece, "position", new_position, time)
 	
