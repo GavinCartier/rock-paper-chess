@@ -18,6 +18,8 @@ var pressed_set_all := false
 
 @onready var white_turn : Sprite2D = get_node("White's Turn")
 @onready var black_turn : Sprite2D = get_node("Black's Turn")
+var white_turn_pos
+var black_turn_pos
 
 var font= load("res://assets/font/bodoni-72-oldstyle-book.ttf")
 var wiggle_tween: Tween
@@ -54,6 +56,8 @@ func _ready() -> void:
 	buttons = [b_pawn, b_rook, b_knight, b_bishop, b_queen, b_king]
 	
 	wiggle_animation(white_turn)
+	white_turn_pos = white_turn.position
+	black_turn_pos = black_turn.position
 	#var dev_button := make_button("Set All (dev only - delete before release)", Vector2(cam.position.x + 1500, cam.position.y))
 	#buttons.append(dev_button)
 	
@@ -226,20 +230,14 @@ func wiggle_animation(indicator):
 
 func change_turn_sprite(current_player):
 	if current_player == black_player:
-		get_tree().create_tween().tween_property(white_turn, "modulate:a", 0.0, 0.2)
-		wiggle_animation(black_turn)
+		await get_tree().create_tween().tween_property(white_turn, "position", black_turn_pos, 0.2).finished
 		white_turn.visible = false
+		white_turn.position = white_turn_pos
 		black_turn.visible = true
-		black_turn.modulate.a = 0.0
-		
-		get_tree().create_tween().tween_property(black_turn, "modulate:a", 1.0, 0.2)
-		
+		wiggle_animation(black_turn)
 	elif current_player == white_player:
-		get_tree().create_tween().tween_property(black_turn, "modulate:a", 0.0, 0.2)
-		wiggle_animation(white_turn)
-		
+		await get_tree().create_tween().tween_property(black_turn, "position", white_turn_pos, 0.2).finished
 		black_turn.visible = false
+		black_turn.position = black_turn_pos
 		white_turn.visible = true
-		white_turn.modulate.a = 0.0
-		
-		get_tree().create_tween().tween_property(white_turn, "modulate:a", 1.0, 0.2)
+		wiggle_animation(white_turn)

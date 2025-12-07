@@ -14,7 +14,7 @@
 [ext_resource type="FontFile" uid="uid://cf8vq1pgfv0j" path="res://assets/font/bodoni-72-oldstyle-book.ttf" id="12_4eble"]
 [ext_resource type="Texture2D" uid="uid://buepmq1hvt5bk" path="res://assets/tile glow/white glow.png" id="13_slaic"]
 [ext_resource type="Texture2D" uid="uid://cnbm0ts6u314m" path="res://assets/legend.PNG" id="13_yiklk"]
-[ext_resource type="Texture2D" uid="uid://c3bu255ykp24j" path="res://assets/UI Elements/rules.png" id="15_jn1x7"]
+[ext_resource type="Texture2D" uid="uid://c3bu255ykp24j" path="res://assets/UI Elements/Rules.png" id="15_jn1x7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_80two"]
 texture = ExtResource("4_k803c")
@@ -121,13 +121,12 @@ scale = Vector2(2.1682904, 2.3990753)
 texture = ExtResource("5_kmr1w")
 
 [node name="Black\'s Turn" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-110, -491)
+position = Vector2(-1830, 264)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("7_jn1x7")
 
 [node name="White\'s Turn" type="Sprite2D" parent="."]
-position = Vector2(-110, -490.99997)
+position = Vector2(-1829.9999, 263.99994)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("8_wtkyx")
 
