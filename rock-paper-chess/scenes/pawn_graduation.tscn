@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://cly7vu8b2un27"]
+
+[ext_resource type="Script" uid="uid://bpod22xcwydjx" path="res://scripts/piece_graduation.gd" id="1_bhjfj"]
+[ext_resource type="Texture2D" uid="uid://dmrxev01nlmop" path="res://assets/story/text_box.jpg" id="1_s6h4f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhjfj"]
+size = Vector2(262, 277)
+
+[node name="PawnGraduation" type="Node2D"]
+script = ExtResource("1_bhjfj")
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 1)
+texture = ExtResource("1_s6h4f")
+
+[node name="Knight" type="Node2D" parent="."]
+position = Vector2(-450, 0)
+
+[node name="KnightSprite" type="Sprite2D" parent="Knight"]
+
+[node name="KnightArea" type="Area2D" parent="Knight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Knight/KnightArea"]
+shape = SubResource("RectangleShape2D_bhjfj")
+
+[node name="Bishop" type="Node2D" parent="."]
+position = Vector2(-150, 0)
+
+[node name="BishopSprite" type="Sprite2D" parent="Bishop"]
+
+[node name="BishopArea" type="Area2D" parent="Bishop"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bishop/BishopArea"]
+shape = SubResource("RectangleShape2D_bhjfj")
+
+[node name="Rook" type="Node2D" parent="."]
+position = Vector2(150, 0)
+
+[node name="RookSprite" type="Sprite2D" parent="Rook"]
+
+[node name="RookArea" type="Area2D" parent="Rook"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rook/RookArea"]
+shape = SubResource("RectangleShape2D_bhjfj")
+
+[node name="Queen" type="Node2D" parent="."]
+position = Vector2(450, 0)
+
+[node name="QueenSprite" type="Sprite2D" parent="Queen"]
+
+[node name="QueenArea" type="Area2D" parent="Queen"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Queen/QueenArea"]
+shape = SubResource("RectangleShape2D_bhjfj")

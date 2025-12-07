@@ -6,15 +6,38 @@ extends Node
 const BOARD_SIZE := 8
 const PT := preload("res://scripts/models/piece_types.gd")
 const PieceScene: PackedScene = preload("res://scenes/Piece.tscn")
+const PawnGraduation : PackedScene = preload("res://scenes/pawn_graduation.tscn")
 
 @onready var white_player : Player = get_parent().get_node("WhitePlayer")
 @onready var black_player : Player = get_parent().get_node("BlackPlayer")
 @onready var current_player : Player
 
+@onready var check : Sprite2D = get_node("Check")
+@onready var white_sprite : Sprite2D = get_node("White's Turn")
+@onready var black_sprite : Sprite2D = get_node("Black's Turn")
+
+@onready var white_graveyard : Sprite2D = get_node("White Graveyard")
+@onready var black_graveyard : Sprite2D = get_node("Black Graveyard")
+
+@onready var rules_button : Button = get_node("Rules Button")
+@onready var rules_sprite : Sprite2D = get_node("Rules")
+
+@onready var stats : Label = get_node("stats")
+@onready var white_winner : Sprite2D = get_tree().root.get_node("Main/WhiteWinner")
+@onready var black_winner : Sprite2D = get_tree().root.get_node("Main/BlackWinner")
+
+@onready var fade_transisiton = get_node("../FadeTransition")
+@onready var fade_animation = get_node("../FadeTransition/AnimationPlayer")
+@onready var fade_timer = get_node("../FadeTransition/FadeTimer")
+
 var grid: Array = []
 
 var selected_piece: Piece = null
 var selected_pos: Vector2i
+var hypothetical_damage : float = 0
+var is_game_over : bool
+var total_turns : int = 0
+var button_availability: bool = false
 
 const CLASS_NAMES := {
 	PT.Classes.PAWN:"Pawn",
@@ -37,10 +60,11 @@ func _play_piece_click_sfx(piece: Piece) -> void:
 		_:
 			pass
 
-
 # Signal for showing when the board's selected piece has changed
 # Used for resetting visualizations and such
 signal reset_piece_selection()
+
+signal victory()
 
 func _finished_drafting():
 	var drafting := get_parent().get_node("Drafting")
@@ -53,12 +77,28 @@ func begin_chess_game():
 	# Initialize the players
 	white_player.color = Player.Player_Color.WHITE
 	black_player.color = Player.Player_Color.BLACK
-	current_player = white_player
+	
 	_initialize_board()
 	_initialize_piece_position()
-	print("White's turn")
+	
+	# enable rule button for hovering
+	button_availability = true
+	
+	current_player = white_player
+	white_sprite.visible = true
+	fade_transisiton.show()
+	fade_timer.start()
+	fade_animation.play("fade_out")
+	await fade_timer.timeout
+	fade_transisiton.hide()
+	
+	rules_sprite.modulate.a = 0.0
+	
+	is_game_over = false
 
 func _initialize_board():
+	connect("victory", Callable(white_winner, "_finished_game"))
+	connect("victory", Callable(black_winner, "_finished_game"))
 	# 8x8 grid with null placeholders
 	grid.resize(BOARD_SIZE)
 	for i in range(BOARD_SIZE):
@@ -144,12 +184,23 @@ func board_to_grid(pos: Vector2i) -> Vector2i:
 # Prompts pieces to load display logic upon being hovered.
 # Only activates if a piece is not already selected via click
 func on_piece_hovered(piece: Piece) -> void:
+	if is_game_over:
+		print("hi")
+		return
+	
 	if selected_piece == null and piece.piece_owner == current_player.color:
 		emit_signal("reset_piece_selection")
 		piece.show_piece_options()
+		piece.health_bar.show_damage_received(0)
+	
+	if selected_piece != null and piece.piece_owner != selected_piece.piece_owner:
+		return
 
 # manage the piece that selected by mouse (player)	
 func on_piece_clicked(piece: Piece) -> void:
+	if is_game_over:
+		return
+	
 	if piece.piece_owner != current_player.color:
 		return
 	
@@ -158,6 +209,10 @@ func on_piece_clicked(piece: Piece) -> void:
 	selected_piece = piece
 	selected_pos = piece.location
 	piece.show_piece_options()
+	stats.text = str(PieceTypes.Classes.keys()[piece.piece_class]).capitalize() + \
+	" stats:\nHealth: " + str(piece.health) + "\nDamage: " + str(piece.damage) \
+	+ "\nType: " + str(PT.Types.keys()[piece.piece_type]).capitalize()
+
 
 func _input(event: InputEvent) -> void:
 	
@@ -188,29 +243,7 @@ func _try_move_to(target_pos: Vector2i) -> bool:
 	
 	# dev log: start pos is correct
 	var start_pos = selected_piece.location
-	# target should be (1,-3)
-	#print("start:", start_pos, " target:", target_pos)
-	
-	#var possible_moves: Array = PT.get_possible_moves(
-	#	selected_piece.piece_class,
-	#	selected_piece.piece_owner,
-	#	Vector2(start_pos.x, start_pos.y),
-	#	self)
-	#var offset = Vector2(target_pos.x - start_pos.x, target_pos.y - start_pos.y)
-	#print("offset:", offset)
-	#print("possible_moves:", possible_moves)
-	
-	#var valid_move :bool = false
-	# check whether it is a valid movement
-	#for i in possible_moves:
-	#	if i == offset:
-	#		valid_move = true
-	#		break
-	
-	#if not valid_move:
-	
-	# The above commented out code did have some buggy behavior about detecting valid moves
-	# But I had also made a function that does this in the piece class so I'm calling that here
+
 	var legal_moves = selected_piece.get_legal_moves(start_pos)
 	if target_pos not in legal_moves:
 		#print("not a valid move")
@@ -234,13 +267,57 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	selected_piece = null
 	emit_signal("reset_piece_selection")
 	
+	var move_distance : float = (target - piece.location).length()
+	var move_speed : float = 7.5
+	var move_time : float = move_distance / move_speed
+	
+	
+	
 	# if the target pos has opponent's piece
 	if target_piece != null:
 		if target_piece.piece_owner != piece.piece_owner:
-			if DamageEngine.challenge(piece, target_piece):
-				target_piece.delete()
+			var attack_time = move_time / 1.5
+			animated_movement(piece, board_to_world(target), attack_time)
+			await get_tree().create_timer(attack_time).timeout
+			$Camera2D.shake(3, 0.5)
+			
+	animated_movement(piece, board_to_world(target), move_time)
+	total_turns += 1
+	# if the target pos has opponent's piece
+	if target_piece != null:
+		if target_piece.piece_owner != piece.piece_owner:
+			if (current_player.color == Player.Player_Color.WHITE):
+				white_player.total_damage_dealt += DamageEngine.damage_dealt(piece, target_piece)
 			else:
+				black_player.total_damage_dealt += DamageEngine.damage_dealt(piece, target_piece)
+			if DamageEngine.challenge(piece, target_piece):
+				target_piece.is_dead = true
+				send_to_side(target_piece)
+				current_player.num_of_lost_pieces += 1
+				if target_piece.piece_class == PieceTypes.Classes.KING:
+					_victory_screen()
+			else:
+				# The piece did not successfully kill the target
+				# If the piece is a bishop, rook, or queen, move it adjacent to the target piece
+				var new_pos : Vector2i = piece.location
+				
+				if piece.piece_class == PieceTypes.Classes.BISHOP or piece.piece_class == PieceTypes.Classes.ROOK or piece.piece_class == PieceTypes.Classes.QUEEN:
+					var x_dir : int = clamp(start.x - target.x, -1, 1)
+					var y_dir : int = clamp(start.y - target.y, -1, 1)
+					
+					new_pos = Vector2i(target.x + x_dir, target.y + y_dir)
+					piece.location = new_pos
+					piece.has_moved = true
+					
+					grid[start.x][start.y] = null
+					grid[new_pos.x][new_pos.y] = piece
+					
+				animated_movement(piece, board_to_world(new_pos), move_time)
+				swap_turn()
+				check_for_check()
 				return
+	else:
+		animated_movement(piece, board_to_world(target), move_time)
 	
 	# update grid status
 	# start point -> no piece on it etc.
@@ -249,15 +326,194 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 
 	# update postion on board
 	piece.location = target
-	# update piece postion in world
-	piece.position = board_to_world(target)
 	
-	# swap whose turn it is
+	
+	# update piece postion in world
+	#piece.position = board_to_world(target)
+	piece.has_moved = true
+	
+	# Check if castling occurred -> if so, update rook position as well
+	if piece.piece_class == PieceTypes.Classes.KING && abs(target.y - start.y) == 2:
+		# Castling occurred, get the rook
+		var rook : Piece
+		
+		if target.y == -2:
+			rook = grid[target.x][-4]
+		else:
+			rook = grid[target.x][3]
+		# Move the rook
+		grid[target.x][rook.location.y] = null
+		grid[target.x][int(target.y / 2.0)] = rook
+		
+		var rook_location = Vector2i(target.x, int(target.y / 2.0))
+		animated_movement(rook, board_to_world(rook_location), move_time)
+		rook.has_moved = true
+	
+	# Check if the moved piece is a pawn that can graduate
+	if piece.piece_class == PieceTypes.Classes.PAWN and ((piece.piece_owner == PieceTypes.Owner.WHITE and target.x == -4) or (piece.piece_owner == PieceTypes.Owner.BLACK and target.x == 3)):
+		var pawn_graduation = PawnGraduation.instantiate()
+		pawn_graduation.piece = piece
+		add_child(pawn_graduation)
+		await pawn_graduation.get_selection() # Wait for player to select upgrade
+		
+		# swap whose turn it is
+	
+	if (check_for_check()):
+		get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.1)
+	
+	swap_turn()
+	
+	check_for_check()
+
+# Swaps the turn
+func swap_turn() -> void:
 	if current_player == white_player:
+		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 0.0, 0.1)
+		
+		white_sprite.visible = false
+		black_sprite.visible = true
+		black_sprite.modulate.a = 0.0
+		
+		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 1.0, 0.1)
+		
 		current_player = black_player
-		print("Black's turn")
-		Sfx.play("lasso")
+		
 	elif current_player == black_player:
+		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 0.0, 0.1)
+		
+		black_sprite.visible = false
+		white_sprite.visible = true
+		white_sprite.modulate.a = 0.0
+		
+		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 1.0, 0.1)
+		
 		current_player = white_player
-		print("White's turn")
-		Sfx.play("clap")
+	
+	# For further selection bug prevention
+	emit_signal("reset_piece_selection")
+
+# This function checks to see whether the King can be attacked
+func check_for_check() -> bool:
+	for x in range(grid.size()):
+		for y in range(grid[x].size()):
+			var piece_at_space = grid[x][y]
+			
+			if (piece_at_space != null and piece_at_space.piece_owner != current_player.color):
+				if (piece_at_space.can_attack_king(piece_at_space.location)):
+					check.visible = true
+					get_tree().create_tween().tween_property(check, "modulate:a", 1.0, 0.2)
+					return true
+					
+	get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.2)
+	check.visible = false
+	return false
+
+
+func animated_movement(piece: Node2D, new_position: Vector2, time: float):
+	var tween := get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	var original_scale = piece.scale
+	var move_scale = original_scale * 1.2
+	
+	tween.tween_property(piece, "position", new_position, time)
+	
+	tween.parallel().tween_property(piece, "scale", move_scale, time * 0.5)
+	tween.parallel().tween_property(piece, "scale", original_scale, time * 0.5).set_delay(time * 0.5)
+
+
+func send_to_side(piece: Node2D):
+	var tween := get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	var new_scale = piece.scale * 0.5
+	var time = 0.5
+	
+	var new_position : Vector2
+	
+	if (current_player == black_player):
+		var width = white_graveyard.texture.get_width() * white_graveyard.scale.x
+		var height = white_graveyard.texture.get_height() * white_graveyard.scale.y
+		
+		if (black_player.num_of_lost_pieces < 8):
+			new_position = white_graveyard.position + Vector2(width * -(3.5/8.0), height * -0.25)
+			new_position.x += (1.0/8.0) * width * black_player.num_of_lost_pieces
+		else:
+			new_position = white_graveyard.position + Vector2(width * -(3.5/8.0), height * 0.25)
+			new_position.x += (1.0/8.0) * width * (black_player.num_of_lost_pieces - 8)
+		
+	else: 
+		var width = black_graveyard.texture.get_width() * black_graveyard.scale.x
+		var height = black_graveyard.texture.get_height() * black_graveyard.scale.y
+		
+		if (white_player.num_of_lost_pieces < 8):
+			new_position = black_graveyard.position + Vector2(width * -(3.5/8.0), height * -0.25)
+			new_position.x += (1.0/8.0) * width * white_player.num_of_lost_pieces
+		else:
+			new_position = black_graveyard.position + Vector2(width * -(3.5/8.0), height * 0.25)
+			new_position.x += (1.0/8.0) * width * (white_player.num_of_lost_pieces - 8)
+		
+	# Hide the player's health bar
+	piece.health_bar.select_show = false
+	piece.health_bar.hide_damage_received()
+	piece.health_bar.hide()
+	
+	tween.tween_property(piece, "position", new_position, time)
+	
+	tween.parallel().tween_property(piece, "scale", new_scale, time)
+	
+	return tween
+
+func _on_rules_button_mouse_entered() -> void:
+	if button_availability == false:
+		return
+	rules_sprite.visible = true
+	var tween = get_tree().create_tween()
+	rules_sprite.modulate.a = 0.0
+	tween.tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
+		
+	
+func _on_rules_button_mouse_exited() -> void:
+	if button_availability == false:
+		return
+	var tween = get_tree().create_tween()
+	tween.tween_property(rules_sprite, "modulate:a", 0.0, 0.25)
+	await tween.finished
+	rules_sprite.visible = false
+	
+#func _on_rules_button_pressed() -> void:
+	#var tween = get_tree().create_tween()
+	#var parent = rules_sprite.get_parent()
+	#if rules_sprite.visible:
+		#tween.tween_property(rules_sprite, "modulate:a", 0.0, 0.25)
+		#await tween.finished
+		#rules_sprite.visible = false
+	#else:
+		#rules_sprite.visible = true
+		#parent.remove_child(rules_sprite)
+		#parent.add_child(rules_sprite)
+		#get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
+
+
+func _victory_screen():
+	Sfx.pause_bgm()
+	fade_transisiton.show()
+	fade_timer.start()
+	fade_animation.play("fade_in")
+	await fade_timer.timeout
+	is_game_over = true
+	button_availability = false
+	emit_signal("victory", white_player.total_damage_dealt, black_player.total_damage_dealt, \
+	white_player.num_of_lost_pieces, black_player.num_of_lost_pieces, total_turns)
+	if current_player == black_player:
+		white_winner.visible = true
+		fade_animation.play("fade_out")
+		await fade_timer.timeout
+		fade_transisiton.hide()
+		Sfx.play("victory")
+	else:
+		black_winner.visible = true
+		fade_animation.play("fade_out")
+		await fade_timer.timeout
+		fade_transisiton.hide()
+		Sfx.play("victory")

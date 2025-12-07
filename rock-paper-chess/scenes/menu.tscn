@@ -1,16 +1,90 @@
-[gd_scene load_steps=5 format=3 uid="uid://rwyyjixmr5ji"]
+[gd_scene load_steps=8 format=3 uid="uid://rwyyjixmr5ji"]
 
+[ext_resource type="Texture2D" uid="uid://d2u6wrtkxbvf5" path="res://assets/ref.png" id="1_g3eks"]
+[ext_resource type="VideoStream" uid="uid://bfq8oqdwyd414" path="res://assets/MenuVideo.ogv" id="1_v86rl"]
 [ext_resource type="Texture2D" uid="uid://cksjw77eor4q2" path="res://assets/Placeholder Assets/main menu/temp_main_menu.png" id="1_yqeox"]
 [ext_resource type="Script" uid="uid://dakny6oidgd6u" path="res://scripts/menu/start.gd" id="2_con2f"]
 [ext_resource type="Script" uid="uid://b1ohipdk8a86v" path="res://scripts/menu/exit.gd" id="2_vjb58"]
 [ext_resource type="Script" uid="uid://dwpbidhmljj47" path="res://scripts/menu/settings.gd" id="3_mhnvy"]
+[ext_resource type="Texture2D" uid="uid://bv3yu5pp71fpd" path="res://assets/drafting_background.png" id="5_v86rl"]
 
 [node name="Menu" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="DraftingBackground" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-940, 328.99902)
+scale = Vector2(4.645339, 3.6804879)
+texture = ExtResource("5_v86rl")
+
+[node name="MenuBackgroundVideo" type="VideoStreamPlayer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_v86rl")
+volume_db = -80.0
+autoplay = true
+loop = true
+
+[node name="Start" type="Button" parent="MenuBackgroundVideo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.52000004
+anchor_right = 0.5
+anchor_bottom = 0.52000004
+offset_left = -66.0
+offset_top = -30.600037
+offset_right = 69.0
+offset_bottom = 31.399963
+flat = true
+script = ExtResource("2_con2f")
+
+[node name="Settings" type="Button" parent="MenuBackgroundVideo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.66400003
+anchor_right = 0.5
+anchor_bottom = 0.66400003
+offset_left = -115.0
+offset_top = -40.120056
+offset_right = 119.0
+offset_bottom = 40.879944
+flat = true
+script = ExtResource("3_mhnvy")
+
+[node name="Exit" type="Button" parent="MenuBackgroundVideo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.497
+anchor_top = 0.80600005
+anchor_right = 0.497
+anchor_bottom = 0.80600005
+offset_left = -76.23999
+offset_top = -29.480042
+offset_right = 75.76001
+offset_bottom = 30.519958
+flat = true
+script = ExtResource("2_vjb58")
+
+[node name="VideoRefPic" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_g3eks")
+
+[node name="Original" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.6, 1.6)
 texture = ExtResource("1_yqeox")
 
-[node name="Start" type="Button" parent="."]
+[node name="Start" type="Button" parent="Original"]
 offset_left = -45.0
 offset_top = -68.0
 offset_right = 45.0
@@ -18,7 +92,7 @@ offset_bottom = -13.0
 flat = true
 script = ExtResource("2_con2f")
 
-[node name="Settings" type="Button" parent="."]
+[node name="Settings" type="Button" parent="Original"]
 offset_left = -69.0
 offset_top = 11.0
 offset_right = 69.0
@@ -26,7 +100,7 @@ offset_bottom = 59.0
 flat = true
 script = ExtResource("3_mhnvy")
 
-[node name="Exit" type="Button" parent="."]
+[node name="Exit" type="Button" parent="Original"]
 offset_left = -48.0
 offset_top = 73.0
 offset_right = 41.0

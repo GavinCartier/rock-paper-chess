@@ -21,6 +21,9 @@ var max_health : float
 
 var location : Vector2i
 
+var is_dead : bool = false
+var has_moved : bool # Whether this piece has moved or not (used for castling)
+
 # convert to string for searching file path
 const CLASS_NAMES := {
 	PT.Classes.PAWN:"Pawn",
@@ -58,6 +61,8 @@ func _ready():
 	
 	board.reset_piece_selection.connect(_on_reset_piece_selection)
 	health_bar.hide()
+	
+	has_moved = false
 
 
 func set_texture():
@@ -67,7 +72,7 @@ func set_texture():
 	var player_name = OWNER_NAMES.get(piece_owner)
 	
 	# Get the texture assets
-	var sprite_filepath = "res://assets/Placeholder Assets/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
+	var sprite_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
 	sprite.texture = load(sprite_filepath)
 
 # Set the stats for this piece based on its type
@@ -88,8 +93,11 @@ func set_board_reference(cb : ChessBoard):
 
 
 func get_legal_moves(current_position : Vector2i) -> Array:
+	if is_dead:
+		return []
+		
 	var possible_moves = PieceTypes.get_possible_moves(piece_class, piece_owner, location, board)
-	var legal_moves : Array
+	var legal_moves : Array = []
 	for move in possible_moves:
 		var potential_move = move + current_position
 		
@@ -103,17 +111,45 @@ func get_legal_moves(current_position : Vector2i) -> Array:
 	
 	return legal_moves
 
+
+func can_attack_king(current_position : Vector2i) -> bool:
+	if is_dead:
+		return false
+		
+	var legal_moves := get_legal_moves(current_position)
+	
+	for move in legal_moves:
+		var piece_at_space = board.grid[move.x][move.y]
+		
+		if (piece_at_space != null):
+			if (piece_at_space.piece_owner != piece_owner and piece_at_space.piece_class == PieceTypes.Classes.KING):
+				return true
+	
+	return false
+
+
 func _on_mouse_entered():
+	if is_dead or board.is_game_over:
+		return
+	
+	self.scale = Vector2(1.0, 1.0)
+		
 	health_bar.show()
 	board.on_piece_hovered(self)
 
 
 func _on_mouse_exited():
+	if is_dead:
+		return
+		
 	health_bar.hide()
 	if not board.selected_piece:
 		_on_reset_piece_selection()
 
 func _on_area_input(_viewport, event, _shape_idx):
+	if is_dead:
+		return
+		
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if board != null:
 			board.on_piece_clicked(self)
@@ -131,6 +167,9 @@ func _on_reset_piece_selection() -> void:
 
 # Show all piece options (health bars and targets)
 func show_piece_options() -> void:
+	if is_dead:
+		return
+		
 	health_bar.select_show = true
 	health_bar.show()
 	show_glows()
@@ -178,6 +217,9 @@ func delete() -> void:
 
 # Show the glowing tiles indicating moves, as well as the damage indicators for piece targets
 func show_glows() -> void:
+	if is_dead:
+		return
+		
 	var legal_moves = get_legal_moves(location)
 		
 	for move in legal_moves:
@@ -209,13 +251,6 @@ func show_glows() -> void:
 		glow.scale = Vector2(0.5, 0.5)
 		
 		glow.position = board_to_world(move)
-		
-		# I know I'm using the location.y to adjust position.x and vice versa
-		# But it works, no clue why lmao
-		# I think it's because the tilemap (x,y) is opposite to world pos
-		# which means tilemap is actually (y,x) to the world axis
-		#glow.position.x -= 256 * location.y + 128
-		#glow.position.y -= 256 * location.x + 128
 		
 		glow_sprites.append(glow)
 
