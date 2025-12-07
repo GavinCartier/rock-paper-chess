@@ -74,54 +74,57 @@ func play():
 	await say(cowboy, "(sigh)")
 	await say(cowboy, "Chess ain't got no suspense! No drama! Where's the fun?")
 	await say(aristocrat, "Hah! Surely you jest; Chess is positively full of suspense.")
-	await say(cowboy, "Guess we're at an impasse then. I ain't playin' your game and you ain't playin' mine.")
+	await say(cowboy, "Guess we're at an impasse. I ain't playin' your game and you ain't playin' mine.")
 	await say(aristocrat, "A compromise, then! Let us combine our favorite games into one.")
-	await say(cowboy, "How would that work, then?")
-
+	await say(cowboy, "Huh, how would that work?")
 
 	show_screenshot(screenshot.get_node("Drafting 1"))
 	await say(aristocrat, "We'll start by taking turns setting each kind of chess piece to either Rock, Paper, or Scissors.")
 	await say(cowboy, "Won't the person goin' second be at a disadvantage, then?")
 	await say(aristocrat, "We'll do it like we're drafting teammates!")
 	hide_screenshot(screenshot.get_node("Drafting 1"))
+	
 	show_screenshot(screenshot.get_node("Drafting 2"))
 	await say(aristocrat, "First, I'll only make one selection.")
 	hide_screenshot(screenshot.get_node("Drafting 2"))
+	
 	show_screenshot(screenshot.get_node("Drafting 3"))
 	await say(aristocrat, "Then, you'll make two.")
 	hide_screenshot(screenshot.get_node("Drafting 3"))
-	show_screenshot(screenshot.get_node("Drafting 4"))
-	await say(aristocrat, "Then we'll both make two selections at a time until every piece has a type.")
-	hide_screenshot(screenshot.get_node("Drafting 4"))
-	await say(cowboy, "I see, so we'll both have to respond to the other's choices. Then what happens?")
 	
+	show_screenshot(screenshot.get_node("Drafting 4"))
+	await say(aristocrat, "We'll both make two selections at a time until every piece has a type.")
+	hide_screenshot(screenshot.get_node("Drafting 4"))
+	
+	await say(cowboy, "I see, so we'll both have to respond to the other's choices. Then what happens?")
 	
 	show_screenshot(screenshot.get_node("Board 1"))
 	await say(aristocrat, "Then we go to the chess board and begin the game!")
 	await say(aristocrat, "We'll completely change how capturing pieces works.")
 	hide_screenshot(screenshot.get_node("Board 1"))
+	
 	show_screenshot(screenshot.get_node("Board 2"))
 	await say(aristocrat, "Each piece will have Health and Damage stats in addition to their type.")
 	await say(aristocrat, "For example, Pawns will have relatively low values, and the Queen will have pretty high values.")
 	hide_screenshot(screenshot.get_node("Board 2"))
-	show_screenshot(screenshot.get_node("Board 6"))
+	
+	show_screenshot(screenshot.get_node("Challenge 1"))
 	await say(aristocrat, "Instead of immediately capturing, pieces will Challenge each other!")
 	await say(aristocrat, "In a Challenge, the attacking piece will deal damage based on its stats and type.")
-	hide_screenshot(screenshot.get_node("Board 6"))
-	show_screenshot(screenshot.get_node("Board 3"))
-	await say(aristocrat, "Challenging with type advantage, like a Rock piece attacking a Scissors piece, will deal double damage.")
-	hide_screenshot(screenshot.get_node("Board 3"))
-	show_screenshot(screenshot.get_node("Board 4"))
-	await say(aristocrat, "Conversely, challenging with type disadvantage will only deal half as much damage as normal.")
-	await say(aristocrat, "If your challenge brings the other piece's health to zero, move to it's spot!")
-	await say(aristocrat, "Otherwise, both pieces remain where they are.")
-	hide_screenshot(screenshot.get_node("Board 4"))
+	hide_screenshot(screenshot.get_node("Challenge 1"))
+	
+	show_screenshot(screenshot.get_node("Challenge 2"))
+	await say(aristocrat, "Challenging with type disadvantage, like a Scissors piece attacking a Rock piece, will only do half as much damage as normal.")
+	await say(aristocrat, "Conversely, challenging with type advantage will deal twice as much damage!")
+	hide_screenshot(screenshot.get_node("Challenge 2"))
+	
 	await say(cowboy, "Okay... so how will Checks and Checkmates work then?")
-	show_screenshot(screenshot.get_node("Board 5"))
+	
+	show_screenshot(screenshot.get_node("Challenge 3"))
 	await say(aristocrat, "I guess we won't have those! These new rules mean you can have the King be attacked but survive.")
 	await say(aristocrat, "So instead, the game will end when you simply defeat the King like any other piece.")
+	hide_screenshot(screenshot.get_node("Challenge 3"))
 	
-	hide_screenshot(screenshot.get_node("Board 5"))
 	await say(cowboy, "Okay, I think I get it.")
 	await say(cowboy, "Let's get drafting then!")
 	fade_transisiton.show()
@@ -136,9 +139,14 @@ func play():
 func say(speaker: Node2D, line: String):
 	var appearance_time = 0.25
 	
+	var non_speaker : Node2D
 	current_speaker = speaker
+	if (current_speaker == aristocrat):
+		non_speaker = cowboy
+	else:
+		non_speaker = aristocrat
 	
-	speaking_animation(speaker)
+	speaking_animation(speaker, non_speaker)
 	
 	text_box.visible = true
 	await get_tree().create_timer(appearance_time).timeout
@@ -173,22 +181,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		clicked.emit()
 
 
-func speaking_animation(speaker: Node2D):
-	var neutral = speaker.get_node("Neutral")
-	var speaking = speaker.get_node("Speaking")
+func speaking_animation(speaker: Node2D, non_speaker: Node2D):
+	var neutral_s = speaker.get_node("Neutral")
+	var speaking_s = speaker.get_node("Speaking")
 	
-	var animation_speed = 0.25
+	var neutral_ns = non_speaker.get_node("Neutral")
+	var speaking_ns = non_speaker.get_node("Speaking")
 	
-	while (current_speaker == speaker):
-		neutral.visible = false
-		speaking.visible = true
-		
-		await get_tree().create_timer(animation_speed).timeout
-		
-		neutral.visible = true
-		speaking.visible = false
-		
-		await get_tree().create_timer(animation_speed).timeout
+	neutral_ns.visible = true
+	speaking_ns.visible = false
+	
+	neutral_s.visible = false
+	speaking_s.visible = true
+	speaking_s.play()
 
 
 func dim_character(nonspeaker : Node2D):
@@ -207,11 +212,10 @@ func _on_button_pressed() -> void:
 	is_over = true
 
 
-func show_screenshot(ss: Sprite2D):
+func show_screenshot(ss: Node2D):
 	ss.modulate.a = 0.0
 	ss.visible = true
 	get_tree().create_tween().tween_property(ss, "modulate:a", 1.0, 0.3)
 
-
-func hide_screenshot(ss: Sprite2D):
+func hide_screenshot(ss: Node2D):
 	get_tree().create_tween().tween_property(ss, "modulate:a", 0.0, 0.3) 

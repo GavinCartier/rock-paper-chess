@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dr2ky34tyoq5u"]
+[gd_scene load_steps=22 format=3 uid="uid://dr2ky34tyoq5u"]
 
 [ext_resource type="Script" uid="uid://bbkiuxy4vm7ce" path="res://scripts/cutscene.gd" id="1_d18fx"]
 [ext_resource type="Texture2D" uid="uid://deagehunexyxi" path="res://assets/story/story_background.png" id="1_edmg7"]
@@ -15,14 +15,37 @@
 [ext_resource type="Texture2D" uid="uid://bgchc8143ovyh" path="res://assets/story/gameplay screenshots/drafting 4.png" id="10_8qop0"]
 [ext_resource type="Texture2D" uid="uid://iq05x2aty04d" path="res://assets/story/gameplay screenshots/board 1.png" id="11_8qop0"]
 [ext_resource type="Texture2D" uid="uid://b8dm5iyt32o1e" path="res://assets/story/gameplay screenshots/board 2.png" id="12_mu2gi"]
-[ext_resource type="Texture2D" uid="uid://bo8mma0vkjtuh" path="res://assets/story/gameplay screenshots/board 5.png" id="13_mu2gi"]
-[ext_resource type="Texture2D" uid="uid://cvdirca54m3is" path="res://assets/story/gameplay screenshots/board 6.png" id="14_c7dhu"]
+[ext_resource type="VideoStream" uid="uid://p41npxduoeh5" path="res://assets/story/gameplay screenshots/challenge 3.ogv" id="13_mu2gi"]
+[ext_resource type="VideoStream" uid="uid://c1ccrlbawlw0o" path="res://assets/story/gameplay screenshots/challenge 1.ogv" id="13_qthij"]
+[ext_resource type="VideoStream" uid="uid://cqcljaduljtrl" path="res://assets/story/gameplay screenshots/challenge 2.ogv" id="14_c7dhu"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c7dhu"]
-load_path = "res://.godot/imported/board 3.png-b468ed3520ebb1714e6f8a9af0a38bc4.ctex"
+[sub_resource type="SpriteFrames" id="SpriteFrames_c7dhu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a320b")
+}, {
+"duration": 1.5,
+"texture": ExtResource("3_fs8wb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qthij"]
-load_path = "res://.godot/imported/board 4.png-25de601058ec4b549a5ece2f7df228c7.ctex"
+[sub_resource type="SpriteFrames" id="SpriteFrames_qthij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bb0yx")
+}, {
+"duration": 1.5,
+"texture": ExtResource("5_3ptll")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="LabelSettings" id="LabelSettings_75brc"]
 font = ExtResource("7_3ptll")
@@ -37,30 +60,32 @@ scale = Vector2(0.8135593, 0.6585366)
 texture = ExtResource("1_edmg7")
 
 [node name="Aristocrat" type="Node2D" parent="."]
-position = Vector2(-600, 0)
+position = Vector2(-650, 0)
 scale = Vector2(0.7, 0.7)
 
 [node name="Neutral" type="Sprite2D" parent="Aristocrat"]
 texture = ExtResource("2_a320b")
 
-[node name="Speaking" type="Sprite2D" parent="Aristocrat"]
+[node name="Speaking" type="AnimatedSprite2D" parent="Aristocrat"]
 visible = false
-texture = ExtResource("3_fs8wb")
+sprite_frames = SubResource("SpriteFrames_c7dhu")
+frame_progress = 0.36067158
 
 [node name="Cowboy" type="Node2D" parent="."]
-position = Vector2(600, 0)
+position = Vector2(550, 0)
 scale = Vector2(0.7, 0.7)
 
 [node name="Neutral" type="Sprite2D" parent="Cowboy"]
 texture = ExtResource("4_bb0yx")
 
-[node name="Speaking" type="Sprite2D" parent="Cowboy"]
+[node name="Speaking" type="AnimatedSprite2D" parent="Cowboy"]
 visible = false
-texture = ExtResource("5_3ptll")
+sprite_frames = SubResource("SpriteFrames_qthij")
+frame_progress = 0.977033
 
 [node name="Screenshots" type="Node2D" parent="."]
-position = Vector2(0, -200)
-scale = Vector2(0.3, 0.3)
+position = Vector2(-43.72, -184.31)
+scale = Vector2(0.33, 0.33)
 
 [node name="Drafting 1" type="Sprite2D" parent="Screenshots"]
 visible = false
@@ -88,25 +113,44 @@ texture = ExtResource("11_8qop0")
 visible = false
 texture = ExtResource("12_mu2gi")
 
-[node name="Board 3" type="Sprite2D" parent="Screenshots"]
+[node name="Challenge 1" type="Node2D" parent="Screenshots"]
 visible = false
-scale = Vector2(0.99999994, 0.99999994)
-texture = SubResource("CompressedTexture2D_c7dhu")
+position = Vector2(-1280.81, -719.77)
+scale = Vector2(2, 2)
 
-[node name="Board 4" type="Sprite2D" parent="Screenshots"]
-visible = false
-scale = Vector2(0.99999976, 0.99999976)
-texture = SubResource("CompressedTexture2D_qthij")
+[node name="Video" type="VideoStreamPlayer" parent="Screenshots/Challenge 1"]
+offset_top = 3.0517578e-05
+offset_right = 1280.0
+offset_bottom = 720.0
+stream = ExtResource("13_qthij")
+autoplay = true
+loop = true
 
-[node name="Board 5" type="Sprite2D" parent="Screenshots"]
+[node name="Challenge 2" type="Node2D" parent="Screenshots"]
 visible = false
-scale = Vector2(0.99999964, 0.99999964)
-texture = ExtResource("13_mu2gi")
+position = Vector2(-1280.81, -719.77)
+scale = Vector2(2, 2)
 
-[node name="Board 6" type="Sprite2D" parent="Screenshots"]
+[node name="Video" type="VideoStreamPlayer" parent="Screenshots/Challenge 2"]
+offset_top = 3.0517578e-05
+offset_right = 1280.0
+offset_bottom = 720.0
+stream = ExtResource("14_c7dhu")
+autoplay = true
+loop = true
+
+[node name="Challenge 3" type="Node2D" parent="Screenshots"]
 visible = false
-scale = Vector2(0.9999992, 0.9999992)
-texture = ExtResource("14_c7dhu")
+position = Vector2(-1280.81, -719.77)
+scale = Vector2(2, 2)
+
+[node name="Video" type="VideoStreamPlayer" parent="Screenshots/Challenge 3"]
+offset_top = 3.0517578e-05
+offset_right = 1280.0
+offset_bottom = 720.0
+stream = ExtResource("13_mu2gi")
+autoplay = true
+loop = true
 
 [node name="Text" type="Node2D" parent="."]
 position = Vector2(0, 300)

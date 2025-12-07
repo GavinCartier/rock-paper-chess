@@ -208,17 +208,6 @@ func on_piece_clicked(piece: Piece) -> void:
 	stats.text = str(PieceTypes.Classes.keys()[piece.piece_class]).capitalize() + \
 	" stats:\nHealth: " + str(piece.health) + "\nDamage: " + str(piece.damage) \
 	+ "\nType: " + str(PT.Types.keys()[piece.piece_type]).capitalize()
-	
-	for x in range(grid.size()):
-		for y in range(grid[x].size()):
-			var piece_at_space = grid[x][y]
-			
-			if (piece_at_space != null and piece_at_space.piece_owner != current_player.color):
-				piece_at_space.health_bar.select_show = true
-				piece_at_space.health_bar.show()
-				
-				hypothetical_damage = DamageEngine.damage_dealt(piece, piece_at_space)
-				piece_at_space.health_bar.show_damage_received(hypothetical_damage / piece_at_space.max_health)
 
 
 func _input(event: InputEvent) -> void:
@@ -278,6 +267,16 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 	var move_speed : float = 7.5
 	var move_time : float = move_distance / move_speed
 	
+	
+	
+	# if the target pos has opponent's piece
+	if target_piece != null:
+		if target_piece.piece_owner != piece.piece_owner:
+			var attack_time = move_time / 1.5
+			animated_movement(piece, board_to_world(target), attack_time)
+			await get_tree().create_timer(attack_time).timeout
+			$Camera2D.shake(3, 0.5)
+			
 	animated_movement(piece, board_to_world(target), move_time)
 	total_turns += 1
 	# if the target pos has opponent's piece
@@ -294,10 +293,27 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 				if target_piece.piece_class == PieceTypes.Classes.KING:
 					_victory_screen()
 			else:
-				animated_movement(piece, board_to_world(piece.location), move_time)
+				# The piece did not successfully kill the target
+				# If the piece is a bishop, rook, or queen, move it adjacent to the target piece
+				var new_pos : Vector2i = piece.location
+				
+				if piece.piece_class == PieceTypes.Classes.BISHOP or piece.piece_class == PieceTypes.Classes.ROOK or piece.piece_class == PieceTypes.Classes.QUEEN:
+					var x_dir : int = clamp(start.x - target.x, -1, 1)
+					var y_dir : int = clamp(start.y - target.y, -1, 1)
+					
+					new_pos = Vector2i(target.x + x_dir, target.y + y_dir)
+					piece.location = new_pos
+					piece.has_moved = true
+					
+					grid[start.x][start.y] = null
+					grid[new_pos.x][new_pos.y] = piece
+					
+				animated_movement(piece, board_to_world(new_pos), move_time)
 				swap_turn()
 				check_for_check()
 				return
+	else:
+		animated_movement(piece, board_to_world(target), move_time)
 	
 	# update grid status
 	# start point -> no piece on it etc.
@@ -368,6 +384,9 @@ func swap_turn() -> void:
 		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 1.0, 0.1)
 		
 		current_player = white_player
+	
+	# For further selection bug prevention
+	emit_signal("reset_piece_selection")
 
 # This function checks to see whether the King can be attacked
 func check_for_check() -> bool:
@@ -430,7 +449,10 @@ func send_to_side(piece: Node2D):
 			new_position = black_graveyard.position + Vector2(width * -(3.5/8.0), height * 0.25)
 			new_position.x += (1.0/8.0) * width * (white_player.num_of_lost_pieces - 8)
 		
-		
+	# Hide the player's health bar
+	piece.health_bar.select_show = false
+	piece.health_bar.hide_damage_received()
+	piece.health_bar.hide()
 	
 	tween.tween_property(piece, "position", new_position, time)
 	
