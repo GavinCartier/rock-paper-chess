@@ -42,18 +42,26 @@ func _ready() -> void:
 					white_player, white_player,
 					black_player, black_player,
 					white_player, white_player,
-					black_player, black_player,
-					white_player ]
+					black_player]#, black_player,
+					#white_player ]
+	
 	
 	# Make all the drop-down menus for each piece
-	var b_pawn := make_button("Pawn", Vector2(cam.position.x - 1400, cam.position.y))
-	var b_rook := make_button("Rook", Vector2(cam.position.x - 900, cam.position.y))
-	var b_knight := make_button("Knight", Vector2(cam.position.x - 400, cam.position.y))
-	var b_bishop := make_button("Bishop", Vector2(cam.position.x + 100, cam.position.y))
-	var b_queen := make_button("Queen", Vector2(cam.position.x + 600, cam.position.y))
+	#var b_pawn := make_button("Pawn", Vector2(cam.position.x - 1400, cam.position.y))
+	#var b_rook := make_button("Rook", Vector2(cam.position.x - 900, cam.position.y))
+	#var b_knight := make_button("Knight", Vector2(cam.position.x - 400, cam.position.y))
+	#var b_bishop := make_button("Bishop", Vector2(cam.position.x + 100, cam.position.y))
+	#var b_queen := make_button("Queen", Vector2(cam.position.x + 600, cam.position.y))
+	#var b_king := make_button("King", Vector2(cam.position.x + 1100, cam.position.y))
+	
+	var b_rook := make_button("Rook", Vector2(cam.position.x - 1400, cam.position.y))
+	var b_knight := make_button("Knight", Vector2(cam.position.x - 775, cam.position.y))
+	var b_bishop := make_button("Bishop", Vector2(cam.position.x - 150, cam.position.y))
+	var b_queen := make_button("Queen", Vector2(cam.position.x  + 475, cam.position.y))
 	var b_king := make_button("King", Vector2(cam.position.x + 1100, cam.position.y))
 	
-	buttons = [b_pawn, b_rook, b_knight, b_bishop, b_queen, b_king]
+	#buttons = [b_pawn, b_rook, b_knight, b_bishop, b_queen, b_king]
+	buttons = [b_rook, b_knight, b_bishop, b_queen, b_king]
 	
 	wiggle_animation(white_turn)
 	white_turn_pos = white_turn.position
@@ -175,13 +183,13 @@ func draft_controller() -> void:
 		var ptype = selections[0][2]
 		
 		if pressed_set_all:
-			white_player.set_piece_type("Pawn", ptype)
+			#white_player.set_piece_type("Pawn", ptype)
 			white_player.set_piece_type("Rook", ptype)
 			white_player.set_piece_type("Bishop", ptype)
 			white_player.set_piece_type("Knight", ptype)
 			white_player.set_piece_type("Queen", ptype)
 			white_player.set_piece_type("King", ptype)
-			black_player.set_piece_type("Pawn", ptype)
+			#black_player.set_piece_type("Pawn", ptype)
 			black_player.set_piece_type("Rook", ptype)
 			black_player.set_piece_type("Bishop", ptype)
 			black_player.set_piece_type("Knight", ptype)

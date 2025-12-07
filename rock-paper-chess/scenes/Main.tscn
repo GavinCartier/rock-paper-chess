@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://nuan8ukxj5ny"]
+[gd_scene load_steps=25 format=3 uid="uid://nuan8ukxj5ny"]
 
 [ext_resource type="PackedScene" uid="uid://cq0e7rspvwt20" path="res://scenes/ChessBoard.tscn" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://rwyyjixmr5ji" path="res://scenes/menu.tscn" id="1_rvslj"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://3or6srru2k6r" path="res://assets/sound effects/Tabletop Jazz Cafe.wav" id="18_ma7h6"]
 [ext_resource type="AudioStream" uid="uid://cs8pb7ood05s0" path="res://assets/sound effects/loud-fanfare-trumpet-effect-01-412045.mp3" id="20_yxlcp"]
 [ext_resource type="AudioStream" uid="uid://ckj3ckfjem4yf" path="res://assets/sound effects/dialogue.mp3" id="21_yxlcp"]
+[ext_resource type="Texture2D" uid="uid://d3m1erbbrxxfk" path="res://assets/demo banner.png" id="24_2ofn6"]
 
 [node name="Main" type="Node2D"]
 
@@ -128,3 +129,6 @@ bus = &"sfx"
 stream = ExtResource("18_ma7h6")
 autoplay = true
 bus = &"bgm"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("24_2ofn6")

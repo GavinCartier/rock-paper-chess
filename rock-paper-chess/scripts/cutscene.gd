@@ -57,76 +57,82 @@ func play():
 	tween_aristocrat.tween_property(aristocrat, "position", aristocrat_position, 0.5)
 	await tween_aristocrat.finished
 	
-	await say(aristocrat, "Ahhh! It's so good to have a break at last.")
+	#await say(aristocrat, "Ahhh! It's so good to have a break at last.")
+	await say(aristocrat, "Welcome to our game: Rock, Paper, Chess!")
 	
 	var tween_cowboy = get_tree().create_tween()
 	tween_cowboy.tween_property(cowboy, "position", cowboy_position, 1)
 	tween_cowboy.tween_property(cowboy, "scale:x", cowboy.scale.x * -1.0, 0.25)
 	await tween_cowboy.finished
 	
-	await say(cowboy, "It sure is, partner.")
-	await say(cowboy, "Whaddya say we play a good ol' round of Rock, Paper, Scissors?")
-	await say(aristocrat, "I say, what is it with you and that silly little game?")
-	await say(aristocrat, "For the life of me, I simply cannot understand why you are so rarely inclined to play a real game.")
-	await say(cowboy, "Oh yeah? And what would a 'real game' be? Chess?")
-	await say(cowboy, "Hell, I reckon you even brought your chess set again.")
-	await say(aristocrat, "But of course! I could never be caught without it.")
-	await say(cowboy, "(sigh)")
-	await say(cowboy, "Chess ain't got no suspense! No drama! Where's the fun?")
-	await say(aristocrat, "Hah! Surely you jest; Chess is positively full of suspense.")
-	await say(cowboy, "Guess we're at an impasse. I ain't playin' your game and you ain't playin' mine.")
-	await say(aristocrat, "A compromise, then! Let us combine our favorite games into one.")
-	await say(cowboy, "Huh, how would that work?")
-
-	show_screenshot(screenshot.get_node("Drafting 1"))
-	await say(aristocrat, "We'll start by taking turns setting each kind of chess piece to either Rock, Paper, or Scissors.")
-	await say(cowboy, "Won't the person goin' second be at a disadvantage, then?")
-	await say(aristocrat, "We'll do it like we're drafting teammates!")
-	hide_screenshot(screenshot.get_node("Drafting 1"))
+	await say(cowboy, "This is a demo build of the game.")
+	await say(cowboy, "Normally this cutscene would explain everything...")
+	await say(aristocrat, "...But we had to shorten it for the sake of time.")
+	await say(aristocrat, "Don't worry, our devs will explain everything instead!")
 	
-	show_screenshot(screenshot.get_node("Drafting 2"))
-	await say(aristocrat, "First, I'll only make one selection.")
-	hide_screenshot(screenshot.get_node("Drafting 2"))
-	
-	show_screenshot(screenshot.get_node("Drafting 3"))
-	await say(aristocrat, "Then, you'll make two.")
-	hide_screenshot(screenshot.get_node("Drafting 3"))
-	
-	show_screenshot(screenshot.get_node("Drafting 4"))
-	await say(aristocrat, "We'll both make two selections at a time until every piece has a type.")
-	hide_screenshot(screenshot.get_node("Drafting 4"))
-	
-	await say(cowboy, "I see, so we'll both have to respond to the other's choices. Then what happens?")
-	
-	show_screenshot(screenshot.get_node("Board 1"))
-	await say(aristocrat, "Then we go to the chess board and begin the game!")
-	await say(aristocrat, "We'll completely change how capturing pieces works.")
-	hide_screenshot(screenshot.get_node("Board 1"))
-	
-	show_screenshot(screenshot.get_node("Board 2"))
-	await say(aristocrat, "Each piece will have Health and Damage stats in addition to their type.")
-	await say(aristocrat, "For example, Pawns will have relatively low values, and the Queen will have pretty high values.")
-	hide_screenshot(screenshot.get_node("Board 2"))
-	
-	show_screenshot(screenshot.get_node("Challenge 1"))
-	await say(aristocrat, "Instead of immediately capturing, pieces will Challenge each other!")
-	await say(aristocrat, "In a Challenge, the attacking piece will deal damage based on its stats and type.")
-	hide_screenshot(screenshot.get_node("Challenge 1"))
-	
-	show_screenshot(screenshot.get_node("Challenge 2"))
-	await say(aristocrat, "Challenging with type disadvantage, like a Scissors piece attacking a Rock piece, will only do half as much damage as normal.")
-	await say(aristocrat, "Conversely, challenging with type advantage will deal twice as much damage!")
-	hide_screenshot(screenshot.get_node("Challenge 2"))
-	
-	await say(cowboy, "Okay... so how will Checks and Checkmates work then?")
-	
-	show_screenshot(screenshot.get_node("Challenge 3"))
-	await say(aristocrat, "I guess we won't have those! These new rules mean you can have the King be attacked but survive.")
-	await say(aristocrat, "So instead, the game will end when you simply defeat the King like any other piece.")
-	hide_screenshot(screenshot.get_node("Challenge 3"))
-	
-	await say(cowboy, "Okay, I think I get it.")
-	await say(cowboy, "Let's get drafting then!")
+	#await say(cowboy, "It sure is, partner.")
+	#await say(cowboy, "Whaddya say we play a good ol' round of Rock, Paper, Scissors?")
+	#await say(aristocrat, "I say, what is it with you and that silly little game?")
+	#await say(aristocrat, "For the life of me, I simply cannot understand why you are so rarely inclined to play a real game.")
+	#await say(cowboy, "Oh yeah? And what would a 'real game' be? Chess?")
+	#await say(cowboy, "Hell, I reckon you even brought your chess set again.")
+	#await say(aristocrat, "But of course! I could never be caught without it.")
+	#await say(cowboy, "(sigh)")
+	#await say(cowboy, "Chess ain't got no suspense! No drama! Where's the fun?")
+	#await say(aristocrat, "Hah! Surely you jest; Chess is positively full of suspense.")
+	#await say(cowboy, "Guess we're at an impasse. I ain't playin' your game and you ain't playin' mine.")
+	#await say(aristocrat, "A compromise, then! Let us combine our favorite games into one.")
+	#await say(cowboy, "Huh, how would that work?")
+#
+	#show_screenshot(screenshot.get_node("Drafting 1"))
+	#await say(aristocrat, "We'll start by taking turns setting each kind of chess piece to either Rock, Paper, or Scissors.")
+	#await say(cowboy, "Won't the person goin' second be at a disadvantage, then?")
+	#await say(aristocrat, "We'll do it like we're drafting teammates!")
+	#hide_screenshot(screenshot.get_node("Drafting 1"))
+	#
+	#show_screenshot(screenshot.get_node("Drafting 2"))
+	#await say(aristocrat, "First, I'll only make one selection.")
+	#hide_screenshot(screenshot.get_node("Drafting 2"))
+	#
+	#show_screenshot(screenshot.get_node("Drafting 3"))
+	#await say(aristocrat, "Then, you'll make two.")
+	#hide_screenshot(screenshot.get_node("Drafting 3"))
+	#
+	#show_screenshot(screenshot.get_node("Drafting 4"))
+	#await say(aristocrat, "We'll both make two selections at a time until every piece has a type.")
+	#hide_screenshot(screenshot.get_node("Drafting 4"))
+	#
+	#await say(cowboy, "I see, so we'll both have to respond to the other's choices. Then what happens?")
+	#
+	#show_screenshot(screenshot.get_node("Board 1"))
+	#await say(aristocrat, "Then we go to the chess board and begin the game!")
+	#await say(aristocrat, "We'll completely change how capturing pieces works.")
+	#hide_screenshot(screenshot.get_node("Board 1"))
+	#
+	#show_screenshot(screenshot.get_node("Board 2"))
+	#await say(aristocrat, "Each piece will have Health and Damage stats in addition to their type.")
+	#await say(aristocrat, "For example, Pawns will have relatively low values, and the Queen will have pretty high values.")
+	#hide_screenshot(screenshot.get_node("Board 2"))
+	#
+	#show_screenshot(screenshot.get_node("Challenge 1"))
+	#await say(aristocrat, "Instead of immediately capturing, pieces will Challenge each other!")
+	#await say(aristocrat, "In a Challenge, the attacking piece will deal damage based on its stats and type.")
+	#hide_screenshot(screenshot.get_node("Challenge 1"))
+	#
+	#show_screenshot(screenshot.get_node("Challenge 2"))
+	#await say(aristocrat, "Challenging with type disadvantage, like a Scissors piece attacking a Rock piece, will only do half as much damage as normal.")
+	#await say(aristocrat, "Conversely, challenging with type advantage will deal twice as much damage!")
+	#hide_screenshot(screenshot.get_node("Challenge 2"))
+	#
+	#await say(cowboy, "Okay... so how will Checks and Checkmates work then?")
+	#
+	#show_screenshot(screenshot.get_node("Challenge 3"))
+	#await say(aristocrat, "I guess we won't have those! These new rules mean you can have the King be attacked but survive.")
+	#await say(aristocrat, "So instead, the game will end when you simply defeat the King like any other piece.")
+	#hide_screenshot(screenshot.get_node("Challenge 3"))
+	#
+	#await say(cowboy, "Okay, I think I get it.")
+	#await say(cowboy, "Let's get drafting then!")
 	fade_transisiton.show()
 	fade_timer.start()
 	fade_animation.play("fade_in")
