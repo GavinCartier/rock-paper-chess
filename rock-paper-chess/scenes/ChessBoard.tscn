@@ -6,15 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://ch2x3bfqwf5o2" path="res://assets/chessboard/tiles.png" id="4_k803c"]
 [ext_resource type="Script" uid="uid://cgrsti1sjgxpm" path="res://scripts/chess_cam.gd" id="5_jn1x7"]
 [ext_resource type="Texture2D" uid="uid://t3gtqrtstrln" path="res://assets/UI Elements/Check.png" id="5_kmr1w"]
-[ext_resource type="Texture2D" uid="uid://bdkv6ptt81nn1" path="res://assets/UI Elements/Black Turn.png" id="6_73djx"]
-[ext_resource type="Texture2D" uid="uid://bfmkha3pmwu4t" path="res://assets/UI Elements/White Turn.png" id="7_73djx"]
+[ext_resource type="Texture2D" uid="uid://d3lwvlqsb3heq" path="res://assets/characters/blackturn.png" id="7_jn1x7"]
 [ext_resource type="Texture2D" uid="uid://632kc8wbt83i" path="res://assets/chessboard/board.png" id="8_bjwxv"]
+[ext_resource type="Texture2D" uid="uid://0b2sl8bvonn0" path="res://assets/characters/whiteturn.png" id="8_wtkyx"]
 [ext_resource type="Texture2D" uid="uid://cycsampjwtdlw" path="res://assets/UI Elements/Rules button.png" id="9_0nwsu"]
 [ext_resource type="Texture2D" uid="uid://dmrxev01nlmop" path="res://assets/story/text_box.jpg" id="11_0nwsu"]
-[ext_resource type="Texture2D" uid="uid://dm2jcfiwqlw1n" path="res://assets/UI Elements/Rules.png" id="11_yiklk"]
 [ext_resource type="FontFile" uid="uid://cf8vq1pgfv0j" path="res://assets/font/bodoni-72-oldstyle-book.ttf" id="12_4eble"]
 [ext_resource type="Texture2D" uid="uid://buepmq1hvt5bk" path="res://assets/tile glow/white glow.png" id="13_slaic"]
 [ext_resource type="Texture2D" uid="uid://cnbm0ts6u314m" path="res://assets/legend.PNG" id="13_yiklk"]
+[ext_resource type="Texture2D" uid="uid://c3bu255ykp24j" path="res://assets/UI Elements/Rules.png" id="15_jn1x7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_80two"]
 texture = ExtResource("4_k803c")
@@ -121,13 +121,14 @@ scale = Vector2(2.1682904, 2.3990753)
 texture = ExtResource("5_kmr1w")
 
 [node name="Black\'s Turn" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-1671, 650)
-texture = ExtResource("6_73djx")
+position = Vector2(-1830, 264)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("7_jn1x7")
 
 [node name="White\'s Turn" type="Sprite2D" parent="."]
-position = Vector2(-1673.25, 650)
-texture = ExtResource("7_73djx")
+position = Vector2(-1829.9999, 263.99994)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("8_wtkyx")
 
 [node name="White Graveyard" type="Sprite2D" parent="."]
 position = Vector2(1669.5, 861.5001)
@@ -138,12 +139,6 @@ texture = ExtResource("8_bjwxv")
 position = Vector2(1672.6251, -879.75)
 scale = Vector2(0.40466303, 0.27368167)
 texture = ExtResource("8_bjwxv")
-
-[node name="Rules" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-131, -41)
-scale = Vector2(1.4849008, 1.4849007)
-texture = ExtResource("11_yiklk")
 
 [node name="Rules Button" type="Button" parent="."]
 offset_left = 1505.0
@@ -174,7 +169,8 @@ scale = Vector2(1.3920455, 1.542068)
 texture = ExtResource("9_0nwsu")
 
 [node name="Legend" type="Node2D" parent="."]
-position = Vector2(-1688, -260.0001)
+visible = false
+position = Vector2(-1644, 835)
 scale = Vector2(0.33806676, 0.33806676)
 
 [node name="background" type="Sprite2D" parent="Legend"]
@@ -185,4 +181,13 @@ texture = ExtResource("13_slaic")
 scale = Vector2(2.9893684, 2.9893684)
 texture = ExtResource("13_yiklk")
 
+[node name="Rules" type="Sprite2D" parent="."]
+visible = false
+z_index = 4096
+position = Vector2(0, -40)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("15_jn1x7")
+
+[connection signal="mouse_entered" from="Rules Button" to="." method="_on_rules_button_mouse_entered"]
+[connection signal="mouse_exited" from="Rules Button" to="." method="_on_rules_button_mouse_exited"]
 [connection signal="pressed" from="Rules Button" to="." method="_on_rules_button_pressed"]

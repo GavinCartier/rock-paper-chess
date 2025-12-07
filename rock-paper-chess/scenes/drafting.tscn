@@ -5,11 +5,10 @@
 [ext_resource type="FontFile" uid="uid://cs0flu6qfy6ck" path="res://assets/font/Cochin Regular.otf" id="3_c1xgl"]
 [ext_resource type="Texture2D" uid="uid://kp2xfi4cfp8x" path="res://assets/font/Drafting.png" id="4_jk5do"]
 [ext_resource type="Texture2D" uid="uid://dmrxev01nlmop" path="res://assets/story/text_box.jpg" id="5_7sye8"]
+[ext_resource type="Texture2D" uid="uid://dh2s05rqq3myt" path="res://assets/UI Elements/drafting.png" id="5_uci4u"]
 [ext_resource type="Shader" uid="uid://cypjb1is7hve3" path="res://assets/grayscale.gdshader" id="6_pd1uy"]
-[ext_resource type="Texture2D" uid="uid://bdkv6ptt81nn1" path="res://assets/UI Elements/Black Turn.png" id="7_0d8wm"]
 [ext_resource type="Texture2D" uid="uid://cx0a4gumdsxxg" path="res://assets/new placeholder/Paper/White/Paper King White.PNG" id="7_uci4u"]
 [ext_resource type="Texture2D" uid="uid://dqd0knmhbajqq" path="res://assets/new placeholder/Paper/White/Paper Queen White.PNG" id="8_dh5ec"]
-[ext_resource type="Texture2D" uid="uid://bfmkha3pmwu4t" path="res://assets/UI Elements/White Turn.png" id="8_ln6q5"]
 [ext_resource type="Texture2D" uid="uid://75cnsvobkn1n" path="res://assets/new placeholder/Paper/White/Paper Bishop White.PNG" id="9_w6nbb"]
 [ext_resource type="Texture2D" uid="uid://btj8734an8te1" path="res://assets/new placeholder/Paper/White/Paper Knight White.PNG" id="10_0fxw5"]
 [ext_resource type="Texture2D" uid="uid://dct60demi5air" path="res://assets/new placeholder/Paper/White/Paper Rook White.PNG" id="11_k41hu"]
@@ -18,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://5g2elb7fysa5" path="res://assets/new placeholder/Rock/Black/Rock Bishop Black.PNG" id="15_6s6b1"]
 [ext_resource type="Texture2D" uid="uid://tokrtqaupnvs" path="res://assets/new placeholder/Rock/Black/Rock Knight Black.PNG" id="16_7g4uo"]
 [ext_resource type="Texture2D" uid="uid://dufxymplxc85h" path="res://assets/new placeholder/Rock/Black/Rock Rook Black.PNG" id="17_g88mm"]
+[ext_resource type="Texture2D" uid="uid://u1keou8f0rhk" path="res://assets/new placeholder/Rock/Black/Rock Pawn Black.PNG" id="18_uitf1"]
+[ext_resource type="Texture2D" uid="uid://c0e34eryba7q7" path="res://assets/Drafting/indicator.png" id="19_pd1uy"]
 [ext_resource type="Texture2D" uid="uid://cnbm0ts6u314m" path="res://assets/legend.PNG" id="21_uci4u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1a71g"]
@@ -57,11 +58,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Drafting" type="Sprite2D" parent="."]
-position = Vector2(128, -843)
+visible = false
+position = Vector2(128, -869)
 scale = Vector2(0.6148437, 0.55138886)
 texture = ExtResource("4_jk5do")
 
+[node name="TitleAndLine" type="Sprite2D" parent="."]
+position = Vector2(-3.2499657, -1006)
+scale = Vector2(0.9802967, 0.68658537)
+texture = ExtResource("5_uci4u")
+
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 position = Vector2(-21.865, -131.84)
 points = PackedVector2Array(-596, -746, -34.760254, -750.41925, 39, -751, 144.72461, -750.6505, 434.82275, -749.6914, 644, -749)
 default_color = Color(0, 0, 0, 1)
@@ -131,16 +139,16 @@ texture = ExtResource("17_g88mm")
 
 [node name="Black\'s Turn" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(2000, 0)
-scale = Vector2(1.75, 1.75)
-texture = ExtResource("7_0d8wm")
+position = Vector2(-1811, -501)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("19_pd1uy")
 
 [node name="White\'s Turn" type="Sprite2D" parent="."]
-position = Vector2(-2000, 0)
-scale = Vector2(1.75, 1.75)
-texture = ExtResource("8_ln6q5")
+position = Vector2(-1811.0001, 571.00006)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("19_pd1uy")
 
 [node name="Legend" type="Sprite2D" parent="."]
-position = Vector2(-1111.0001, -1171)
+position = Vector2(1934, -756)
 scale = Vector2(1.030303, 1.030303)
 texture = ExtResource("21_uci4u")

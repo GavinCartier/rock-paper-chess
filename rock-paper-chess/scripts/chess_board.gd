@@ -37,6 +37,8 @@ var selected_pos: Vector2i
 var hypothetical_damage : float = 0
 var is_game_over : bool
 var total_turns : int = 0
+var button_availability: bool = false
+var wiggle_tween: Tween
 
 const CLASS_NAMES := {
 	PT.Classes.PAWN:"Pawn",
@@ -80,8 +82,13 @@ func begin_chess_game():
 	_initialize_board()
 	_initialize_piece_position()
 	
+	# enable rule button for hovering
+	button_availability = true
+	
 	current_player = white_player
+	wiggle_animation(white_sprite)
 	white_sprite.visible = true
+	black_sprite.scale.x = 0.0
 	fade_transisiton.show()
 	fade_timer.start()
 	fade_animation.play("fade_out")
@@ -364,29 +371,31 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 # Swaps the turn
 func swap_turn() -> void:
 	if current_player == white_player:
-		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 0.0, 0.1)
-		
-		white_sprite.visible = false
-		black_sprite.visible = true
-		black_sprite.modulate.a = 0.0
-		
-		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 1.0, 0.1)
+		await get_tree().create_tween().tween_property(white_sprite, "scale:x", 0.0, 0.1).finished
+		wiggle_animation(black_sprite)
+		get_tree().create_tween().tween_property(black_sprite, "scale:x", 3.5, 0.1)
 		
 		current_player = black_player
 		
 	elif current_player == black_player:
-		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 0.0, 0.1)
-		
-		black_sprite.visible = false
-		white_sprite.visible = true
-		white_sprite.modulate.a = 0.0
-		
-		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 1.0, 0.1)
+		await get_tree().create_tween().tween_property(black_sprite, "scale:x", 0.0, 0.1).finished
+		wiggle_animation(white_sprite)
+		get_tree().create_tween().tween_property(white_sprite, "scale:x", 3.5, 0.1)
 		
 		current_player = white_player
 	
 	# For further selection bug prevention
 	emit_signal("reset_piece_selection")
+
+
+func wiggle_animation(indicator):
+	if wiggle_tween and wiggle_tween.is_valid():
+		wiggle_tween.kill()
+	wiggle_tween = get_tree().create_tween()
+	wiggle_tween.set_loops()  
+	wiggle_tween.tween_property(indicator, "position:y", indicator.position.y + 7, 0.5)
+	wiggle_tween.tween_property(indicator, "position:y", indicator.position.y - 7, 0.5)
+
 
 # This function checks to see whether the King can be attacked
 func check_for_check() -> bool:
@@ -460,19 +469,35 @@ func send_to_side(piece: Node2D):
 	
 	return tween
 
-
-func _on_rules_button_pressed() -> void:
+func _on_rules_button_mouse_entered() -> void:
+	if button_availability == false:
+		return
+	rules_sprite.visible = true
 	var tween = get_tree().create_tween()
-	var parent = rules_sprite.get_parent()
-	if rules_sprite.visible:
-		tween.tween_property(rules_sprite, "modulate:a", 0.0, 0.25)
-		await tween.finished
-		rules_sprite.visible = false
-	else:
-		rules_sprite.visible = true
-		parent.remove_child(rules_sprite)
-		parent.add_child(rules_sprite)
-		get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
+	rules_sprite.modulate.a = 0.0
+	tween.tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
+		
+	
+func _on_rules_button_mouse_exited() -> void:
+	if button_availability == false:
+		return
+	var tween = get_tree().create_tween()
+	tween.tween_property(rules_sprite, "modulate:a", 0.0, 0.25)
+	await tween.finished
+	rules_sprite.visible = false
+	
+#func _on_rules_button_pressed() -> void:
+	#var tween = get_tree().create_tween()
+	#var parent = rules_sprite.get_parent()
+	#if rules_sprite.visible:
+		#tween.tween_property(rules_sprite, "modulate:a", 0.0, 0.25)
+		#await tween.finished
+		#rules_sprite.visible = false
+	#else:
+		#rules_sprite.visible = true
+		#parent.remove_child(rules_sprite)
+		#parent.add_child(rules_sprite)
+		#get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
 
 
 func _victory_screen():
@@ -482,6 +507,7 @@ func _victory_screen():
 	fade_animation.play("fade_in")
 	await fade_timer.timeout
 	is_game_over = true
+	button_availability = false
 	emit_signal("victory", white_player.total_damage_dealt, black_player.total_damage_dealt, \
 	white_player.num_of_lost_pieces, black_player.num_of_lost_pieces, total_turns)
 	if current_player == black_player:

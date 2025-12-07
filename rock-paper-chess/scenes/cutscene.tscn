@@ -1,8 +1,8 @@
 [gd_scene load_steps=22 format=3 uid="uid://dr2ky34tyoq5u"]
 
 [ext_resource type="Script" uid="uid://bbkiuxy4vm7ce" path="res://scripts/cutscene.gd" id="1_d18fx"]
-[ext_resource type="Texture2D" uid="uid://deagehunexyxi" path="res://assets/story/story_background.png" id="1_edmg7"]
 [ext_resource type="Texture2D" uid="uid://o7wyyfbamf57" path="res://assets/characters/aristocrat_neutral_shadow.png" id="2_a320b"]
+[ext_resource type="Texture2D" uid="uid://bfkjmwq2debp5" path="res://assets/story/background_f.png" id="2_qthij"]
 [ext_resource type="Texture2D" uid="uid://cplx2bpqkm3mw" path="res://assets/characters/aristocrat_speaking_shadow.png" id="3_fs8wb"]
 [ext_resource type="Texture2D" uid="uid://kqirnvw11d00" path="res://assets/characters/cowboy_neutral_shadow.png" id="4_bb0yx"]
 [ext_resource type="Texture2D" uid="uid://dutwmpmoghpq1" path="res://assets/characters/cowboy_speaking_shadow.png" id="5_3ptll"]
@@ -55,9 +55,9 @@ font_size = 346
 script = ExtResource("1_d18fx")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(-4.7683716e-07, 1.4551915e-11)
-scale = Vector2(0.8135593, 0.6585366)
-texture = ExtResource("1_edmg7")
+position = Vector2(-57.999996, -141.5)
+scale = Vector2(0.9025423, 0.8481707)
+texture = ExtResource("2_qthij")
 
 [node name="Aristocrat" type="Node2D" parent="."]
 position = Vector2(-650, 0)
@@ -119,6 +119,7 @@ position = Vector2(-1280.81, -719.77)
 scale = Vector2(2, 2)
 
 [node name="Video" type="VideoStreamPlayer" parent="Screenshots/Challenge 1"]
+visible = false
 offset_top = 3.0517578e-05
 offset_right = 1280.0
 offset_bottom = 720.0
@@ -157,12 +158,12 @@ position = Vector2(0, 300)
 scale = Vector2(0.8, 0.8)
 
 [node name="Box" type="Sprite2D" parent="Text"]
-self_modulate = Color(1, 1, 1, 0.78431374)
+self_modulate = Color(1, 1, 1, 0.9764706)
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("6_bb0yx")
 
 [node name="Sprite2D" type="Sprite2D" parent="Text/Box"]
-self_modulate = Color(1, 1, 1, 0.5882353)
+self_modulate = Color(1, 1, 1, 0.7294118)
 position = Vector2(-707.50006, -118.75004)
 scale = Vector2(0.17578126, 0.042724628)
 texture = ExtResource("8_75brc")
