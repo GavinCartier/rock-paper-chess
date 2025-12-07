@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3bu255ykp24j"
-path="res://.godot/imported/rules.png-95a2c130123649d09cc171146e83f2fd.ctex"
+uid="uid://dh2s05rqq3myt"
+path="res://.godot/imported/drafting.png-ce13c9dee3dc7d3fa812fa52b2438242.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI Elements/rules.png"
-dest_files=["res://.godot/imported/rules.png-95a2c130123649d09cc171146e83f2fd.ctex"]
+source_file="res://assets/UI Elements/drafting.png"
+dest_files=["res://.godot/imported/drafting.png-ce13c9dee3dc7d3fa812fa52b2438242.ctex"]
 
 [params]
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://0k71bkt73jdv"]
+[gd_scene load_steps=26 format=3 uid="uid://0k71bkt73jdv"]
 
 [ext_resource type="Script" uid="uid://cmyr62k4q30af" path="res://scripts/drafting.gd" id="1_xd4v5"]
 [ext_resource type="Texture2D" uid="uid://bv3yu5pp71fpd" path="res://assets/drafting_background.png" id="2_xd4v5"]
 [ext_resource type="FontFile" uid="uid://cs0flu6qfy6ck" path="res://assets/font/Cochin Regular.otf" id="3_c1xgl"]
 [ext_resource type="Texture2D" uid="uid://kp2xfi4cfp8x" path="res://assets/font/Drafting.png" id="4_jk5do"]
 [ext_resource type="Texture2D" uid="uid://dmrxev01nlmop" path="res://assets/story/text_box.jpg" id="5_7sye8"]
+[ext_resource type="Texture2D" uid="uid://dh2s05rqq3myt" path="res://assets/UI Elements/drafting.png" id="5_uci4u"]
 [ext_resource type="Shader" uid="uid://cypjb1is7hve3" path="res://assets/grayscale.gdshader" id="6_pd1uy"]
 [ext_resource type="Texture2D" uid="uid://cx0a4gumdsxxg" path="res://assets/new placeholder/Paper/White/Paper King White.PNG" id="7_uci4u"]
 [ext_resource type="Texture2D" uid="uid://dqd0knmhbajqq" path="res://assets/new placeholder/Paper/White/Paper Queen White.PNG" id="8_dh5ec"]
@@ -58,11 +59,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Drafting" type="Sprite2D" parent="."]
-position = Vector2(128, -843)
+visible = false
+position = Vector2(128, -869)
 scale = Vector2(0.6148437, 0.55138886)
 texture = ExtResource("4_jk5do")
 
+[node name="TitleAndLine" type="Sprite2D" parent="."]
+position = Vector2(-3.2499657, -1006)
+scale = Vector2(0.9802967, 0.68658537)
+texture = ExtResource("5_uci4u")
+
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 position = Vector2(-21.865, -131.84)
 points = PackedVector2Array(-596, -746, -34.760254, -750.41925, 39, -751, 144.72461, -750.6505, 434.82275, -749.6914, 644, -749)
 default_color = Color(0, 0, 0, 1)
