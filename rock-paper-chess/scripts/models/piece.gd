@@ -131,6 +131,8 @@ func can_attack_king(current_position : Vector2i) -> bool:
 func _on_mouse_entered():
 	if is_dead or board.is_game_over:
 		return
+	
+	self.scale = Vector2(1.0, 1.0)
 		
 	health_bar.show()
 	board.on_piece_hovered(self)

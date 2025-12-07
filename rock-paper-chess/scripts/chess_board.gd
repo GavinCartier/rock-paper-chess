@@ -293,7 +293,22 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 				if target_piece.piece_class == PieceTypes.Classes.KING:
 					_victory_screen()
 			else:
-				animated_movement(piece, board_to_world(piece.location), move_time)
+				# The piece did not successfully kill the target
+				# If the piece is a bishop, rook, or queen, move it adjacent to the target piece
+				var new_pos : Vector2i = piece.location
+				
+				if piece.piece_class == PieceTypes.Classes.BISHOP or piece.piece_class == PieceTypes.Classes.ROOK or piece.piece_class == PieceTypes.Classes.QUEEN:
+					var x_dir : int = clamp(start.x - target.x, -1, 1)
+					var y_dir : int = clamp(start.y - target.y, -1, 1)
+					
+					new_pos = Vector2i(target.x + x_dir, target.y + y_dir)
+					piece.location = new_pos
+					piece.has_moved = true
+					
+					grid[start.x][start.y] = null
+					grid[new_pos.x][new_pos.y] = piece
+					
+				animated_movement(piece, board_to_world(new_pos), move_time)
 				swap_turn()
 				check_for_check()
 				return
@@ -369,6 +384,9 @@ func swap_turn() -> void:
 		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 1.0, 0.1)
 		
 		current_player = white_player
+	
+	# For further selection bug prevention
+	emit_signal("reset_piece_selection")
 
 # This function checks to see whether the King can be attacked
 func check_for_check() -> bool:
