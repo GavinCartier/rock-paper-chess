@@ -25,7 +25,6 @@ func play(sfx_name: String) -> void:
 		player.stop()
 		player.play()
 
-		# If an offset exists for this sfx, apply it
 		if offsets.has(sfx_name):
 			var offset: float = offsets[sfx_name]
 			if offset > 0.0:
