@@ -202,7 +202,7 @@ func draft_controller() -> void:
 		var sprite = get_node(player_name + " Pieces/" + pname)
 		
 		# First get the correct asset
-		var sprite_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".png"
+		var sprite_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " " + pname + " " + player_name + ".PNG"
 		sprite.texture = load(sprite_filepath)
 		sprite.material = null
 		
