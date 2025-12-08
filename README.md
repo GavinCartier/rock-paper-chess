@@ -2,7 +2,7 @@
 
 ## Summary ##
 
-**Two player chess game with a health and damage combat system that includes a type-based “Rock, Paper, Scissors” twist thrown in. The goal of the game is to defeat the king rather than checkmate it. **
+Two player chess game with a health and damage combat system that includes a type-based “Rock, Paper, Scissors” twist thrown in. The goal of the game is to defeat the king rather than checkmate it.
 
 ## Project Resources
 
