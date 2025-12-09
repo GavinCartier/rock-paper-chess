@@ -30,10 +30,10 @@ func get_selection():
 	
 	# Display correct selection options
 	# Get the filepaths
-	var knight_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " Knight " + player_name + ".png"
-	var bishop_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " Bishop " + player_name + ".png"
-	var rook_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " Rook " + player_name + ".png"
-	var queen_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " Queen " + player_name + ".png"
+	var knight_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " Knight " + player_name + ".PNG"
+	var bishop_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " Bishop " + player_name + ".PNG"
+	var rook_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " Rook " + player_name + ".PNG"
+	var queen_filepath = "res://assets/new placeholder/" + ptype + "/" + player_name + "/" + ptype + " Queen " + player_name + ".PNG"
 	
 	# Set the sprites
 	knight_sprite.texture = load(knight_filepath)

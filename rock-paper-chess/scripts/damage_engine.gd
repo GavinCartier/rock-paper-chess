@@ -34,8 +34,8 @@ static var type_multipliers := {
 }
 
 # Sound effect function for favored matchup
-func _play_matchup_sfx(attacker: Piece, defender: Piece, multiplier: float) -> void:
-	if multiplier == ATTACK:
+func _play_matchup_sfx(attacker: Piece, multiplier: float) -> void:
+	if multiplier == ATTACK or multiplier == WEAK_ATTACK:
 		Sfx.play("drum")
 		return
 		
@@ -45,18 +45,9 @@ func _play_matchup_sfx(attacker: Piece, defender: Piece, multiplier: float) -> v
 		else:
 			Sfx.play("whip")
 		return
-		
-	# weak attack → defender favored
-	#if multiplier == WEAK_ATTACK:
-		#if defender.piece_owner == PieceTypes.Owner.WHITE:
-		#	Sfx.play("bell")
-		#else:
-		#	Sfx.play("whip")
-		#return
-		#Sfx.play("")
 
 	# safety fallback 
-	Sfx.play("drum")
+	#Sfx.play("drum")
 
 
 # Main function for handling a challenge
@@ -74,6 +65,6 @@ func damage_dealt(attacker: Piece, defender: Piece, play_sfx := false) -> float:
 	var attack_damage = attacker.damage * multiplier
 	
 	if play_sfx:
-		_play_matchup_sfx(attacker, defender, multiplier)
+		_play_matchup_sfx(attacker, multiplier)
 		
 	return min(defender.health, attack_damage)
