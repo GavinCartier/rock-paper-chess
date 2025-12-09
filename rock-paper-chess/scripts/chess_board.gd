@@ -27,7 +27,6 @@ const PawnGraduation : PackedScene = preload("res://scenes/pawn_graduation.tscn"
 @onready var black_winner : Sprite2D = get_tree().root.get_node("Main/BlackWinner")
 
 @onready var fade_transisiton = get_node("../FadeTransition")
-@onready var fade_animation = get_node("../FadeTransition/AnimationPlayer")
 @onready var fade_timer = get_node("../FadeTransition/FadeTimer")
 
 var grid: Array = []
@@ -89,11 +88,8 @@ func begin_chess_game():
 	wiggle_animation(white_sprite)
 	white_sprite.visible = true
 	black_sprite.scale.x = 0.0
-	fade_transisiton.show()
-	fade_timer.start()
-	fade_animation.play("fade_out")
+	fade_transisiton.fade_out()
 	await fade_timer.timeout
-	fade_transisiton.hide()
 	
 	rules_sprite.modulate.a = 0.0
 	
@@ -502,9 +498,7 @@ func _on_rules_button_mouse_exited() -> void:
 
 func _victory_screen():
 	Sfx.pause_bgm()
-	fade_transisiton.show()
-	fade_timer.start()
-	fade_animation.play("fade_in")
+	fade_transisiton.fade_in()
 	await fade_timer.timeout
 	is_game_over = true
 	button_availability = false
@@ -512,13 +506,9 @@ func _victory_screen():
 	white_player.num_of_lost_pieces, black_player.num_of_lost_pieces, total_turns)
 	if current_player == black_player:
 		white_winner.visible = true
-		fade_animation.play("fade_out")
-		await fade_timer.timeout
-		fade_transisiton.hide()
+		fade_transisiton.fade_out()
 		Sfx.play("victory")
 	else:
 		black_winner.visible = true
-		fade_animation.play("fade_out")
-		await fade_timer.timeout
-		fade_transisiton.hide()
+		fade_transisiton.fade_out()
 		Sfx.play("victory")
