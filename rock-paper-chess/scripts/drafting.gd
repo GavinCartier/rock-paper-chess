@@ -13,7 +13,6 @@ var pressed_set_all := false
 @onready var message : Label = $"Instruction Text"
 @onready var cam : Camera2D = get_parent().get_node("Camera2D")
 @onready var fade_transisiton = get_node("../FadeTransition")
-@onready var fade_animation = get_node("../FadeTransition/AnimationPlayer")
 @onready var fade_timer = get_node("../FadeTransition/FadeTimer")
 
 @onready var white_turn : Sprite2D = get_node("White's Turn")
@@ -209,11 +208,8 @@ func draft_controller() -> void:
 		# go to chessboard after all drafting finished
 		if i == len(turn_order) - 1:
 			message.text = "Ready for game."
-			fade_transisiton.show()
-			fade_timer.start()
-			fade_animation.play("fade_in")
+			fade_transisiton.fade_in()
 			await fade_timer.timeout
-			fade_transisiton.hide()
 			emit_signal("finish_drafting")
 			if wiggle_tween and wiggle_tween.is_valid():
 				wiggle_tween.kill()
