@@ -2,7 +2,7 @@
 
 ## Summary ##
 
-Two player chess game with a health and damage combat system that includes a type-based “Rock, Paper, Scissors” twist thrown in. The goal of the game is to defeat the king rather than checkmate it.
+Chess combined with Rock, Paper, Scissors. Players start by taking turns assigning each piece to a type of Rock, Paper, or Scissors. Instead of directly capturing enemy pieces like in normal Chess, we have a ‘challenge’ system in which each type of piece has its own base stats of Damage and Health. When you challenge an enemy piece, you deal damage to its health value, which is determined by your base damage stat and the type matchup between the two pieces.
 
 ## Project Resources
 
