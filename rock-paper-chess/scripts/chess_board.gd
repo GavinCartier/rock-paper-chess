@@ -345,6 +345,7 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		
 		var rook_location = Vector2i(target.x, int(target.y / 2.0))
 		animated_movement(rook, board_to_world(rook_location), move_time)
+		rook.location = rook_location
 		rook.has_moved = true
 	
 	# Check if the moved piece is a pawn that can graduate
