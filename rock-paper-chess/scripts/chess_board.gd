@@ -313,7 +313,6 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 					
 				animated_movement(piece, board_to_world(new_pos), move_time)
 				swap_turn()
-				check_for_check()
 				return
 	else:
 		animated_movement(piece, board_to_world(target), move_time)
@@ -357,12 +356,13 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		
 		# swap whose turn it is
 	
-	if (check_for_check()):
-		get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.1)
-	
 	swap_turn()
 	
-	check_for_check()
+	if (check_for_check()):
+		get_tree().create_tween().tween_property(check, "modulate:a", 1.0, 0.1)
+	else:
+		get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.1)
+	
 
 # Swaps the turn
 func swap_turn() -> void:
@@ -399,14 +399,14 @@ func check_for_check() -> bool:
 		for y in range(grid[x].size()):
 			var piece_at_space = grid[x][y]
 			
-			if (piece_at_space != null and piece_at_space.piece_owner != current_player.color):
+			if (piece_at_space != null and piece_at_space.piece_owner == current_player.color):
 				if (piece_at_space.can_attack_king(piece_at_space.location)):
 					check.visible = true
-					get_tree().create_tween().tween_property(check, "modulate:a", 1.0, 0.2)
+					#get_tree().create_tween().tween_property(check, "modulate:a", 1.0, 0.2)
 					return true
 					
-	get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.2)
-	check.visible = false
+	#get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.2)
+	#check.visible = false
 	return false
 
 
