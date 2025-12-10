@@ -7,6 +7,7 @@ Two player chess game with a health and damage combat system that includes a typ
 ## Project Resources
 
 [Web-playable version of your game.](https://reillydunnucdavis.itch.io/rock-paper-chess)
+
 [Proposal](https://docs.google.com/document/d/1R2_ADIK6n0Gfldgpfdc70Q1aaqAm14DkJqM3c9yRP9o/edit?usp=sharing)  
 
 ## Gameplay Explanation ##
