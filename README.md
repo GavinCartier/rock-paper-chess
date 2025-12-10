@@ -132,6 +132,7 @@ Miscellaneous contributions to the game (outside of my role):
 - Made the scene and script for FadeTransition
 - Updated the font of the drafting UI (for the drop down and the base buttons themselves) to match the rest of the game
 - Made the following assets:
+
 ![replay_button](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/replay_button.png?raw=true) ![exit](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/exit_button.png?raw=true)
 ![Settings](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/Settings.png?raw=true) 
 ![white_winner](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/White_winner.png?raw=true) 
