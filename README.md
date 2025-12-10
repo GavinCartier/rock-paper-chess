@@ -1,5 +1,7 @@
 # Rock, Paper, Chess! #
 
+![Main Menu](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/main%20menu.png?raw=true)
+
 ## Summary ##
 
 Chess combined with Rock, Paper, Scissors. Players start by taking turns assigning each piece to a type of Rock, Paper, or Scissors. Instead of directly capturing enemy pieces like in normal Chess, we have a ‘challenge’ system in which each type of piece has its own base stats of Damage and Health. When you challenge an enemy piece, you deal damage to its health value, which is determined by your base damage stat and the type matchup between the two pieces.
@@ -14,14 +16,16 @@ Chess combined with Rock, Paper, Scissors. Players start by taking turns assigni
 
 Everything in the game is done with left click.
 
+![Drafting](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/drafting%20in%20game.png?raw=true)
+
 The game begins with the Drafting Phase, in which players take turns assigning types to each class of chess piece. White starts by making only 1 selection, then Black makes two, then White makes 2, and so on until every piece has been assigned a type.
 This means that in each round of drafting, you will be making a decision and responding to the other player's decision. You'll have a chance to give one of your pieces the advantage over one of the other player's, but you'll also be opening yourself up to letting your opponent pick an advantageous type against you.
 You want to consider which of your pieces you want to have an advantage over which enemy piece. For example, if your opponent selects Rock Pawns, you may want to select Paper Pawns to give yourself an advantage in the early game. 
 Another thing to consider is the order in which you assign pieces. If you start by assigning a type to your King or Queen, your enemy can use that information and set more of their pieces to counter your most important pieces. So you probably want to start by assigning types to your weaker pieces like your Pawns or Bishops.
 
-After Drafting is complete, you'll move into the main board game. There are a variety of possible strategies. You can try using your pieces to take control of the center of the board and limit your opponent's options. Or you can be aggressive and send a piece with many type advantages deep into enemy territory.
+![Board game](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/board%20game.png?raw=true)
 
-**Add it here if you did work that should be factored into your grade but does not fit easily into the proscribed roles! Please include links to resources and descriptions of game-related material that does not fit into roles here.**
+After Drafting is complete, you'll move into the main board game. You can try to apply traditional Chess strategies, such as trying to take control of the center of the board. Or you can explore the new strategies that are possible with the type advantage system. If you have a piece with many type advantages, you can be aggressive and send it deep into enemy territory. You can also make use of the way Checks don't force you to resolve them; maybe it's okay to let your King take some damage if you know it will survive? The King has low health, but high damage, so you can risk letting an enemy piece get close in order to defeat it with the King.
 
 # External Code, Ideas, and Structure #
 
