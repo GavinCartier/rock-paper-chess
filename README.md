@@ -124,7 +124,7 @@ Contributions:
 - Victory screen handling, made 2 victory screen scenes
 	- This includes: the addition of the stats on the victory screen, a restart button, and its assets (complete list below the role contributions)
 - Implementation of the main menu and basic settings, including the volume slider.
-- Handled the logic for the statistics displayed text for both victory screen and pieces on hover on the chessboard
+- Handled the logic for the statistics displayed text for both victory screens and the pieces when they were hovered on the chessboard
 
 Miscellaneous contributions to the game (outside of my role):
 - handled simple transition animations in between each scene using another scene called FadeTransition 
