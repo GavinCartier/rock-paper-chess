@@ -12,8 +12,6 @@ Chess combined with Rock, Paper, Scissors. Players start by taking turns assigni
 
 ## Gameplay Explanation ##
 
-**In this section, explain how the game should be played. Treat this as a manual within a game. Explaining the button mappings and the most optimal gameplay strategy is encouraged.**
-
 Everything in the game is done with left click.
 
 The game begins with the Drafting Phase, in which players take turns assigning types to each class of chess piece. White starts by making only 1 selection, then Black makes two, then White makes 2, and so on until every piece has been assigned a type.
@@ -26,10 +24,6 @@ After Drafting is complete, you'll move into the main board game. There are a va
 **Add it here if you did work that should be factored into your grade but does not fit easily into the proscribed roles! Please include links to resources and descriptions of game-related material that does not fit into roles here.**
 
 # External Code, Ideas, and Structure #
-
-If your project contains code that: 1) your team did not write, and 2) does not fit cleanly into a role, please document it in this section. Please include the author of the code, where to find the code, and note which scripts, folders, or other files that comprise the external contribution. Additionally, include the license for the external code that permits you to use it. You do not need to include the license for code provided by the instruction team.
-
-If you used tutorials or other intellectual guidance to create aspects of your project, include reference to that information as well.
 
 ### Grayscale filter
 
@@ -59,6 +53,7 @@ Subrole: Game Feel
 I was our group’s Technical Artist and Game Feel person. This meant I was responsible for implementing the assets into the game in a way that is visually satisfying and makes it clear what’s going on in the game. I found that there was a lot of overlap between the Technical Artist and Game Feel roles, so it makes sense to describe my contributions in a single section.
 In my capacity in these roles, my contributions include:
 - Implemented logic for hovering over a chess piece
+- ![Hovering Over Pieces](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/tile%20glows.png?raw=true)
   - Highlights the spaces the piece can move to
     - Wrote logic that takes the set of spaces each piece type could move to and returns the subset of those that are legal moves (except for the Castling system)
     - On each legal space, show a highlight to indicate to the player they can move there
@@ -67,6 +62,7 @@ In my capacity in these roles, my contributions include:
 - Add an on-screen warning for when the current player’s king can be attacked by one of the other player’s pieces
   - This involved creating the warning asset, and writing logic to detect when this condition is true
 - Animated how the pieces move around the board scene
+- ![Piece Movement](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/challenge%20gif.gif?raw=true)
   - When moving to an empty space:
     - The piece glides over to its new position. As it does so it grows larger until halfway through the movement, then shrinks back to the original size. This creates the feeling of the piece being physically lifted up and set down onto the new spot
   - In a challenge:
@@ -77,6 +73,7 @@ In my capacity in these roles, my contributions include:
     - Wrote logic to determine where in the graveyard the sprite should land depending on how many pieces are in the graveyard already
   - If the defending piece survives, the attacking piece moves away
 - Created everything that drives the cutscene
+- ![Cutscene in Editor](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/cutscene%20editor.png?raw=true)
   - Moving the characters around the screen
   - Text boxes that update with the character’s name and line of dialog
   - Animating the mouth of the character speaking so it looks like they’re talking
@@ -84,6 +81,7 @@ In my capacity in these roles, my contributions include:
   - Show and hide visualizations of the gameplay concepts being discussed in the cutscene
   - Skip cutscene button
 - Improvements to drafting phase’s UI to help with clarity of what’s going on
+- ![Drafting in Editor](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/drafting%20editor.png?raw=true)
   - Add piece sprites to UI
     - Pieces that have not yet been assigned a type have a custom shader applied that makes the sprites grayscale and transparent
     - When a piece is assigned a type that shader is removed to make it clear what selections have been made
