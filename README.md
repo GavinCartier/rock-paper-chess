@@ -45,6 +45,13 @@ Camera shake logic created by following this tutorial (with some minor custom ch
 
 [“Quality Screen Shake in Godot 4.4 | Game Juice” by Mostly Mad Productions on YouTube](https://youtu.be/pG4KGyxQp40)
 
+### Volume Slider
+
+scripts/menu/volume.gd
+
+The code used for the volume slider was taken from here, with minor changes to the code.
+
+["Creating volume sliders in Godot 4" by The Shaggy Dev](https://www.youtube.com/watch?v=aFkRmtGiZCw)
 
 # Team Member Contributions
 
@@ -102,3 +109,30 @@ Contributions outside of my main and sub roles:
 - Created a demo build for the 12/8 presentation (to fit in the 5 minute time limit)
   - The build has a much shorter cutscene, no pawns, and a banner sprite indicating that it’s the demo build
 
+## Lucia Zeng ##
+
+Main role: UI and Input
+
+Subrole: Accessibility and Usability
+
+As a note: the way I fulfilled my subrole, accessibility and usability, was taken into consideration (and integrated) during the creation of the UI and assets, so I will not split them as seperate contributions.
+
+Contributions:
+- Implementation of the main menu and basic settings, with functioning buttons to start, open settings, and exiting the game
+- Wrote the script and made the entire scene to open and close the settings.
+- The addition of the of the stats of each piece on the side of the chessboard (when clicked, and was the player's own piece)
+- Victory screen handling, made 2 victory screen scenes
+	- This includes: the addition of the stats on the victory screen, a restart button, and its assets (complete list below the role contributions)
+- Implementation of the main menu and basic settings, including the volume slider.
+- Handled the logic for the statistics displayed text for both victory screen and pieces on hover on the chessboard
+
+Miscellaneous contributions to the game (outside of my role):
+- handled simple transition animations in between each scene using another scene called FadeTransition 
+	- created the script, the scene, and the animation for both fading in and out of an offwhite color
+- Made the scene and script for FadeTransition
+- Updated the font of the drafting UI (for the drop down and the base buttons themselves) to match the rest of the game
+- Made the following assets:
+![replay_button](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/replay_button.png?raw=true) ![exit](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/exit_button.png?raw=true)
+![Settings](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/Settings.png?raw=true) 
+![white_winner](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/White_winner.png?raw=true) 
+![black_winner](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/Black_winner.png?raw=true)
