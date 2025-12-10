@@ -27,7 +27,6 @@ const PawnGraduation : PackedScene = preload("res://scenes/pawn_graduation.tscn"
 @onready var black_winner : Sprite2D = get_tree().root.get_node("Main/BlackWinner")
 
 @onready var fade_transisiton = get_node("../FadeTransition")
-@onready var fade_animation = get_node("../FadeTransition/AnimationPlayer")
 @onready var fade_timer = get_node("../FadeTransition/FadeTimer")
 
 var grid: Array = []
@@ -37,6 +36,8 @@ var selected_pos: Vector2i
 var hypothetical_damage : float = 0
 var is_game_over : bool
 var total_turns : int = 0
+var button_availability: bool = false
+var wiggle_tween: Tween
 
 const CLASS_NAMES := {
 	PT.Classes.PAWN:"Pawn",
@@ -80,13 +81,15 @@ func begin_chess_game():
 	_initialize_board()
 	_initialize_piece_position()
 	
+	# enable rule button for hovering
+	button_availability = true
+	
 	current_player = white_player
+	wiggle_animation(white_sprite)
 	white_sprite.visible = true
-	fade_transisiton.show()
-	fade_timer.start()
-	fade_animation.play("fade_out")
+	black_sprite.scale.x = 0.0
+	fade_transisiton.fade_out()
 	await fade_timer.timeout
-	fade_transisiton.hide()
 	
 	rules_sprite.modulate.a = 0.0
 	
@@ -310,7 +313,6 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 					
 				animated_movement(piece, board_to_world(new_pos), move_time)
 				swap_turn()
-				check_for_check()
 				return
 	else:
 		animated_movement(piece, board_to_world(target), move_time)
@@ -343,6 +345,7 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		
 		var rook_location = Vector2i(target.x, int(target.y / 2.0))
 		animated_movement(rook, board_to_world(rook_location), move_time)
+		rook.location = rook_location
 		rook.has_moved = true
 		rook.location = rook_location
 	
@@ -355,39 +358,42 @@ func _move_piece(start: Vector2i, target: Vector2i) -> void:
 		
 		# swap whose turn it is
 	
-	if (check_for_check()):
-		get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.1)
-	
 	swap_turn()
 	
-	check_for_check()
+	if (check_for_check()):
+		get_tree().create_tween().tween_property(check, "modulate:a", 1.0, 0.1)
+	else:
+		get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.1)
+	
 
 # Swaps the turn
 func swap_turn() -> void:
 	if current_player == white_player:
-		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 0.0, 0.1)
-		
-		white_sprite.visible = false
-		black_sprite.visible = true
-		black_sprite.modulate.a = 0.0
-		
-		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 1.0, 0.1)
+		await get_tree().create_tween().tween_property(white_sprite, "scale:x", 0.0, 0.1).finished
+		wiggle_animation(black_sprite)
+		get_tree().create_tween().tween_property(black_sprite, "scale:x", 3.5, 0.1)
 		
 		current_player = black_player
 		
 	elif current_player == black_player:
-		get_tree().create_tween().tween_property(black_sprite, "modulate:a", 0.0, 0.1)
-		
-		black_sprite.visible = false
-		white_sprite.visible = true
-		white_sprite.modulate.a = 0.0
-		
-		get_tree().create_tween().tween_property(white_sprite, "modulate:a", 1.0, 0.1)
+		await get_tree().create_tween().tween_property(black_sprite, "scale:x", 0.0, 0.1).finished
+		wiggle_animation(white_sprite)
+		get_tree().create_tween().tween_property(white_sprite, "scale:x", 3.5, 0.1)
 		
 		current_player = white_player
 	
 	# For further selection bug prevention
 	emit_signal("reset_piece_selection")
+
+
+func wiggle_animation(indicator):
+	if wiggle_tween and wiggle_tween.is_valid():
+		wiggle_tween.kill()
+	wiggle_tween = get_tree().create_tween()
+	wiggle_tween.set_loops()  
+	wiggle_tween.tween_property(indicator, "position:y", indicator.position.y + 7, 0.5)
+	wiggle_tween.tween_property(indicator, "position:y", indicator.position.y - 7, 0.5)
+
 
 # This function checks to see whether the King can be attacked
 func check_for_check() -> bool:
@@ -395,14 +401,14 @@ func check_for_check() -> bool:
 		for y in range(grid[x].size()):
 			var piece_at_space = grid[x][y]
 			
-			if (piece_at_space != null and piece_at_space.piece_owner != current_player.color):
+			if (piece_at_space != null and piece_at_space.piece_owner == current_player.color):
 				if (piece_at_space.can_attack_king(piece_at_space.location)):
 					check.visible = true
-					get_tree().create_tween().tween_property(check, "modulate:a", 1.0, 0.2)
+					#get_tree().create_tween().tween_property(check, "modulate:a", 1.0, 0.2)
 					return true
 					
-	get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.2)
-	check.visible = false
+	#get_tree().create_tween().tween_property(check, "modulate:a", 0.0, 0.2)
+	#check.visible = false
 	return false
 
 
@@ -461,39 +467,50 @@ func send_to_side(piece: Node2D):
 	
 	return tween
 
-
-func _on_rules_button_pressed() -> void:
+func _on_rules_button_mouse_entered() -> void:
+	if button_availability == false:
+		return
+	rules_sprite.visible = true
 	var tween = get_tree().create_tween()
-	var parent = rules_sprite.get_parent()
-	if rules_sprite.visible:
-		tween.tween_property(rules_sprite, "modulate:a", 0.0, 0.25)
-		await tween.finished
-		rules_sprite.visible = false
-	else:
-		rules_sprite.visible = true
-		parent.remove_child(rules_sprite)
-		parent.add_child(rules_sprite)
-		get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
+	rules_sprite.modulate.a = 0.0
+	tween.tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
+		
+	
+func _on_rules_button_mouse_exited() -> void:
+	if button_availability == false:
+		return
+	var tween = get_tree().create_tween()
+	tween.tween_property(rules_sprite, "modulate:a", 0.0, 0.25)
+	await tween.finished
+	rules_sprite.visible = false
+	
+#func _on_rules_button_pressed() -> void:
+	#var tween = get_tree().create_tween()
+	#var parent = rules_sprite.get_parent()
+	#if rules_sprite.visible:
+		#tween.tween_property(rules_sprite, "modulate:a", 0.0, 0.25)
+		#await tween.finished
+		#rules_sprite.visible = false
+	#else:
+		#rules_sprite.visible = true
+		#parent.remove_child(rules_sprite)
+		#parent.add_child(rules_sprite)
+		#get_tree().create_tween().tween_property(rules_sprite, "modulate:a", 1.0, 0.25)
 
 
 func _victory_screen():
 	Sfx.pause_bgm()
-	fade_transisiton.show()
-	fade_timer.start()
-	fade_animation.play("fade_in")
+	fade_transisiton.fade_in()
 	await fade_timer.timeout
 	is_game_over = true
+	button_availability = false
 	emit_signal("victory", white_player.total_damage_dealt, black_player.total_damage_dealt, \
 	white_player.num_of_lost_pieces, black_player.num_of_lost_pieces, total_turns)
 	if current_player == black_player:
 		white_winner.visible = true
-		fade_animation.play("fade_out")
-		await fade_timer.timeout
-		fade_transisiton.hide()
+		fade_transisiton.fade_out()
 		Sfx.play("victory")
 	else:
 		black_winner.visible = true
-		fade_animation.play("fade_out")
-		await fade_timer.timeout
-		fade_transisiton.hide()
+		fade_transisiton.fade_out()
 		Sfx.play("victory")

@@ -7,7 +7,6 @@ extends Button
 @onready var cutscene = get_node("../../../Cutscene")
 @onready var cam : Camera2D = get_node("../../../Camera2D")
 @onready var fade_transisiton = get_node("../../../FadeTransition")
-@onready var fade_animation = get_node("../../../FadeTransition/AnimationPlayer")
 @onready var fade_timer = get_node("../../../FadeTransition/FadeTimer")
 
 func _ready():
@@ -16,24 +15,19 @@ func _ready():
 
 func _button_pressed():
 	Sfx.play("woosh")
-	fade_transisiton.show()
-	fade_timer.start()
-	fade_animation.play("fade_in")
+	fade_transisiton.fade_in()
 	await fade_timer.timeout
 	menu.set_visible(false)
 	drafting.set_visible(false)
-	fade_timer.start()
 	cutscene.set_visible(true)
-	fade_animation.play("fade_out")
+	fade_transisiton.fade_out()
 	await fade_timer.timeout
-	fade_transisiton.hide()
 	
 	await cutscene.run()
+	fade_transisiton.fade_in()
+	await fade_timer.timeout
 	cutscene.queue_free()
 	
 	drafting.set_visible(true)
-	fade_transisiton.show()
-	fade_timer.start()
-	fade_animation.play("fade_out")
+	fade_transisiton.fade_out()
 	await fade_timer.timeout
-	fade_transisiton.hide()

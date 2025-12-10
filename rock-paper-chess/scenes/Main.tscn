@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://nuan8ukxj5ny"]
+[gd_scene load_steps=25 format=3 uid="uid://nuan8ukxj5ny"]
 
 [ext_resource type="PackedScene" uid="uid://cq0e7rspvwt20" path="res://scenes/ChessBoard.tscn" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://rwyyjixmr5ji" path="res://scenes/menu.tscn" id="1_rvslj"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://cwrahbtpter0v" path="res://assets/sound effects/clap.wav" id="9_nfivy"]
 [ext_resource type="AudioStream" uid="uid://j4u4ip60wpkr" path="res://assets/sound effects/dice.wav" id="10_1nqs0"]
 [ext_resource type="AudioStream" uid="uid://ym55ofett8cb" path="res://assets/sound effects/drum single beat.wav" id="11_1iba3"]
+[ext_resource type="Script" uid="uid://bhnlg74ot7o0b" path="res://scripts/fade_transition.gd" id="11_2ofn6"]
 [ext_resource type="AudioStream" uid="uid://b5023yiq0n3j8" path="res://assets/sound effects/lasso.wav" id="12_yxlcp"]
 [ext_resource type="AudioStream" uid="uid://gsknsc2t8hfh" path="res://assets/sound effects/paper.wav" id="13_ebg2g"]
 [ext_resource type="AudioStream" uid="uid://dssbr4txh4358" path="res://assets/sound effects/rock.wav" id="14_2ofn6"]
@@ -62,6 +63,7 @@ script = ExtResource("8_ebg2g")
 
 [node name="FadeTransition" parent="." instance=ExtResource("9_1nqs0")]
 visible = false
+script = ExtResource("11_2ofn6")
 
 [node name="FadeTimer" type="Timer" parent="FadeTransition"]
 

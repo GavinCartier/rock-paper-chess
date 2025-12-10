@@ -10,10 +10,7 @@ func _ready():
 
 func _replay_button_pressed():
 	Sfx.play("woosh")
-	fade_transisiton.show()
-	fade_timer.start()
-	fade_animation.play("fade_in")
+	fade_transisiton.fade_in()
 	await fade_timer.timeout
-	fade_transisiton.hide()
 	Sfx.resume_bgm()
 	get_tree().reload_current_scene()
