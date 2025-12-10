@@ -80,6 +80,7 @@ func set_stats():
 	damage = PT.damage_stats.get(piece_class)
 	max_health = PT.health_stats.get(piece_class)
 	health = max_health
+	health_bar.update_health(1.0)
 	
 
 # Function to receive damage
