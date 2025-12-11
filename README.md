@@ -236,7 +236,7 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 **Additional contributions in the Other Contributions section:**
 - Initialized the chessboard via creating a tilemap and developed the basic `ChessBoard.tscn` layout.
 - Initialized all pieces on the chessboard and set the corresponding textures for them in `chess_board.gd`.
-- Added the movement logic for each singe piece in `chessboard.gd` based on the structure in ` piece_types.gd ` and implemented basic reactions to the player’s mouse inputs.
+- Added the movement logic for each singe piece in `chess_board.gd` based on the structure in ` piece_types.gd ` and implemented basic reactions to the player’s mouse inputs.
 ![Tilemap Implement](https://github.com/GavinCartier/rock-paper-chess/blob/d7083b5f3f1e971173680420174d534955046c0f/readme%20images/tilemap%20implement.png)
 
 **Recources**
