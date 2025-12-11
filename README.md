@@ -56,6 +56,26 @@ The code used for the volume slider was taken from here, with minor changes to t
 
 ["Creating volume sliders in Godot 4" by The Shaggy Dev](https://www.youtube.com/watch?v=aFkRmtGiZCw)
 
+### Tilemap Creation
+
+`scenes/ChessBoard.tscn`
+
+Create the tilemap for chessboard by referring to this tutorial.
+
+["In Depth TILEMAP Tutorial For Godot 4.3+" by DevWorm](https://youtu.be/ZutpG0_CYrQ?si=xNeTdk1QAhrviBW9)
+
+### Screen Coordinates Alined
+
+`scripts/chess_board.gd`
+
+The code used for get the correct position for pieces on chessboard based on the cemera zoom effects.
+
+[Confusion about Screen Coordinates](https://forum.godotengine.org/t/confusion-about-screen-coordinates/97711/2)
+
+Also referred Godot official tutorial/doc for tilemap:
+
+[Godot Engine 4.4 documentation - TileMap](https://docs.godotengine.org/en/4.4/classes/class_tilemap.html)
+
 # Team Member Contributions
 
 ## Reilly Dunn ##
