@@ -141,6 +141,8 @@ Contributions outside of my main and sub roles:
 
 ## Lucia Zeng ##
 
+Github username: locallamp
+
 Main role: UI and Input
 
 Subrole: Accessibility and Usability
@@ -169,6 +171,8 @@ Miscellaneous contributions to the game (outside of my role):
 ![black_winner](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/Black_winner.png?raw=true)
 
 ## Gavin Cartier
+
+**Github username: GavinCartier**
 
 ### Main role: Game Logic
 
