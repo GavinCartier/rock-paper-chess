@@ -208,7 +208,7 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 - Folders includign `new placeholder`, `story`, `chessboard`, `characters`
 ![Assets Overview](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/assets%20overview.jpg)
 
-##cRoop Nijjarc##
+## Roop Nijjar ##
 
 **Main Role:** Producer
 **Sub-Role:** Build & Release Management
@@ -234,6 +234,8 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 
 - Created the foundation algorithm of the chessboard 
 
-- Here was some documentation related to my role, including meeting notes, the progress report i did for my team, gameplay testing findings, and a Gnatt Chart: https://docs.google.com/document/d/1kIB4USr9gDSW2sDW_pepmw7fntMR1_fyC8lqUGGykjk/edit?usp=sharing 
+**Resources**
+
+Here was some documentation related to my role, including meeting notes, the progress report i did for my team, gameplay testing findings, and a Gnatt Chart: https://docs.google.com/document/d/1kIB4USr9gDSW2sDW_pepmw7fntMR1_fyC8lqUGGykjk/edit?usp=sharing 
 
 
