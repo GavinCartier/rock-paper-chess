@@ -203,6 +203,8 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 - Added the movement logic for each singe pieces based on the structure in `piece.gd`.
 
 **Recources**
+- [Fonts (free for personal use)](https://github.com/GavinCartier/rock-paper-chess/tree/70af1b90b33595a47b15528892f10d6c1db8b401/rock-paper-chess/assets/font)
+- Including fonts: `Cochin Regular`, `bodoni-72-oldstyle-book`, `bodoni-72-smallcaps-book`
 - [Cutscene Background Info](https://unsplash.com/photos/a-room-with-a-table-chairs-and-a-bed-AREe9eMdK8Q)
 - [Assets Created by Own](https://github.com/GavinCartier/rock-paper-chess/tree/ce9e618f099506592477d150447cf4d41200b6a3/rock-paper-chess/assets)
 - Folders includign `new placeholder`, `story`, `chessboard`, `characters`
