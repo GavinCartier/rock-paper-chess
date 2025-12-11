@@ -291,7 +291,7 @@ NOTE: As the Level and World Designer for a chess game, there wasn't much to imp
 
 - Located and uploaded royalty-free audio for some of the game’s sound effects.
   
-- Created an audio system `Sfx.gd` that plays sound effects and the background music globally.
+- Created an audio system that plays sound effects and the background music globally. [sfx.gd](https://github.com/GavinCartier/rock-paper-chess/blob/main/rock-paper-chess/scripts/sfx.gd)
   
 - Created `AudioStreamPlayer` nodes for each audio file.
   
