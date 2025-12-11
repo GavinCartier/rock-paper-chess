@@ -2,7 +2,7 @@
 
 ## Summary ##
 
-Rock, Paper, Chess!  is a turn-based chess game that introduces a strategic Rock, Paper, Scissors-type assignment mechanic. Players are prompted to a cutscene explaining the narrative/tutorial of our game, which is a battle between the Aristocrat (player 1) and the Cowboy (player 2). Before the game begins, players enter a “Drafting” phase, during which they take turns assigning Rock, Paper, or Scissors types to each category of their chess pieces. These choices significantly influence gameplay because in our version of chess, pieces are not simply captured; they must battle in a “Challenge”. Every piece on the board has its own health and damage stats. When two pieces engage in a “Challenge”, type advantages (following classic Rock, Paper, Scissors rules) allow the superior types to deal increased damage. Instead of achieving checkmate, a player wins by defeating the opponent’s king in combat. Aside from these additions, all chess pieces retain their traditional movement rules.
+`Rock, Paper, Chess!` is a turn-based chess game that introduces a strategic Rock, Paper, Scissors-type assignment mechanic. Players are prompted to a cutscene explaining the narrative/tutorial of our game, which is a battle between the Aristocrat (player 1) and the Cowboy (player 2). Before the game begins, players enter a “Drafting” phase, during which they take turns assigning Rock, Paper, or Scissors types to each category of their chess pieces. These choices significantly influence gameplay because in our version of chess, pieces are not simply captured; they must battle in a “Challenge”. Every piece on the board has its own health and damage stats. When two pieces engage in a “Challenge”, type advantages (following classic Rock, Paper, Scissors rules) allow the superior types to deal increased damage. Instead of achieving checkmate, a player wins by defeating the opponent’s king in combat. Aside from these additions, all chess pieces retain their traditional movement rules.
 
 ![Main Menu](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/main%20menu.png?raw=true)
 
@@ -224,18 +224,19 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 ![prototype]( https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/prototype.jpg) 
 - Created most of the visual assets for the whole project, including the chess pieces, chessboard, character portraits, turn indicators, and the hand-drawn background.
 - Made the looping main-menu video via Adobe After Effects, which loop for every 25s and connected it to the menu UI.
+- [Main Menu Video (MP4)](https://github.com/GavinCartier/rock-paper-chess/blob/244b5821b4a76072912ee4d401d0a4e3d07447c5/rock-paper-chess/assets/begin.mp4)
 - Designed the early gamefeel prototype and the refined version later on, covering UI layout ideas, fonts, screen size, and the overall visual guide of the project.
 - Set the cohesive visual style, found free-to-use backgrounds and added art effects for the cutscene scenes.
-- Implemented the transition from the drafting scene to the chessboard scene.
+- Implemented the transition from the drafting scene to the chessboard scene in `chess_board.gd`.
 - Added the turn indicator in the drafting scene and created the wiggle animation to improve gameplay experience.
 ![Turn Indicator](https://github.com/GavinCartier/rock-paper-chess/blob/b4d455361215b91a7ca0ce5ea353542543ec7e9a/readme%20images/indicator%20wiggle.gif)
-- Updated the rules page as hovering to make the interface cleaner and to avoid conflicts between piece hover and rule page hover.
+- Updated the rules page as hovering in `chess_board.gd` to make the interface cleaner and to avoid conflicts between piece hover and rule page hover.
 ![Rule Hover](https://github.com/GavinCartier/rock-paper-chess/blob/b4d455361215b91a7ca0ce5ea353542543ec7e9a/readme%20images/rule%20hover.gif)
 
 **Additional contributions in the Other Contributions section:**
 - Initialized the chessboard via creating a tilemap and developed the basic `ChessBoard.tscn` layout.
-- Initialized all pieces on the chessboard and set the corresponding textures for them.
-- Added the movement logic for each singe piece based on the structure in ` piece_types.gd ` and implemented basic reactions to the player’s mouse inputs.
+- Initialized all pieces on the chessboard and set the corresponding textures for them in `chess_board.gd`.
+- Added the movement logic for each singe piece in `chessboard.gd` based on the structure in ` piece_types.gd ` and implemented basic reactions to the player’s mouse inputs.
 ![Tilemap Implement](https://github.com/GavinCartier/rock-paper-chess/blob/d7083b5f3f1e971173680420174d534955046c0f/readme%20images/tilemap%20implement.png)
 
 **Recources**
