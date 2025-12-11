@@ -275,6 +275,8 @@ Drafting External Designs:
 
 ## Vivian Sun ##
 
+**Github username:** vjsun-hub
+
 **Main role: Level and World Design**
 
 **Subrole: Narrative Design -> Audio**
