@@ -238,6 +238,48 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 
 **Resources**
 
+## Roop Nijjar ##
+
+**Main Role:** Producer
+**Sub-Role:** Build & Release Management
+
+- Served as the primary point of contact for the project, communicating essential questions and updates to the professor and TA on behalf of the team.
+
+
+- Prepared and submitted progress reports, including written updates and participation in progress-related discussions.
+
+
+- Conducted gameplay testing with multiple participants, both during scheduled discussion sessions and independently outside of them.
+
+
+- Created and contributed to the project presentation slides / the actual game demo
+
+
+- Organized and led team meetings, documented meeting notes, and assigned tasks required for project completion. Constant check-in and monitoring of Discord messages 
+
+- Developed and refined U.I of drafting phase, including asset adjustments, drafting tutorial creation, chess piece rescaling, layout scaling, and drafting interface borders
+
+- Implemented core chess movement algorithms and game logic at the beginning of the project. Later on, it was used to develop the main portion of our game 
+
+
+- Created the foundation algorithm of the chessboard 
+
+**Resources**
+
 Here was some documentation related to my role, including meeting notes, the progress report i did for my team, gameplay testing findings, and a Gnatt Chart: https://docs.google.com/document/d/1kIB4USr9gDSW2sDW_pepmw7fntMR1_fyC8lqUGGykjk/edit?usp=sharing 
+
+Drafting External Designs: 
+![Screenshot 2025-12-10 at 8 25 22 PM](https://github.com/user-attachments/assets/ac7fc515-4a2f-48f7-84c4-04c04cb2c20c)
+
+
+<img width="2560" height="1440" alt="Drafting" src="https://github.com/user-attachments/assets/dd9ca5bc-4073-4803-87e9-c0a18d5dff11" />
+
+<img width="930" height="647" alt="drafting_tutorial" src="https://github.com/user-attachments/assets/4e1e6702-ad3b-4737-b648-47d07e50ef00" />
+
+
+
+
+
+ 
 
 
