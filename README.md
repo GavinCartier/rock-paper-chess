@@ -2,7 +2,7 @@
 
 ## Summary ##
 
-Chess combined with Rock, Paper, Scissors. Players start by taking turns assigning each piece to a type of Rock, Paper, or Scissors. Instead of directly capturing enemy pieces like in normal Chess, we have a ‘challenge’ system in which each type of piece has its own base stats of Damage and Health. When you challenge an enemy piece, you deal damage to its health value, which is determined by your base damage stat and the type matchup between the two pieces.
+Rock, Paper, Chess!  is a turn-based chess game that introduces a strategic Rock, Paper, Scissors-type assignment mechanic. Players are prompted to a cutscene explaining the narrative/tutorial of our game, which is a battle between the Aristocrat (player 1) and the Cowboy (player 2). Before the game begins, players enter a “Drafting” phase, during which they take turns assigning Rock, Paper, or Scissors types to each category of their chess pieces. These choices significantly influence gameplay because in our version of chess, pieces are not simply captured; they must battle in a “Challenge”. Every piece on the board has its own health and damage stats. When two pieces engage in a “Challenge”, type advantages (following classic Rock, Paper, Scissors rules) allow the superior types to deal increased damage. Instead of achieving checkmate, a player wins by defeating the opponent’s king in combat. Aside from these additions, all chess pieces retain their traditional movement rules.
 ![Main Menu](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/main%20menu.png?raw=true)
 
 ## Project Resources
@@ -221,23 +221,20 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 **Sub-Role:** Build & Release Management
 
 - Served as the primary point of contact for the project, communicating essential questions and updates to the professor and TA on behalf of the team.
-
-
+  
 - Prepared and submitted progress reports, including written updates and participation in progress-related discussions.
 
+- Worked on the "summary" of ReadMe.md and the "scheduling" portion of intial plan.
 
 - Conducted gameplay testing with multiple participants, both during scheduled discussion sessions and independently outside of them.
 
-
 - Created and contributed to the project presentation slides / the actual game demo
-
 
 - Organized and led team meetings, documented meeting notes, and assigned tasks required for project completion. Constant check-in and monitoring of Discord messages 
 
 - Developed and refined U.I of drafting phase, including asset adjustments, drafting tutorial creation, chess piece rescaling, layout scaling, and drafting interface borders
 
 - Implemented core chess movement algorithms and game logic at the beginning of the project. Later on, it was used to develop the main portion of our game 
-
 
 - Created the foundation algorithm of the chessboard 
 
