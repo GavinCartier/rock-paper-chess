@@ -277,6 +277,7 @@ Drafting External Designs:
 
 
 **Main role: Level and World Design**
+
 As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals, so I aided in coding part of `damage_engine.gd` and some of the gameplay logic. 
 
 **Subrole: Narrative Design -> Audio**
