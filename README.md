@@ -254,6 +254,7 @@ Drafting External Designs:
 ## Vivian Sun ##
 
 **Main role: Level and World Design**
+As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals. 
 
 **Subrole: Narrative Design -> Audio**
 
