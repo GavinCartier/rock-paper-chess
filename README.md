@@ -295,7 +295,7 @@ Drafting External Designs:
 
 **Contributions:**
 
-NOTE: As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals, so I aided in coding part of `damage_engine.gd` and some of the gameplay logic. However, we did brainstorm the idea of having different game modes like "Challenge" and "Speed" modes with different chess boards where the goal of the match would be to capture as many pieces within a time limit or capturing all your opponent's pieces.
+NOTE: As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals, so I aided in coding part of `damage_engine.gd` and some of the gameplay logic. However, we did brainstorm the idea of having different game modes like "Challenge" and "Speed" modes with different chess boards where the goal of the match would be to capture as many pieces within a time limit or capturing all your opponent's pieces. We ultimately decided against this due to time constraints.
 
 - Located and uploaded royalty-free audio for some of the game’s sound effects.
   
