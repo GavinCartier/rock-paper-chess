@@ -285,15 +285,22 @@ Drafting External Designs:
 
 **Contributions:**
 
-NOTE: As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals, so I aided in coding part of `damage_engine.gd` and some of the gameplay logic. 
+NOTE: As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals, so I aided in coding part of `damage_engine.gd` and some of the gameplay logic. However, we did brainstorm the idea of having different game modes like "Challenge" and "Speed" modes with different chess boards where the goal of the match would be to capture as many pieces within a time limit or capturing all your opponent's pieces.
 
 - Located and uploaded royalty-free audio for some of the game’s sound effects.
+  
 - Created an audio system `Sfx.gd` that plays sound effects and the background music globally.
+  
 - Created `AudioStreamPlayer` nodes for each audio file.
+  
 - Created audio buses that separated "sfx" from "bgm".
+  
 - Implemented sound effects within the game logic and UI button scripts.
+  
 - Implemented looping background music, with play/pause/resume functionality.
+  
 - Fixed up some audio bugs and unintentional sound looping.
+  
 - Participated in gameplay testing
 
 **Additional Contributions:**
