@@ -280,7 +280,8 @@ Drafting External Designs:
 **Subrole: Narrative Design -> Audio**
 
 **Contributions:**
-As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals, so I aided in coding part of `damage_engine.gd` and some of the gameplay logic. 
+
+NOTE: As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals, so I aided in coding part of `damage_engine.gd` and some of the gameplay logic. 
 
 - Located and uploaded royalty-free audio for some of the game’s sound effects.
 - Created an audio system `Sfx.gd` that plays sound effects and the background music globally.
