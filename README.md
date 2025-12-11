@@ -1,10 +1,9 @@
 # Rock, Paper, Chess! #
 
-![Main Menu](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/main%20menu.png?raw=true)
-
 ## Summary ##
 
 Chess combined with Rock, Paper, Scissors. Players start by taking turns assigning each piece to a type of Rock, Paper, or Scissors. Instead of directly capturing enemy pieces like in normal Chess, we have a ‘challenge’ system in which each type of piece has its own base stats of Damage and Health. When you challenge an enemy piece, you deal damage to its health value, which is determined by your base damage stat and the type matchup between the two pieces.
+![Main Menu](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/main%20menu.png?raw=true)
 
 ## Project Resources
 
@@ -175,17 +174,17 @@ Due to limitations of time and scope, the large-scale suggestions provided by th
 
 ## Victoria Zhang ##
 
-Github: 1mVictoria
+**Github: 1mVictoria**
 
-Main role: Animation and Visuals
+**Main role: Animation and Visuals**
 
-Subrole: Player Onboarding -> Visual Cohesion and Style Guide
+**Subrole: Player Onboarding -> Visual Cohesion and Style Guide**
 
 Note: Since Reilley implemented the cutscene system early on and didn’t realize it overlapped with the my original subrole `Player Onboarding`, I shifted my subrole to `Visual Cohesion and Style Guide` during the later stages of the project. I also took on several game logic tasks, which will be explained below. 
 
 There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohesion and Style Guide`, so I will describe them together in a single section.
 
-Contributions:
+**Contributions:**
 - Created most of the visual assets for the whole project, including the chess pieces, chessboard, character portraits, turn indicators, and the hand-drawn background.
 - Made the looping main-menu video via Adobe After Effects, which loop for every 25s and connected it to the menu UI.
 - Designed the early game-feel prototype and the refined version later on, covering UI layout ideas, fonts, screen size, and the overall visual direction of the project.
@@ -194,6 +193,9 @@ Contributions:
 - Added the turn indicator in the drafting scene and created the wiggle animation to improve user feedback.
 - Updated the rules page as hovering to make the interface cleaner and to avoid conflicts between piece hover and rule page hover.
 
-Additional contributions in the Other Contributions section:
+**Additional contributions in the Other Contributions section:**
 - Initialized the chessboard via creating a tilemap and placed all pieces in their correct starting positions based on the drafting results.
 - Added the movement logic for each singe pieces based on the structure in `piece.gd`.
+
+**Recources**
+[Cutscene Background Info](https://unsplash.com/photos/a-room-with-a-table-chairs-and-a-bed-AREe9eMdK8Q)
