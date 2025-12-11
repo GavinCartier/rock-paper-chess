@@ -277,9 +277,9 @@ Drafting External Designs:
 
 **Github username:** vjsun-hub
 
-**Main role: Level and World Design**
+**Main role:** Level and World Design
 
-**Subrole: Narrative Design -> Audio**
+**Subrole:** Narrative Design -> Audio
 
 **Contributions:**
 
