@@ -113,7 +113,7 @@ Contributions outside of my main and sub roles:
 - Various bug fixes
 - Created a demo build for the 12/8 presentation (to fit in the 5 minute time limit)
   - The build has a much shorter cutscene, no pawns, and a banner sprite indicating that it’s the demo build
-- Created a few simple assets
+- Created a few simple assets using Krita
 ![Assets made by Reilly](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/reilly%20assets.png?raw=true)
 
 ## Lucia Zeng ##
