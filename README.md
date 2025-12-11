@@ -269,7 +269,9 @@ As the Level and World Designer for a chess game, there wasn't much to implement
 
 **Resources**
 Here are some links to the websites I used to find sound effects:
+
 https://www.myinstants.com/en/instant/undertale-select-sound-42576/
+
 https://pixabay.com/sound-effects/search/victory%20trumpets/
 
 
