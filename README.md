@@ -241,6 +241,8 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 
 ## Roop Nijjar ##
 
+**GitHub username:** rknijjar
+
 **Main Role:** Producer
 **Sub-Role:** Build & Release Management
 
