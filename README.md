@@ -251,6 +251,26 @@ Drafting External Designs:
 <img width="930" height="647" alt="drafting_tutorial" src="https://github.com/user-attachments/assets/4e1e6702-ad3b-4737-b648-47d07e50ef00" />
 
 
+## Vivian Sun ##
+
+**Main role: Level and World Design**
+
+**Subrole: Narrative Design -> Audio**
+
+- Located and uploaded royalty-free audio for some of the game’s sound effects.
+- Created an audio system `Sfx.gd` that plays sound effects and the background music globally. 
+- Created `AudioStreamPlayer` nodes for each audio file.
+- Created audio buses that separated "sfx" from "bgm".
+- Implemented sound effects within the game logic and UI button scripts.
+- Implemented looping background music, with play/pause/resume functionality.
+- Fixed up some audio bugs and unintentional looping.
+- Participated in gameplay testing
+
+**Resources**
+Here are some links to the websites I used to find sound effects:
+https://www.myinstants.com/en/instant/undertale-select-sound-42576/
+https://pixabay.com/sound-effects/search/victory%20trumpets/
+
 
 
 
