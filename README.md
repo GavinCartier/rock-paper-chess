@@ -210,11 +210,11 @@ Due to limitations of time and scope, the large-scale suggestions provided by th
 
 ## Victoria Zhang ##
 
-**Github: 1mVictoria**
+**Github username:** 1mVictoria
 
-**Main role: Animation and Visuals**
+**Main role:** Animation and Visuals
 
-**Subrole: Player Onboarding -> Visual Cohesion and Style Guide**
+**Subrole:** Player Onboarding -> Visual Cohesion and Style Guide
 
 Note: Since Reilly implemented the cutscene system early on and didn’t realize it overlapped with the my original subrole `Player Onboarding`, I shifted my subrole to `Visual Cohesion and Style Guide` during the later stages of the project. I also took on several game logic tasks, which will be explained below. 
 
@@ -228,7 +228,7 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 - Set the cohesive visual style, found free-to-use backgrounds and added art effects for the cutscene scenes.
 - Implemented the transition from the drafting scene to the chessboard scene.
 - Added the turn indicator in the drafting scene and created the wiggle animation to improve gameplay experience.
-![Turn Indicator]((https://github.com/GavinCartier/rock-paper-chess/blob/b4d455361215b91a7ca0ce5ea353542543ec7e9a/readme%20images/indicator%20wiggle.gif)
+![Turn Indicator](https://github.com/GavinCartier/rock-paper-chess/blob/b4d455361215b91a7ca0ce5ea353542543ec7e9a/readme%20images/indicator%20wiggle.gif)
 - Updated the rules page as hovering to make the interface cleaner and to avoid conflicts between piece hover and rule page hover.
 ![Rule Hover](https://github.com/GavinCartier/rock-paper-chess/blob/b4d455361215b91a7ca0ce5ea353542543ec7e9a/readme%20images/rule%20hover.gif)
 
