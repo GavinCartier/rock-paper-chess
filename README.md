@@ -9,7 +9,11 @@ Chess combined with Rock, Paper, Scissors. Players start by taking turns assigni
 
 [Web-playable version](https://reillydunnucdavis.itch.io/rock-paper-chess)
 
-[Proposal](https://docs.google.com/document/d/1R2_ADIK6n0Gfldgpfdc70Q1aaqAm14DkJqM3c9yRP9o/edit?usp=sharing)  
+[Intial Plan](https://docs.google.com/document/d/1R2_ADIK6n0Gfldgpfdc70Q1aaqAm14DkJqM3c9yRP9o/edit?usp=sharing)  
+
+[Rock, Paper, Chess Progress Report Discussion Notes] (https://docs.google.com/document/d/1SKJJgBzz7TyQUmU2RUWdISAFGKn1s6Gl3_dxRyvKgeA/edit?tab=t.0#heading=h.x6bjmdz0ly1d ) 
+
+[Progress Report of Black Rapsohdy Rabbit] (https://docs.google.com/document/d/1sqlWxQEwTkvB5rE3_c796FQBkte6ip863G7BRirKl0s/edit?usp=sharing)
 
 ## Gameplay Explanation ##
 
