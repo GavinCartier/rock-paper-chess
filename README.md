@@ -81,9 +81,11 @@ Also referred Godot official tutorial/doc for tilemap:
 
 ## Reilly Dunn ##
 
-Main role: Technical Artist
+**Main role:** Technical Artist
 
-Subrole: Game Feel
+**Subrole:** Game Feel
+
+**Github username:** ReillyDunn-UCDavis
 
 I was our group’s Technical Artist and Game Feel person. This meant I was responsible for implementing the assets into the game in a way that is visually satisfying and makes it clear what’s going on in the game. I found that there was a lot of overlap between the Technical Artist and Game Feel roles, so it makes sense to describe my contributions in a single section.
 In my capacity in these roles, my contributions include:
