@@ -185,11 +185,10 @@ Note: Since Reilley implemented the cutscene system early on and didn’t realiz
 There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohesion and Style Guide`, so I will describe them together in a single section.
 
 **Contributions:**
+![prototype](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/prototype.jpg)
 - Created most of the visual assets for the whole project, including the chess pieces, chessboard, character portraits, turn indicators, and the hand-drawn background.
 - Made the looping main-menu video via Adobe After Effects, which loop for every 25s and connected it to the menu UI.
-![Assets Overview](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/assets%20overview.jpg)
 - Designed the early game-feel Oprototype and the refined version later on, covering UI layout ideas, fonts, screen size, and the overall visual direction of the project.
-![prototype](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/prototype.jpg)
 - Set the cohesive visual style, found free-to-use backgrounds and added art effects for the cutscene scenes.
 - Implemented the transition from the drafting scene to the chessboard scene.
 - Added the turn indicator in the drafting scene and created the wiggle animation to improve user feedback.
@@ -201,3 +200,6 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 
 **Recources**
 - [Cutscene Background Info](https://unsplash.com/photos/a-room-with-a-table-chairs-and-a-bed-AREe9eMdK8Q)
+- [Assets Created by Own](https://github.com/GavinCartier/rock-paper-chess/tree/ce9e618f099506592477d150447cf4d41200b6a3/rock-paper-chess/assets)
+- Folders includign `new placeholder`, `story`, `chessboard`, `characters`
+![Assets Overview](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/assets%20overview.jpg)
