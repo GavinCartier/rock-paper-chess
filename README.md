@@ -207,3 +207,31 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 - [Assets Created by Own](https://github.com/GavinCartier/rock-paper-chess/tree/ce9e618f099506592477d150447cf4d41200b6a3/rock-paper-chess/assets)
 - Folders includign `new placeholder`, `story`, `chessboard`, `characters`
 ![Assets Overview](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/assets%20overview.jpg)
+
+##Roop Nijjar
+**Main Role:** Producer
+**Sub-Role:** Build & Release Management
+- Served as the primary point of contact for the project, communicating essential questions and updates to the professor and TA on behalf of the team.
+
+
+- Prepared and submitted progress reports, including written updates and participation in progress-related discussions.
+
+
+- Conducted gameplay testing with multiple participants, both during scheduled discussion sessions and independently outside of them.
+
+
+- Created and contributed to the project presentation slides / the actual game demo
+
+
+- Organized and led team meetings, documented meeting notes, and assigned tasks required for project completion. Constant check-in and monitoring of Discord messages 
+
+- Developed and refined U.I of drafting phase, including asset adjustments, drafting tutorial creation, chess piece rescaling, layout scaling, and drafting interface borders
+
+- Implemented core chess movement algorithms and game logic at the beginning of the project. Later on, it was used to develop the main portion of our game 
+
+
+- Created the foundation algorithm of the chessboard 
+
+- Here was some documentation related to my role, including meeting notes, the progress report i did for my team, gameplay testing findings, and a Gnatt Chart: https://docs.google.com/document/d/1kIB4USr9gDSW2sDW_pepmw7fntMR1_fyC8lqUGGykjk/edit?usp=sharing 
+
+
