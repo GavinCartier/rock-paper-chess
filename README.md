@@ -34,7 +34,7 @@ After Drafting is complete, you'll move into the main board game. You can try to
 
 ### Grayscale filter
 
-assets/grayscale.gdshader
+`assets/grayscale.gdshader`
 
 Grayscale shader created by following this tutorial (with some minor custom changes applied):
 
@@ -42,7 +42,7 @@ Grayscale shader created by following this tutorial (with some minor custom chan
 
 ### Camera Shake
 
-scripts/chess_cam.gd
+`scripts/chess_cam.gd`
 
 Camera shake logic created by following this tutorial (with some minor custom changes applied):
 
@@ -50,7 +50,7 @@ Camera shake logic created by following this tutorial (with some minor custom ch
 
 ### Volume Slider
 
-scripts/menu/volume.gd
+`scripts/menu/volume.gd`
 
 The code used for the volume slider was taken from here, with minor changes to the code.
 
@@ -200,6 +200,7 @@ Due to limitations of time and scope, the large-scale suggestions provided by th
 
 **Misellaneous bugfixing** - I fixed some of the bugs that showed up during the development process. [Health bar showing when not hovered](https://github.com/GavinCartier/rock-paper-chess/commit/4094a5c7df920c23a2dad8d87a3cb9be4edaf19e), [Turns not swapping](https://github.com/GavinCartier/rock-paper-chess/commit/df412863c1ae8f9e7610ed2a36e426f921340198), [Piece sizing getting messed up](https://github.com/GavinCartier/rock-paper-chess/commit/29b1bafb422c9e39cbed1a714c8a81a23f501224)
 
+
 ## Victoria Zhang ##
 
 **Github: 1mVictoria**
@@ -208,32 +209,32 @@ Due to limitations of time and scope, the large-scale suggestions provided by th
 
 **Subrole: Player Onboarding -> Visual Cohesion and Style Guide**
 
-Note: Since Reilly implemented the cutscene system early on and didn’t realize it overlapped with the my original subrole `Player Onboarding`, I shifted my subrole to `Visual Cohesion and Style Guide` during the later stages of the project. I also took on several game logic tasks, which will be explained below. 
+Note: Since Reilley implemented the cutscene system early on and didn’t realize it overlapped with the my original subrole `Player Onboarding`, I shifted my subrole to `Visual Cohesion and Style Guide` during the later stages of the project. I also took on several game logic tasks, which will be explained below. 
 
 There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohesion and Style Guide`, so I will describe them together in a single section.
 
 **Contributions:**
-![prototype](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/prototype.jpg)
+![prototype]( https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/prototype.jpg) 
 - Created most of the visual assets for the whole project, including the chess pieces, chessboard, character portraits, turn indicators, and the hand-drawn background.
 - Made the looping main-menu video via Adobe After Effects, which loop for every 25s and connected it to the menu UI.
-- Designed the early game-feel Oprototype and the refined version later on, covering UI layout ideas, fonts, screen size, and the overall visual direction of the project.
+- Designed the early gamefeel prototype and the refined version later on, covering UI layout ideas, fonts, screen size, and the overall visual guide of the project.
 - Set the cohesive visual style, found free-to-use backgrounds and added art effects for the cutscene scenes.
 - Implemented the transition from the drafting scene to the chessboard scene.
-- Added the turn indicator in the drafting scene and created the wiggle animation to improve user feedback.
+- Added the turn indicator in the drafting scene and created the wiggle animation to improve gameplay experience.
 - Updated the rules page as hovering to make the interface cleaner and to avoid conflicts between piece hover and rule page hover.
 
 **Additional contributions in the Other Contributions section:**
-- Initialized the chessboard via creating a tilemap and placed all pieces in their correct starting positions based on the drafting results.
-- Added the movement logic for each singe pieces based on the structure in `piece.gd`.
+- Initialized the chessboard via creating a tilemap and developed the basic `ChessBoard.tscn` layout.
+- Initialized all pieces on the chessboard and set the corresponding textures for them.
+- Added the movement logic for each singe piece based on the structure in ` piece_types.gd ` and implemented basic reactions to the player’s mouse inputs.
 
 **Recources**
-- [Fonts (free for personal use)](https://github.com/GavinCartier/rock-paper-chess/tree/70af1b90b33595a47b15528892f10d6c1db8b401/rock-paper-chess/assets/font)
+- [Fonts (free for personal use)]( https://github.com/GavinCartier/rock-paper-chess/tree/70af1b90b33595a47b15528892f10d6c1db8b401/rock-paper-chess/assets/font) 
 - Including fonts: `Cochin Regular`, `bodoni-72-oldstyle-book`, `bodoni-72-smallcaps-book`
-- [Cutscene Background Info](https://unsplash.com/photos/a-room-with-a-table-chairs-and-a-bed-AREe9eMdK8Q)
-- [Assets Created by Own](https://github.com/GavinCartier/rock-paper-chess/tree/ce9e618f099506592477d150447cf4d41200b6a3/rock-paper-chess/assets)
+- [Cutscene Background Info]( https://unsplash.com/photos/a-room-with-a-table-chairs-and-a-bed-AREe9eMdK8Q) 
+- [Assets Created by Own]( https://github.com/GavinCartier/rock-paper-chess/tree/ce9e618f099506592477d150447cf4d41200b6a3/rock-paper-chess/assets) 
 - Folders includign `new placeholder`, `story`, `chessboard`, `characters`
-![Assets Overview](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/assets%20overview.jpg)
-
+![Assets Overview]( https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/assets%20overview.jpg)
 
 ## Roop Nijjar ##
 
