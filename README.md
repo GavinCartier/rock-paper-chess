@@ -67,7 +67,7 @@ Subrole: Game Feel
 I was our group’s Technical Artist and Game Feel person. This meant I was responsible for implementing the assets into the game in a way that is visually satisfying and makes it clear what’s going on in the game. I found that there was a lot of overlap between the Technical Artist and Game Feel roles, so it makes sense to describe my contributions in a single section.
 In my capacity in these roles, my contributions include:
 - Implemented logic for hovering over a chess piece
-- ![Hovering Over Pieces](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/tile%20glows.png?raw=true)
+![Hovering Over Pieces](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/tile%20glows.png?raw=true)
   - Highlights the spaces the piece can move to
     - Wrote logic that takes the set of spaces each piece type could move to and returns the subset of those that are legal moves (except for the Castling system)
     - On each legal space, show a highlight to indicate to the player they can move there
@@ -76,7 +76,7 @@ In my capacity in these roles, my contributions include:
 - Add an on-screen warning for when the current player’s king can be attacked by one of the other player’s pieces
   - This involved creating the warning asset, and writing logic to detect when this condition is true
 - Animated how the pieces move around the board scene
-- ![Piece Movement](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/challenge%20gif.gif?raw=true)
+![Piece Movement](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/challenge%20gif.gif?raw=true)
   - When moving to an empty space:
     - The piece glides over to its new position. As it does so it grows larger until halfway through the movement, then shrinks back to the original size. This creates the feeling of the piece being physically lifted up and set down onto the new spot
   - In a challenge:
@@ -87,15 +87,17 @@ In my capacity in these roles, my contributions include:
     - Wrote logic to determine where in the graveyard the sprite should land depending on how many pieces are in the graveyard already
   - If the defending piece survives, the attacking piece moves away
 - Created everything that drives the cutscene
-- ![Cutscene in Editor](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/cutscene%20editor.png?raw=true)
+![Cutscene in Editor](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/cutscene%20editor.png?raw=true)
   - Moving the characters around the screen
   - Text boxes that update with the character’s name and line of dialog
   - Animating the mouth of the character speaking so it looks like they’re talking
   - Made the character who isn’t speaking slightly darker so it’s clear who is and isn’t talking
   - Show and hide visualizations of the gameplay concepts being discussed in the cutscene
   - Skip cutscene button
+  - Wrote the dialog and named the characters
+  	- Their names are puns; We referred to them as the "Aristocrat" and "Cowboy", so I gave them names that sound like the words Aristocrat and Cowboy when said out loud (Aris T. O'Cratt and C. W. Boye)
 - Improvements to drafting phase’s UI to help with clarity of what’s going on
-- ![Drafting in Editor](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/drafting%20editor.png?raw=true)
+![Drafting in Editor](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/drafting%20editor.png?raw=true)
   - Add piece sprites to UI
     - Pieces that have not yet been assigned a type have a custom shader applied that makes the sprites grayscale and transparent
     - When a piece is assigned a type that shader is removed to make it clear what selections have been made
@@ -111,6 +113,8 @@ Contributions outside of my main and sub roles:
 - Various bug fixes
 - Created a demo build for the 12/8 presentation (to fit in the 5 minute time limit)
   - The build has a much shorter cutscene, no pawns, and a banner sprite indicating that it’s the demo build
+- Created a few simple assets
+![Assets made by Reilly](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/reilly%20assets.png?raw=true)
 
 ## Lucia Zeng ##
 
