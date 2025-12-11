@@ -187,7 +187,9 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 **Contributions:**
 - Created most of the visual assets for the whole project, including the chess pieces, chessboard, character portraits, turn indicators, and the hand-drawn background.
 - Made the looping main-menu video via Adobe After Effects, which loop for every 25s and connected it to the menu UI.
-- Designed the early game-feel prototype and the refined version later on, covering UI layout ideas, fonts, screen size, and the overall visual direction of the project.
+![Assets Overview]([[readme images/prototype.jpg](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/prototype.jpg)](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/assets%20overview.jpg))
+- Designed the early game-feel Oprototype and the refined version later on, covering UI layout ideas, fonts, screen size, and the overall visual direction of the project.
+![prototype]([readme images/prototype.jpg](https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/prototype.jpg))
 - Set the cohesive visual style, found free-to-use backgrounds and added art effects for the cutscene scenes.
 - Implemented the transition from the drafting scene to the chessboard scene.
 - Added the turn indicator in the drafting scene and created the wiggle animation to improve user feedback.
@@ -198,4 +200,4 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 - Added the movement logic for each singe pieces based on the structure in `piece.gd`.
 
 **Recources**
-[Cutscene Background Info](https://unsplash.com/photos/a-room-with-a-table-chairs-and-a-bed-AREe9eMdK8Q)
+- [Cutscene Background Info](https://unsplash.com/photos/a-room-with-a-table-chairs-and-a-bed-AREe9eMdK8Q)
