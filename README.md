@@ -210,7 +210,7 @@ Due to limitations of time and scope, the large-scale suggestions provided by th
 
 **Subrole: Player Onboarding -> Visual Cohesion and Style Guide**
 
-Note: Since Reilley implemented the cutscene system early on and didn’t realize it overlapped with the my original subrole `Player Onboarding`, I shifted my subrole to `Visual Cohesion and Style Guide` during the later stages of the project. I also took on several game logic tasks, which will be explained below. 
+Note: Since Reilly implemented the cutscene system early on and didn’t realize it overlapped with the my original subrole `Player Onboarding`, I shifted my subrole to `Visual Cohesion and Style Guide` during the later stages of the project. I also took on several game logic tasks, which will be explained below. 
 
 There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohesion and Style Guide`, so I will describe them together in a single section.
 
