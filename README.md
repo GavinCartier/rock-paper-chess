@@ -275,7 +275,6 @@ Drafting External Designs:
 
 ## Vivian Sun ##
 
-
 **Main role: Level and World Design**
 
 As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals, so I aided in coding part of `damage_engine.gd` and some of the gameplay logic. 
@@ -291,6 +290,7 @@ As the Level and World Designer for a chess game, there wasn't much to implement
 - Participated in gameplay testing
 
 **Resources**
+
 Here are some links to the websites I used to find the "victory" and "dialogue" sound effects:
 
 https://www.myinstants.com/en/instant/undertale-select-sound-42576/
