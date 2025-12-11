@@ -224,12 +224,15 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 - Set the cohesive visual style, found free-to-use backgrounds and added art effects for the cutscene scenes.
 - Implemented the transition from the drafting scene to the chessboard scene.
 - Added the turn indicator in the drafting scene and created the wiggle animation to improve gameplay experience.
+![Turn Indicator]((https://github.com/GavinCartier/rock-paper-chess/blob/b4d455361215b91a7ca0ce5ea353542543ec7e9a/readme%20images/indicator%20wiggle.gif)
 - Updated the rules page as hovering to make the interface cleaner and to avoid conflicts between piece hover and rule page hover.
+![Rule Hover](https://github.com/GavinCartier/rock-paper-chess/blob/b4d455361215b91a7ca0ce5ea353542543ec7e9a/readme%20images/rule%20hover.gif)
 
 **Additional contributions in the Other Contributions section:**
 - Initialized the chessboard via creating a tilemap and developed the basic `ChessBoard.tscn` layout.
 - Initialized all pieces on the chessboard and set the corresponding textures for them.
 - Added the movement logic for each singe piece based on the structure in ` piece_types.gd ` and implemented basic reactions to the player’s mouse inputs.
+![Tilemap Implement](https://github.com/GavinCartier/rock-paper-chess/blob/d7083b5f3f1e971173680420174d534955046c0f/readme%20images/tilemap%20implement.png)
 
 **Recources**
 - [Fonts (free for personal use)]( https://github.com/GavinCartier/rock-paper-chess/tree/70af1b90b33595a47b15528892f10d6c1db8b401/rock-paper-chess/assets/font) 
@@ -238,6 +241,7 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 - [Assets Created by Own]( https://github.com/GavinCartier/rock-paper-chess/tree/ce9e618f099506592477d150447cf4d41200b6a3/rock-paper-chess/assets) 
 - Folders includign `new placeholder`, `story`, `chessboard`, `characters`
 ![Assets Overview]( https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/assets%20overview.jpg)
+
 
 ## Roop Nijjar ##
 
