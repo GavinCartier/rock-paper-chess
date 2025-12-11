@@ -3,6 +3,7 @@
 ## Summary ##
 
 Rock, Paper, Chess!  is a turn-based chess game that introduces a strategic Rock, Paper, Scissors-type assignment mechanic. Players are prompted to a cutscene explaining the narrative/tutorial of our game, which is a battle between the Aristocrat (player 1) and the Cowboy (player 2). Before the game begins, players enter a “Drafting” phase, during which they take turns assigning Rock, Paper, or Scissors types to each category of their chess pieces. These choices significantly influence gameplay because in our version of chess, pieces are not simply captured; they must battle in a “Challenge”. Every piece on the board has its own health and damage stats. When two pieces engage in a “Challenge”, type advantages (following classic Rock, Paper, Scissors rules) allow the superior types to deal increased damage. Instead of achieving checkmate, a player wins by defeating the opponent’s king in combat. Aside from these additions, all chess pieces retain their traditional movement rules.
+
 ![Main Menu](https://github.com/GavinCartier/rock-paper-chess/blob/main/readme%20images/main%20menu.png?raw=true)
 
 ## Project Resources
@@ -274,29 +275,26 @@ Drafting External Designs:
 
 ## Vivian Sun ##
 
+
 **Main role: Level and World Design**
-As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals. 
+As the Level and World Designer for a chess game, there wasn't much to implement as there is only one board. The chessboard and world design was mainly taken care of by Game Logic and Visuals, so I aided in coding part of `damage_engine.gd` and some of the gameplay logic. 
 
 **Subrole: Narrative Design -> Audio**
-
 - Located and uploaded royalty-free audio for some of the game’s sound effects.
-- Created an audio system `Sfx.gd` that plays sound effects and the background music globally. 
+- Created an audio system `Sfx.gd` that plays sound effects and the background music globally.
 - Created `AudioStreamPlayer` nodes for each audio file.
 - Created audio buses that separated "sfx" from "bgm".
 - Implemented sound effects within the game logic and UI button scripts.
 - Implemented looping background music, with play/pause/resume functionality.
-- Fixed up some audio bugs and unintentional looping.
+- Fixed up some audio bugs and unintentional sound looping.
 - Participated in gameplay testing
 
 **Resources**
-Here are some links to the websites I used to find sound effects:
+Here are some links to the websites I used to find the "victory" and "dialogue" sound effects:
 
 https://www.myinstants.com/en/instant/undertale-select-sound-42576/
 
 https://pixabay.com/sound-effects/search/victory%20trumpets/
-
-
-
 
  
 
