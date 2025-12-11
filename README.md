@@ -222,15 +222,15 @@ There are a lot of overlaps between the `Animation and Visuals` and `Visual Cohe
 
 **Contributions:**
 ![prototype]( https://github.com/GavinCartier/rock-paper-chess/blob/fa138271d258f41bc2d7cd3b9100369e6e8c1a82/readme%20images/prototype.jpg) 
-- Created most of the visual assets for the whole project, including the chess pieces, chessboard, character portraits, turn indicators, and the hand-drawn background.
-- Made the looping main-menu video via Adobe After Effects, which loop for every 25s and connected it to the menu UI.
+- Created most of the visual assets for the whole project, including the chess pieces, chessboard, character portraits, turn indicators, and the hand-drawn background. They were all hand-drawn via Procreate to create a retro game feel.
+- Made the looping main-menu video via Adobe After Effects, which loop for every 25s and connected it to the menu UI. I used 3D layers to make the spotlight and projectile effects, so it looks like an old movie.
 - [Main Menu Video (MP4)](https://github.com/GavinCartier/rock-paper-chess/blob/244b5821b4a76072912ee4d401d0a4e3d07447c5/rock-paper-chess/assets/begin.mp4)
 - Designed the early gamefeel prototype and the refined version later on, covering UI layout ideas, fonts, screen size, and the overall visual guide of the project.
-- Set the cohesive visual style, found free-to-use backgrounds and added art effects for the cutscene scenes.
+- Set the cohesive retro visual style, found free-to-use backgrounds and added art effects for the cutscene scenes.
 - Implemented the transition from the drafting scene to the chessboard scene in `chess_board.gd`.
-- Added the turn indicator in the drafting scene and created the wiggle animation to improve gameplay experience.
+- Added the turn indicator in the drafting scene and created the wiggle animation to improve gameplay experience when player drafting.
 ![Turn Indicator](https://github.com/GavinCartier/rock-paper-chess/blob/b4d455361215b91a7ca0ce5ea353542543ec7e9a/readme%20images/indicator%20wiggle.gif)
-- Updated the rules page as hovering in `chess_board.gd` to make the interface cleaner and to avoid conflicts between piece hover and rule page hover.
+- Updated the rules page as hovering in `chess_board.gd` to make the interface cleaner and to avoid conflicts between piece hover and rule page hover. Also changed the intial character turn indicators into character-shaped cucoloris so that they won't distract players while playing.
 ![Rule Hover](https://github.com/GavinCartier/rock-paper-chess/blob/b4d455361215b91a7ca0ce5ea353542543ec7e9a/readme%20images/rule%20hover.gif)
 
 **Additional contributions in the Other Contributions section:**
